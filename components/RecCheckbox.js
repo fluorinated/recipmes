@@ -1,0 +1,75 @@
+import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
+import React, {useState} from 'react';
+import {StyleSheet, Text, View, TouchableOpacity} from 'react-native';
+import {faCheck} from '@fortawesome/free-solid-svg-icons';
+import {Colors} from '../colors';
+
+const RecCheckbox = props => {
+  const [isChecked, setIsChecked] = useState(false);
+  const onPress = () => {
+    if (isChecked) {
+      setIsChecked(false);
+    } else {
+      setIsChecked(true);
+    }
+  };
+
+  return (
+    <View style={styles.checkboxContainer}>
+      <TouchableOpacity
+        style={
+          isChecked
+            ? [styles.checkbox, styles.checked]
+            : [styles.checkbox, styles.unchecked]
+        }
+        onPress={onPress}>
+        <FontAwesomeIcon
+          style={isChecked ? {} : styles.hidden}
+          color={Colors.neutral1}
+          icon={faCheck}
+        />
+      </TouchableOpacity>
+      <Text style={props.title ? styles.inputTitle : styles.hidden}>
+        {props.title}
+      </Text>
+    </View>
+  );
+};
+
+const styles = StyleSheet.create({
+  hidden: {
+    display: 'none',
+  },
+  inputTitle: {
+    color: Colors.neutral1,
+    marginTop: 10,
+    marginLeft: 5,
+    fontFamily: 'Kailasa',
+    width: '100%',
+    color: Colors.neutral1,
+  },
+  checkbox: {
+    height: 30,
+    width: 30,
+    color: Colors.neutral1,
+    padding: 10,
+    borderRadius: 8,
+    margin: 10,
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  checkboxContainer: {
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  checked: {
+    backgroundColor: Colors.neutral3,
+  },
+  unchecked: {
+    backgroundColor: Colors.neutral5,
+  },
+});
+
+export default RecCheckbox;
