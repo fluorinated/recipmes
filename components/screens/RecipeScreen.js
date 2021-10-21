@@ -1,16 +1,16 @@
-import React from 'react';
-import {StyleSheet, Text, View, Image} from 'react-native';
-import {Colors} from '../../colors';
-import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
+import React from "react";
+import { StyleSheet, Text, View, Image } from "react-native";
+import { Colors } from "../../colors";
+import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 import {
   faPlus,
   faHeart,
   faFlag,
   faTrash,
   faCheck,
-} from '@fortawesome/free-solid-svg-icons';
+} from "@fortawesome/free-solid-svg-icons";
 
-const RecipeScreen = props => {
+const RecipeScreen = (props) => {
   return (
     <View style={styles.background}>
       <View style={styles.recipe}>
@@ -29,7 +29,7 @@ const RecipeScreen = props => {
           </View>
         </View>
         <Image
-          source={require('../../assets/scrambled-eggs.png')}
+          source={require("../../assets/scrambled-eggs.png")}
           style={styles.photo}
         />
         <Text style={styles.title}>scrambled eggs</Text>
@@ -63,23 +63,20 @@ const RecipeScreen = props => {
 
 const styles = StyleSheet.create({
   background: {
-    backgroundColor: Colors.orange3,
+    backgroundColor: Colors.neutral7,
     flex: 1,
-    alignItems: 'center',
+    alignItems: "center",
   },
   recipe: {
-    backgroundColor: Colors.white,
-    borderRadius: 10,
-    padding: 10,
-    width: '95%',
+    width: "95%",
     marginTop: 10,
-    flexDirection: 'row',
-    fontFamily: 'Kailasa',
-    flexDirection: 'column',
+    flexDirection: "row",
+    fontFamily: "Kailasa",
+    flexDirection: "column",
   },
   photo: {
     height: 200,
-    width: '100%',
+    width: "100%",
     borderRadius: 10,
   },
   title: {
@@ -93,7 +90,7 @@ const styles = StyleSheet.create({
     paddingBottom: 15,
   },
   description: {
-    flexDirection: 'row',
+    flexDirection: "row",
   },
   check: {
     marginRight: 10,
@@ -103,10 +100,10 @@ const styles = StyleSheet.create({
     marginRight: 5,
   },
   actions: {
-    flexDirection: 'row',
-    justifyContent: 'flex-end',
-    alignItems: 'center',
-    width: '100%',
+    flexDirection: "row",
+    justifyContent: "flex-end",
+    alignItems: "center",
+    width: "100%",
     marginBottom: 20,
     marginTop: 10,
   },
@@ -124,8 +121,8 @@ const styles = StyleSheet.create({
     paddingRight: 5,
   },
   step: {
-    flexDirection: 'row',
-    alignItems: 'baseline',
+    flexDirection: "row",
+    alignItems: "baseline",
   },
 });
 

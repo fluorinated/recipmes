@@ -1,23 +1,24 @@
-import * as React from 'react';
-import {NavigationContainer} from '@react-navigation/native';
-import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import {LinearGradient} from 'expo-linear-gradient';
-import {BlurView} from 'expo-blur';
-import {Colors} from './colors';
-import RecipesScreen from './components/screens/RecipesScreen';
-import RecipeScreen from './components/screens/RecipeScreen';
-import NewRecipeScreen from './components/screens/NewRecipeScreen';
-import MenuScreen from './components/screens/MenuScreen';
-import IngredientsScreen from './components/screens/IngredientsScreen';
-import GroceriesScreen from './components/screens/GroceriesScreen';
-import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
+import * as React from "react";
+import { View } from "react-native";
+import { NavigationContainer } from "@react-navigation/native";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import { LinearGradient } from "expo-linear-gradient";
+import { BlurView } from "expo-blur";
+import { Colors } from "./colors";
+import RecipesScreen from "./components/screens/RecipesScreen";
+import RecipeScreen from "./components/screens/RecipeScreen";
+import NewRecipeScreen from "./components/screens/NewRecipeScreen";
+import MenuScreen from "./components/screens/MenuScreen";
+import IngredientsScreen from "./components/screens/IngredientsScreen";
+import GroceriesScreen from "./components/screens/GroceriesScreen";
+import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 import {
   faBookOpen,
   faUtensils,
   faCarrot,
   faList,
-} from '@fortawesome/free-solid-svg-icons';
+} from "@fortawesome/free-solid-svg-icons";
 
 const Tab = createBottomTabNavigator();
 const RecipesStack = createNativeStackNavigator();
@@ -44,7 +45,10 @@ export default function App() {
     <NavigationContainer>
       <Tab.Navigator
         screenOptions={{
-          tabBarStyle: {position: 'absolute', backgroundColor: Colors.purple1},
+          tabBarStyle: {
+            position: "absolute",
+            backgroundColor: Colors.purple1,
+          },
           tabBarActiveBackgroundColor: Colors.purple2,
           tabBarInactiveBackgroundColor: Colors.purple1,
           tabBarInactiveTintColor: Colors.white,
@@ -57,61 +61,53 @@ export default function App() {
             borderRadius: 10,
           },
           tabBarShowLabel: false,
-          fontFamily: 'Kailasa',
-        }}>
+          fontFamily: "Kailasa",
+        }}
+      >
         <Tab.Screen
           name="Recipes"
           options={{
-            tabBarIcon: ({color, size}) => (
+            tabBarIcon: ({ color, size }) => (
               <FontAwesomeIcon
                 icon={faBookOpen}
                 color={Colors.white}
                 size={size}
               />
             ),
-          }}>
+          }}
+        >
           {() => (
             <RecipesStack.Navigator>
               <RecipesStack.Screen
-                name="Recipes"
+                name="RecipesHome"
                 component={RecipesScreen}
                 options={{
-                  title: 'Recipes',
-                  headerStyle: {
-                    backgroundColor: Colors.purple1,
-                  },
-                  headerTintColor: Colors.white,
-                  headerTitleStyle: {
-                    fontWeight: 'bold',
-                  },
+                  title: "Recipes",
+                  header: () => <View />,
                 }}
               />
               <RecipesStack.Screen
                 name="NewRecipe"
                 component={NewRecipeScreen}
                 options={{
-                  title: 'NewRecipe',
+                  title: "NewRecipe",
                   headerStyle: {
-                    backgroundColor: Colors.purple1,
+                    backgroundColor: Colors.white,
                   },
-                  headerTintColor: Colors.white,
-                  headerTitleStyle: {
-                    fontWeight: 'bold',
-                  },
+                  headerTintColor: Colors.purple1,
+                  headerTitle: () => <View />,
                 }}
               />
               <RecipesStack.Screen
                 name="Recipe"
                 component={RecipeScreen}
                 options={{
-                  title: 'Recipe',
+                  title: "Recipe",
                   headerStyle: {
-                    backgroundColor: Colors.purple1,
+                    backgroundColor: Colors.white,
                   },
-                  headerTintColor: Colors.white,
-                  headerTitleStyle: {
-                    fontWeight: 'bold',
-                  },
+                  headerTintColor: Colors.purple1,
+                  headerTitle: () => <View />,
                 }}
               />
             </RecipesStack.Navigator>
@@ -120,56 +116,38 @@ export default function App() {
         <Tab.Screen
           name="Menu"
           options={{
-            tabBarIcon: ({color, size}) => (
+            tabBarIcon: ({ color, size }) => (
               <FontAwesomeIcon
                 icon={faUtensils}
                 color={Colors.white}
                 size={size}
               />
             ),
-          }}>
-          {() => (
-            <MenuStack.Navigator>
-              <MenuStack.Screen name="Menu" component={MenuScreen} />
-            </MenuStack.Navigator>
-          )}
-        </Tab.Screen>
+          }}
+          component={MenuScreen}
+        />
         <Tab.Screen
           name="Ingredients"
           options={{
-            tabBarIcon: ({color, size}) => (
+            tabBarIcon: ({ color, size }) => (
               <FontAwesomeIcon
                 icon={faCarrot}
                 color={Colors.white}
                 size={size}
               />
             ),
-          }}>
-          {() => (
-            <IngredientsStack.Navigator>
-              <IngredientsStack.Screen
-                name="Ingredients"
-                component={IngredientsScreen}
-              />
-            </IngredientsStack.Navigator>
-          )}
-        </Tab.Screen>
+          }}
+          component={MenuScreen}
+        />
         <Tab.Screen
           name="Groceries"
           options={{
-            tabBarIcon: ({color, size}) => (
+            tabBarIcon: ({ color, size }) => (
               <FontAwesomeIcon icon={faList} color={Colors.white} size={size} />
             ),
-          }}>
-          {() => (
-            <GroceriesStack.Navigator>
-              <GroceriesStack.Screen
-                name="Groceries"
-                component={GroceriesScreen}
-              />
-            </GroceriesStack.Navigator>
-          )}
-        </Tab.Screen>
+          }}
+          component={MenuScreen}
+        />
       </Tab.Navigator>
     </NavigationContainer>
   );

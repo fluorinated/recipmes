@@ -1,7 +1,7 @@
-import React, {useState} from 'react';
-import {StyleSheet, Text, View, Image, TouchableOpacity} from 'react-native';
-import {Colors} from '../colors';
-import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
+import React, { useState } from "react";
+import { StyleSheet, Text, View, Image, TouchableOpacity } from "react-native";
+import { Colors } from "../colors";
+import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 import {
   faPlus,
   faHeart,
@@ -9,21 +9,26 @@ import {
   faTrash,
   faCheck,
   faEllipsisV,
-} from '@fortawesome/free-solid-svg-icons';
+} from "@fortawesome/free-solid-svg-icons";
 
-const RecipeMiniCard = ({props}) => {
+const RecipeMiniCard = ({ props }) => {
   const [areActionsShown, setAreActionsShown] = useState(false);
 
   const onClickEllipsis = () => {
-    setAreActionsShown(true);
+    if (areActionsShown) {
+      setAreActionsShown(false);
+    } else {
+      setAreActionsShown(true);
+    }
   };
 
   return (
     <TouchableOpacity
       style={styles.recipe}
-      onPress={() => props.navigate('Recipe')}>
+      onPress={() => props.navigate("Recipe")}
+    >
       <Image
-        source={require('../assets/scrambled-eggs.png')}
+        source={require("../assets/scrambled-eggs.png")}
         style={styles.photo}
       />
       <View>
@@ -41,7 +46,8 @@ const RecipeMiniCard = ({props}) => {
             <View style={styles.ellipsisContainer}>
               <TouchableOpacity
                 style={styles.ellipsis}
-                onPressIn={onClickEllipsis}>
+                onPressIn={onClickEllipsis}
+              >
                 <FontAwesomeIcon
                   icon={faEllipsisV}
                   style={styles.action}
@@ -73,16 +79,16 @@ const RecipeMiniCard = ({props}) => {
 
 const styles = StyleSheet.create({
   hidden: {
-    display: 'none',
+    display: "none",
   },
   recipe: {
-    backgroundColor: Colors.white,
+    backgroundColor: Colors.neutral7,
     borderRadius: 10,
     padding: 10,
-    width: '95%',
+    width: "95%",
     marginTop: 10,
-    flexDirection: 'row',
-    fontFamily: 'Kailasa',
+    flexDirection: "row",
+    fontFamily: "Kailasa",
   },
   photo: {
     height: 100,
@@ -98,7 +104,7 @@ const styles = StyleSheet.create({
   description: {
     marginLeft: 20,
     marginTop: 10,
-    flexDirection: 'row',
+    flexDirection: "row",
   },
   separator: {
     marginLeft: 5,
@@ -115,10 +121,10 @@ const styles = StyleSheet.create({
     color: Colors.neutral2,
   },
   actions: {
-    flexDirection: 'row',
-    justifyContent: 'flex-end',
-    alignItems: 'center',
-    width: '83%',
+    flexDirection: "row",
+    justifyContent: "flex-end",
+    alignItems: "center",
+    width: "83%",
   },
   action: {
     backgroundColor: Colors.neutral5,

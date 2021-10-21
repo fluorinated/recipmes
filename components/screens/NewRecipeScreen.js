@@ -1,12 +1,12 @@
-import React from 'react';
-import {StyleSheet, View} from 'react-native';
-import {Colors} from '../../colors';
-import RecInput from '../RecInput';
-import RecSelect from '../RecSelect';
-import RecCheckbox from '../RecCheckbox';
+import React from "react";
+import { StyleSheet, View } from "react-native";
+import { Colors } from "../../colors";
+import RecInput from "../RecInput";
+import RecSelect from "../RecSelect";
+import RecCheckbox from "../RecCheckbox";
 // import RecPhotoUpload from '../RecPhotoUpload';
 
-const NewRecipeScreen = props => {
+const NewRecipeScreen = (props) => {
   return (
     <View style={styles.background}>
       <View style={styles.inputsContainer}>
@@ -28,26 +28,18 @@ const NewRecipeScreen = props => {
   );
 };
 
-NewRecipeScreen.options = {
-  topBar: {
-    title: {
-      text: 'New Recipe',
-    },
-  },
-};
-
 const styles = StyleSheet.create({
   background: {
-    backgroundColor: Colors.white,
+    backgroundColor: Colors.neutral7,
     flex: 1,
-    alignItems: 'flex-start',
+    alignItems: "flex-start",
   },
   inputsContainer: {
     marginLeft: 10,
-    width: '100%',
+    width: "100%",
   },
   row: {
-    flexDirection: 'row',
+    flexDirection: "row",
   },
 });
 
