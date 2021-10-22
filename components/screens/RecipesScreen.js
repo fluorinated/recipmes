@@ -1,23 +1,28 @@
 import React from "react";
-import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
+import { StyleSheet, ScrollView, SafeAreaView } from "react-native";
 import RecipeMiniCard from "../RecipeMiniCard";
 import { Colors } from "../../colors";
+import RecButton from "../RecButton";
 
 const RecipesScreen = ({ navigation }) => {
   return (
-    <View style={styles.background}>
-      <View style={styles.addNewContainer}>
-        <TouchableOpacity
-          style={styles.addNewButton}
-          onPress={() => navigation.navigate("NewRecipe")}
-        >
-          <Text style={styles.addNewText}>add new</Text>
-        </TouchableOpacity>
-      </View>
-
-      <RecipeMiniCard props={navigation} />
-      <RecipeMiniCard props={navigation} />
-    </View>
+    <SafeAreaView style={styles.background}>
+      <ScrollView>
+        <RecButton
+          handleClick={() => navigation.navigate("NewRecipe")}
+          label="add new"
+        />
+        <RecipeMiniCard props={navigation} />
+        <RecipeMiniCard props={navigation} />
+        <RecipeMiniCard props={navigation} />
+        <RecipeMiniCard props={navigation} />
+        <RecipeMiniCard props={navigation} />
+        <RecipeMiniCard props={navigation} />
+        <RecipeMiniCard props={navigation} />
+        <RecipeMiniCard props={navigation} />
+        <RecipeMiniCard props={navigation} />
+      </ScrollView>
+    </SafeAreaView>
   );
 };
 
@@ -25,25 +30,6 @@ const styles = StyleSheet.create({
   background: {
     backgroundColor: Colors.neutral7,
     flex: 1,
-    alignItems: "center",
-  },
-  addNewContainer: {
-    backgroundColor: Colors.neutral7,
-    padding: 10,
-    display: "flex",
-    marginTop: 10,
-    width: "90%",
-  },
-  addNewButton: {
-    backgroundColor: Colors.purple1,
-    padding: 20,
-    alignItems: "center",
-    borderRadius: 5,
-  },
-  addNewText: {
-    color: Colors.white,
-    fontSize: 18,
-    fontFamily: "Kailasa",
   },
 });
 

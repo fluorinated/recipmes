@@ -1,15 +1,21 @@
-import React, {useState} from 'react';
-import {StyleSheet, Text, View, FlatList, TouchableOpacity} from 'react-native';
-import {TextInput} from 'react-native-gesture-handler';
-import {Colors} from '../colors';
-import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
-import {faChevronDown, faChevronUp} from '@fortawesome/free-solid-svg-icons';
+import React, { useState } from "react";
+import {
+  StyleSheet,
+  Text,
+  View,
+  FlatList,
+  TouchableOpacity,
+} from "react-native";
+import { TextInput } from "react-native-gesture-handler";
+import { Colors } from "../colors";
+import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
+import { faChevronDown, faChevronUp } from "@fortawesome/free-solid-svg-icons";
 
-const RecSelect = props => {
+const RecSelect = (props) => {
   const [isOpen, setIsOpen] = useState(false);
-  const [value, setValue] = useState('');
+  const [value, setValue] = useState("");
 
-  const onPress = key => {
+  const onPress = (key) => {
     setValue(key);
     setIsOpen(false);
   };
@@ -22,9 +28,10 @@ const RecSelect = props => {
     <View
       style={[
         styles.inputContainer,
-        {width: props.width},
-        {marginRight: props.marginRight},
-      ]}>
+        { width: props.size === "half" ? 180 : 370 },
+        { marginRight: props.marginRight },
+      ]}
+    >
       <Text style={props.title ? styles.inputTitle : styles.hidden}>
         {props.title}
       </Text>
@@ -39,23 +46,24 @@ const RecSelect = props => {
         style={styles.input}
         placeholder={props.placeholder}
         placeholderTextColor={Colors.neutral2}
-        editable={false}>
+        editable={false}
+      >
         {value}
       </TextInput>
-      <View style={isOpen ? '' : styles.hidden}>
+      <View style={isOpen ? "" : styles.hidden}>
         <FlatList
           data={[
-            {key: 'breakfast'},
-            {key: 'lunch'},
-            {key: 'dinner'},
-            {key: 'snack'},
-            {key: 'dessert'},
-            {key: 'drink'},
-            {key: 'cocktail'},
-            {key: 'appetizer'},
+            { key: "breakfast" },
+            { key: "lunch" },
+            { key: "dinner" },
+            { key: "snack" },
+            { key: "dessert" },
+            { key: "drink" },
+            { key: "cocktail" },
+            { key: "appetizer" },
           ]}
           style={[styles.flatList, styles.absolute]}
-          renderItem={({item}) => (
+          renderItem={({ item }) => (
             <TouchableOpacity onPress={() => onPress(item.key)}>
               <Text style={styles.listItem}>{item.key} </Text>
             </TouchableOpacity>
@@ -68,14 +76,14 @@ const RecSelect = props => {
 
 const styles = StyleSheet.create({
   hidden: {
-    display: 'none',
+    display: "none",
   },
   inputTitle: {
     color: Colors.neutral1,
     marginTop: 10,
     marginLeft: 5,
-    fontFamily: 'Kailasa',
-    width: '100%',
+    fontFamily: "Kailasa",
+    width: "100%",
   },
   input: {
     height: 50,
@@ -84,11 +92,11 @@ const styles = StyleSheet.create({
     color: Colors.neutral1,
     padding: 10,
     borderRadius: 8,
-    width: '100%',
-    fontFamily: 'Kailasa',
+    width: "100%",
+    fontFamily: "Kailasa",
   },
   inputContainer: {
-    alignItems: 'flex-start',
+    alignItems: "flex-start",
   },
   listItem: {
     paddingTop: 15,
@@ -97,18 +105,18 @@ const styles = StyleSheet.create({
     color: Colors.neutral1,
   },
   flatList: {
-    marginTop: '-2%',
+    marginTop: "-2%",
     backgroundColor: Colors.neutral5,
-    width: '100%',
+    width: "100%",
     borderBottomRightRadius: 8,
     borderBottomLeftRadius: 8,
     paddingBottom: 15,
   },
   absolute: {
-    position: 'absolute',
+    position: "absolute",
   },
   chevDown: {
-    position: 'absolute',
+    position: "absolute",
     marginTop: 30,
     marginLeft: 140,
     zIndex: 1,

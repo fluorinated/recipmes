@@ -1,10 +1,10 @@
-import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
-import React, {useState} from 'react';
-import {StyleSheet, Text, View, TouchableOpacity} from 'react-native';
-import {faCheck} from '@fortawesome/free-solid-svg-icons';
-import {Colors} from '../colors';
+import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
+import React, { useState } from "react";
+import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
+import { faCheck } from "@fortawesome/free-solid-svg-icons";
+import { Colors } from "../colors";
 
-const RecCheckbox = props => {
+const RecCheckbox = (props) => {
   const [isChecked, setIsChecked] = useState(false);
   const onPress = () => {
     if (isChecked) {
@@ -22,15 +22,16 @@ const RecCheckbox = props => {
             ? [styles.checkbox, styles.checked]
             : [styles.checkbox, styles.unchecked]
         }
-        onPress={onPress}>
+        onPress={onPress}
+      >
         <FontAwesomeIcon
           style={isChecked ? {} : styles.hidden}
           color={Colors.neutral1}
           icon={faCheck}
         />
       </TouchableOpacity>
-      <Text style={props.title ? styles.inputTitle : styles.hidden}>
-        {props.title}
+      <Text style={props.label ? styles.label : styles.hidden}>
+        {props.label}
       </Text>
     </View>
   );
@@ -38,14 +39,12 @@ const RecCheckbox = props => {
 
 const styles = StyleSheet.create({
   hidden: {
-    display: 'none',
+    display: "none",
   },
-  inputTitle: {
+  label: {
     color: Colors.neutral1,
-    marginTop: 10,
-    marginLeft: 5,
-    fontFamily: 'Kailasa',
-    width: '100%',
+    fontFamily: "Kailasa",
+    width: "100%",
     color: Colors.neutral1,
   },
   checkbox: {
@@ -54,15 +53,17 @@ const styles = StyleSheet.create({
     color: Colors.neutral1,
     padding: 10,
     borderRadius: 8,
-    margin: 10,
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
+    marginTop: 10,
+    marginBottom: 10,
+    marginRight: 10,
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
   },
   checkboxContainer: {
-    display: 'flex',
-    flexDirection: 'row',
-    alignItems: 'center',
+    display: "flex",
+    flexDirection: "row",
+    alignItems: "center",
   },
   checked: {
     backgroundColor: Colors.neutral3,
