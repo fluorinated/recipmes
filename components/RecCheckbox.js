@@ -1,11 +1,16 @@
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
 import { faCheck } from "@fortawesome/free-solid-svg-icons";
 import { Colors } from "../colors";
 
 const RecCheckbox = (props) => {
   const [isChecked, setIsChecked] = useState(false);
+
+  useEffect(() => {
+    props.isChecked(isChecked);
+  }, [isChecked]);
+
   const onPress = () => {
     if (isChecked) {
       setIsChecked(false);
@@ -26,7 +31,7 @@ const RecCheckbox = (props) => {
       >
         <FontAwesomeIcon
           style={isChecked ? {} : styles.hidden}
-          color={Colors.neutral1}
+          color={Colors.white}
           icon={faCheck}
         />
       </TouchableOpacity>
@@ -45,7 +50,6 @@ const styles = StyleSheet.create({
     color: Colors.neutral1,
     fontFamily: "Kailasa",
     width: "100%",
-    color: Colors.neutral1,
   },
   checkbox: {
     height: 30,
@@ -66,7 +70,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   checked: {
-    backgroundColor: Colors.neutral3,
+    backgroundColor: Colors.pink1,
   },
   unchecked: {
     backgroundColor: Colors.neutral5,

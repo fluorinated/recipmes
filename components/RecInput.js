@@ -9,17 +9,75 @@ import {
 import { Colors } from "../colors";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 import { faMinus, faPlus } from "@fortawesome/free-solid-svg-icons";
+import RecSelect from "./RecSelect";
 
 const RecInput = (props) => {
   const [inputs, setInputs] = useState(Array.from(Array(1).keys()));
+  const [inputTexts, setInputTexts] = useState([]);
+  const [ingredients, setIngredients] = useState([]);
+
+  useEffect(() => {
+    props.isMany
+      ? props.handleChangeText(inputTexts)
+      : props.handleChangeText(inputTexts[0]);
+
+    if (props.isIngredients) {
+      let finalIngredients = [...ingredients];
+      finalIngredients = finalIngredients.map((obj, i) => ({
+        ...obj,
+        title: inputTexts[i],
+      }));
+      props.ingredients(finalIngredients);
+    }
+  }, [inputTexts, ingredients]);
 
   const onClickPlus = (num) => {
     setInputs([...inputs, num + 1]);
   };
 
-  const onClickMinus = (num) => {
+  const onClickMinus = (num, index) => {
     const filteredInputs = inputs.filter((input, index) => input !== num);
     setInputs(filteredInputs);
+    let newInputTexts = [...inputTexts].filter((input, i) => i !== index);
+    setInputTexts(newInputTexts);
+    let newIngredients = [...ingredients].filter((input, i) => i !== index);
+    setIngredients(newIngredients);
+  };
+
+  const handleChangeText = (text, index) => {
+    let newInputTexts = [...inputTexts];
+    newInputTexts[index] = text;
+    setInputTexts(newInputTexts);
+  };
+
+  const handleSetIngredients = (text, index, input) => {
+    let newIngredients = [...ingredients];
+    newIngredients[index] = { ...newIngredients[index], [input]: text };
+    setIngredients(newIngredients);
+  };
+
+  const showIngredientsInputs = (index) => {
+    if (props.isIngredients) {
+      return (
+        <View style={styles.row}>
+          <RecInput
+            placeholder="amount"
+            title="amount"
+            size="half"
+            marginRight={10}
+            handleChangeText={(text) =>
+              handleSetIngredients(text, index, "amount")
+            }
+          />
+          <RecSelect
+            placeholder="units"
+            title="units"
+            size="half"
+            selectedValue={(val) => handleSetIngredients(val, index, "unit")}
+          />
+        </View>
+      );
+    }
   };
 
   return (
@@ -41,10 +99,12 @@ const RecInput = (props) => {
                   : `${props.placeholder} ${num + 1}`
               }
               placeholderTextColor={Colors.neutral2}
+              onChangeText={(text) => handleChangeText(text, index)}
             ></TextInput>
+            {showIngredientsInputs(index)}
             <TouchableOpacity
               style={props.isMany ? styles.minusContainer : styles.hidden}
-              onPress={() => onClickMinus(num)}
+              onPress={() => onClickMinus(num, index)}
             >
               <FontAwesomeIcon icon={faMinus} style={styles.action} />
             </TouchableOpacity>
@@ -107,6 +167,9 @@ const styles = StyleSheet.create({
     justifyContent: "flex-end",
     width: "100%",
     padding: 10,
+  },
+  row: {
+    flexDirection: "row",
   },
 });
 

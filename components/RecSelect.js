@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   StyleSheet,
   Text,
   View,
   FlatList,
   TouchableOpacity,
+  ScrollView,
 } from "react-native";
 import { TextInput } from "react-native-gesture-handler";
 import { Colors } from "../colors";
@@ -14,6 +15,10 @@ import { faChevronDown, faChevronUp } from "@fortawesome/free-solid-svg-icons";
 const RecSelect = (props) => {
   const [isOpen, setIsOpen] = useState(false);
   const [value, setValue] = useState("");
+
+  useEffect(() => {
+    props.selectedValue(value);
+  }, [value]);
 
   const onPress = (key) => {
     setValue(key);
@@ -47,29 +52,30 @@ const RecSelect = (props) => {
         placeholder={props.placeholder}
         placeholderTextColor={Colors.neutral2}
         editable={false}
+        onPressIn={onChevClick}
       >
         {value}
       </TextInput>
-      <View style={isOpen ? "" : styles.hidden}>
+      <ScrollView style={isOpen ? styles.list : styles.hidden}>
         <FlatList
           data={[
-            { key: "breakfast" },
-            { key: "lunch" },
-            { key: "dinner" },
-            { key: "snack" },
-            { key: "dessert" },
-            { key: "drink" },
-            { key: "cocktail" },
-            { key: "appetizer" },
+            { key: "tsp" },
+            { key: "tbsp" },
+            { key: "mL" },
+            { key: "g" },
+            { key: "mg" },
+            { key: "lb" },
+            { key: "L" },
+            { key: "gallon" },
           ]}
-          style={[styles.flatList, styles.absolute]}
+          style={[styles.flatList]}
           renderItem={({ item }) => (
             <TouchableOpacity onPress={() => onPress(item.key)}>
               <Text style={styles.listItem}>{item.key} </Text>
             </TouchableOpacity>
           )}
         />
-      </View>
+      </ScrollView>
     </View>
   );
 };
@@ -103,21 +109,30 @@ const styles = StyleSheet.create({
     paddingBottom: 15,
     paddingLeft: 10,
     color: Colors.neutral1,
+    width: 180,
+    zIndex: 1001,
   },
   flatList: {
-    marginTop: "-2%",
+    marginTop: "-5%",
     backgroundColor: Colors.neutral5,
     width: "100%",
     borderBottomRightRadius: 8,
     borderBottomLeftRadius: 8,
     paddingBottom: 15,
+    zIndex: 100,
+  },
+  list: {
+    marginTop: "-5%",
+    height: 100,
+    borderBottomRightRadius: 8,
+    borderBottomLeftRadius: 8,
   },
   absolute: {
     position: "absolute",
   },
   chevDown: {
     position: "absolute",
-    marginTop: 30,
+    marginTop: 55,
     marginLeft: 140,
     zIndex: 1,
   },

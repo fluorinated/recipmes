@@ -19,6 +19,13 @@ import {
   faCarrot,
   faList,
 } from "@fortawesome/free-solid-svg-icons";
+import Parse from "parse/react-native";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+
+Parse.setAsyncStorage(AsyncStorage);
+Parse.initialize("recipmes", "recipmesJSKey", "recipmesMasterKey619");
+Parse.serverURL = "https://recipmes-server.herokuapp.com/parse";
+// Parse.serverURL = "http://localhost:1337/parse";
 
 const Tab = createBottomTabNavigator();
 const RecipesStack = createNativeStackNavigator();
