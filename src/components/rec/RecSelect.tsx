@@ -8,11 +8,11 @@ import {
   ScrollView,
 } from "react-native";
 import { TextInput } from "react-native-gesture-handler";
-import { Colors } from "../colors";
+import { Colors } from "@constants/colors";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 import { faChevronDown, faChevronUp } from "@fortawesome/free-solid-svg-icons";
 
-const RecSelect = (props) => {
+const RecSelect = (props: any) => {
   const [isOpen, setIsOpen] = useState(false);
   const [value, setValue] = useState("");
 
@@ -20,7 +20,7 @@ const RecSelect = (props) => {
     props.selectedValue(value);
   }, [value]);
 
-  const onPress = (key) => {
+  const onPress = (key: string) => {
     setValue(key);
     setIsOpen(false);
   };
@@ -44,8 +44,8 @@ const RecSelect = (props) => {
         icon={isOpen ? faChevronUp : faChevronDown}
         style={styles.chevDown}
         color={Colors.neutral1}
-        onPress={onChevClick}
       />
+      {/* onPress={onChevClick} */}
 
       <TextInput
         style={styles.input}

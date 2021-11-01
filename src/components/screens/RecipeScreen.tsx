@@ -1,6 +1,6 @@
 import React from "react";
 import { StyleSheet, Text, View, Image } from "react-native";
-import { Colors } from "../../colors";
+import { Colors } from "@constants/colors";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 import {
   faPlus,
@@ -10,7 +10,7 @@ import {
   faCheck,
 } from "@fortawesome/free-solid-svg-icons";
 
-const RecipeScreen = (props) => {
+const RecipeScreen = () => {
   return (
     <View style={styles.background}>
       <View style={styles.recipe}>
@@ -70,9 +70,8 @@ const styles = StyleSheet.create({
   recipe: {
     width: "95%",
     marginTop: 10,
-    flexDirection: "row",
-    fontFamily: "Kailasa",
     flexDirection: "column",
+    fontFamily: "Kailasa",
   },
   photo: {
     height: 200,

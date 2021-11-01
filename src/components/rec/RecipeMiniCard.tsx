@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { StyleSheet, Text, View, Image, TouchableOpacity } from "react-native";
-import { Colors } from "../colors";
+import { Colors } from "@constants/colors";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 import {
   faPlus,
@@ -11,7 +11,7 @@ import {
   faEllipsisV,
 } from "@fortawesome/free-solid-svg-icons";
 
-const RecipeMiniCard = ({ props }) => {
+const RecipeMiniCard = ({ props }: any) => {
   const [areActionsShown, setAreActionsShown] = useState(false);
 
   const onClickEllipsis = () => {
@@ -28,7 +28,7 @@ const RecipeMiniCard = ({ props }) => {
       onPress={() => props.navigate("Recipe")}
     >
       <Image
-        source={require("../assets/scrambled-eggs.png")}
+        source={require("@assets/scrambled-eggs.png")}
         style={styles.photo}
       />
       <View>

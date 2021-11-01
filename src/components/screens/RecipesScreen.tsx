@@ -1,10 +1,10 @@
 import React from "react";
 import { StyleSheet, ScrollView, SafeAreaView } from "react-native";
-import RecipeMiniCard from "../RecipeMiniCard";
-import { Colors } from "../../colors";
-import RecButton from "../RecButton";
+import RecipeMiniCard from "../rec/RecipeMiniCard";
+import { Colors } from "../../constants/colors";
+import RecButton from "../rec/RecButton";
 
-const RecipesScreen = ({ navigation }) => {
+const RecipesScreen = ({ navigation }: any) => {
   // const getRecipe = async () => {
   //   const parseQuery = new Parse.Query("GameScore");
 

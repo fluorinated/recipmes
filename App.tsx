@@ -1,27 +1,3 @@
-// import { StatusBar } from 'expo-status-bar';
-// import React from 'react';
-// import { SafeAreaProvider } from 'react-native-safe-area-context';
-
-// import useCachedResources from './hooks/useCachedResources';
-// import useColorScheme from './hooks/useColorScheme';
-// import Navigation from './navigation';
-
-// export default function App() {
-//   const isLoadingComplete = useCachedResources();
-//   const colorScheme = useColorScheme();
-
-//   if (!isLoadingComplete) {
-//     return null;
-//   } else {
-//     return (
-//       <SafeAreaProvider>
-//         <Navigation colorScheme={colorScheme} />
-//         <StatusBar />
-//       </SafeAreaProvider>
-//     );
-//   }
-// }
-
 import * as React from "react";
 import { View } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
@@ -29,13 +5,13 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { LinearGradient } from "expo-linear-gradient";
 import { BlurView } from "expo-blur";
-import { Colors } from "./colors";
-import RecipesScreen from "./components/screens/RecipesScreen";
-import RecipeScreen from "./components/screens/RecipeScreen";
-import NewRecipeScreen from "./components/screens/NewRecipeScreen";
-import MenuScreen from "./components/screens/MenuScreen";
-import IngredientsScreen from "./components/screens/IngredientsScreen";
-import GroceriesScreen from "./components/screens/GroceriesScreen";
+import { Colors } from "@constants/colors";
+import RecipesScreen from "@screens/RecipesScreen";
+import RecipeScreen from "@screens/RecipeScreen";
+import NewRecipeScreen from "@screens/NewRecipeScreen";
+import MenuScreen from "@screens/MenuScreen";
+import IngredientsScreen from "@screens/IngredientsScreen";
+import GroceriesScreen from "@screens/GroceriesScreen";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 import {
   faBookOpen,
@@ -46,7 +22,7 @@ import {
 import Parse from "parse/react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
-import useCachedResources from "./hooks/useCachedResources";
+import useCachedResources from "@hooks/useCachedResources";
 
 Parse.setAsyncStorage(AsyncStorage);
 Parse.initialize("recipmes", "recipmesJSKey", "recipmesMasterKey619");
@@ -99,8 +75,8 @@ export default function App() {
               borderRadius: 10,
             },
             tabBarShowLabel: false,
-            fontFamily: "Kailasa",
           }}
+          // fontFamily: "Kailasa",
         >
           <Tab.Screen
             name="Recipes"

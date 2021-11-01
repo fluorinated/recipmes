@@ -7,26 +7,17 @@ import {
   SafeAreaView,
   TouchableOpacity,
 } from "react-native";
-import { Colors } from "../colors";
+import { Colors } from "@constants/colors";
+import { FoodCategory } from "@models/FoodCategory";
 
-const RecTagList = (props) => {
-  const [selectedTags, setSelectedTags] = useState([]);
+const RecTagList = (props: any) => {
+  const [selectedTags, setSelectedTags]: [string[], any] = useState([]);
 
   useEffect(() => {
     props.selectedTags(selectedTags);
   }, [selectedTags]);
 
-  const foodCategories = [
-    "breakfast",
-    "lunch",
-    "dinner",
-    "snack",
-    "drink",
-    "dessert",
-    "appetizer",
-  ];
-
-  const onClickTag = (tag) => {
+  const onClickTag = (tag: string) => {
     if (isTagSelected(tag)) {
       const newSelectedTags = selectedTags.filter(
         (selectedTag) => selectedTag !== tag
@@ -37,13 +28,13 @@ const RecTagList = (props) => {
     }
   };
 
-  const isTagSelected = (tag) =>
+  const isTagSelected = (tag: string) =>
     selectedTags.find((selectedTag) => selectedTag === tag);
 
-  const getTags = (props) => {
-    let list = [];
+  const getTags = (props: any) => {
+    let list: [] | FoodCategory[] = [];
     if (props.listType === "food") {
-      list = foodCategories;
+      list = Object.values(FoodCategory);
     }
     return list.map((tag) => (
       <TouchableOpacity

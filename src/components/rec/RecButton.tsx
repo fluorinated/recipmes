@@ -1,8 +1,8 @@
 import React from "react";
 import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
-import { Colors } from "../colors";
+import { Colors } from "@constants/colors";
 
-const RecButton = (props) => {
+const RecButton = (props: any) => {
   return (
     <View style={styles.addNewContainer}>
       <TouchableOpacity

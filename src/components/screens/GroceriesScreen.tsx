@@ -1,9 +1,9 @@
-import React from 'react';
-import {StyleSheet, Text, View} from 'react-native';
+import React from "react";
+import { StyleSheet, Text, View } from "react-native";
 
 const GroceriesScreen = () => {
   return (
-    <View style={styles.root}>
+    <View>
       <Text>Groceries Screen</Text>
     </View>
   );
@@ -12,8 +12,8 @@ const GroceriesScreen = () => {
 const styles = StyleSheet.create({
   description: {
     fontSize: 18,
-    textAlign: 'center',
-    color: '#656565',
+    textAlign: "center",
+    color: "#656565",
     marginTop: 65,
   },
   container: {

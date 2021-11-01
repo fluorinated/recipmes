@@ -6,15 +6,19 @@ import {
   TextInput,
   TouchableOpacity,
 } from "react-native";
-import { Colors } from "../colors";
+import { Colors } from "@constants/colors";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 import { faMinus, faPlus } from "@fortawesome/free-solid-svg-icons";
-import RecSelect from "./RecSelect";
+import RecSelect from "@rec/RecSelect";
+import { Ingredient } from "@models/Ingredient";
+import { Unit } from "@models/Unit";
 
-const RecInput = (props) => {
-  const [inputs, setInputs] = useState(Array.from(Array(1).keys()));
-  const [inputTexts, setInputTexts] = useState([]);
-  const [ingredients, setIngredients] = useState([]);
+const RecInput = (props: any) => {
+  const [inputs, setInputs]: [number[], any] = useState(
+    Array.from(Array(1).keys())
+  );
+  const [inputTexts, setInputTexts]: [string[], any] = useState([]);
+  const [ingredients, setIngredients]: [Ingredient[], any] = useState([]);
 
   useEffect(() => {
     props.isMany
@@ -22,7 +26,7 @@ const RecInput = (props) => {
       : props.handleChangeText(inputTexts[0]);
 
     if (props.isIngredients) {
-      let finalIngredients = [...ingredients];
+      let finalIngredients: Ingredient[] = [...ingredients];
       finalIngredients = finalIngredients.map((obj, i) => ({
         ...obj,
         title: inputTexts[i],
@@ -31,11 +35,11 @@ const RecInput = (props) => {
     }
   }, [inputTexts, ingredients]);
 
-  const onClickPlus = (num) => {
+  const onClickPlus = (num: number): void => {
     setInputs([...inputs, num + 1]);
   };
 
-  const onClickMinus = (num, index) => {
+  const onClickMinus = (num: number, index: number): void => {
     const filteredInputs = inputs.filter((input, index) => input !== num);
     setInputs(filteredInputs);
     let newInputTexts = [...inputTexts].filter((input, i) => i !== index);
@@ -44,19 +48,23 @@ const RecInput = (props) => {
     setIngredients(newIngredients);
   };
 
-  const handleChangeText = (text, index) => {
+  const handleChangeText = (text: string, index: number): void => {
     let newInputTexts = [...inputTexts];
     newInputTexts[index] = text;
     setInputTexts(newInputTexts);
   };
 
-  const handleSetIngredients = (text, index, input) => {
+  const handleSetIngredients = (
+    text: number | Unit,
+    index: number,
+    input: string
+  ): void => {
     let newIngredients = [...ingredients];
     newIngredients[index] = { ...newIngredients[index], [input]: text };
     setIngredients(newIngredients);
   };
 
-  const showIngredientsInputs = (index) => {
+  const showIngredientsInputs = (index: number) => {
     if (props.isIngredients) {
       return (
         <View style={styles.row}>
@@ -65,15 +73,18 @@ const RecInput = (props) => {
             title="amount"
             size="half"
             marginRight={10}
-            handleChangeText={(text) =>
+            handleChangeText={(text: number) =>
               handleSetIngredients(text, index, "amount")
             }
+            keyboardType="numeric"
           />
           <RecSelect
             placeholder="units"
             title="units"
             size="half"
-            selectedValue={(val) => handleSetIngredients(val, index, "unit")}
+            selectedValue={(val: Unit) =>
+              handleSetIngredients(val, index, "unit")
+            }
           />
         </View>
       );
@@ -100,6 +111,7 @@ const RecInput = (props) => {
               }
               placeholderTextColor={Colors.neutral2}
               onChangeText={(text) => handleChangeText(text, index)}
+              keyboardType={props.keyboardType}
             ></TextInput>
             {showIngredientsInputs(index)}
             <TouchableOpacity

@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { Image, View, TouchableOpacity, Text, StyleSheet } from "react-native";
 import * as ImagePicker from "expo-image-picker";
-import { Colors } from "../colors";
+import { Colors } from "@constants/colors";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 
 import { faTimes } from "@fortawesome/free-solid-svg-icons";
 
-const RecPhotoUpload = (props) => {
-  const [image, setImage] = useState(null);
+const RecPhotoUpload = (props: any) => {
+  const [image, setImage]: [any, any] = useState(null);
 
   useEffect(() => {
     props.uploadedImage && props.uploadedImage(image);
@@ -37,7 +37,7 @@ const RecPhotoUpload = (props) => {
             <FontAwesomeIcon icon={faTimes} style={styles.closeBtn} />
           </View>
         </TouchableOpacity>
-        {image && <Image source={{ uri: image }} style={styles.photo} />}
+        <Image source={{ uri: image }} style={styles.photo} />
       </View>
 
       <View style={styles.container}>
