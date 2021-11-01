@@ -1,61 +1,107 @@
-// import React, {useState} from 'react';
-// import {Image, View, TouchableOpacity, Text, StyleSheet} from 'react-native';
-// // import {AntDesign} from '@expo/vector-icons';
+import React, { useState, useEffect } from "react";
+import { Image, View, TouchableOpacity, Text, StyleSheet } from "react-native";
+import * as ImagePicker from "expo-image-picker";
+import { Colors } from "../colors";
+import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 
-// const RecPhotoUpload = () => {
-//   const [image, setImage] = useState(null);
+import { faTimes } from "@fortawesome/free-solid-svg-icons";
 
-//   const addImage = async () => {
-//     let _image = await ImagePicker.launchImageLibraryAsync({
-//       mediaTypes: ImagePicker.MediaTypeOptions.Images,
-//       allowsEditing: true,
-//       aspect: [4, 3],
-//       quality: 1,
-//     });
-//   };
+const RecPhotoUpload = (props) => {
+  const [image, setImage] = useState(null);
 
-//   return (
-//     <View style={imageUploaderStyles.container}>
-//       {image && (
-//         <Image source={{uri: image}} style={{width: 200, height: 200}} />
-//       )}
+  useEffect(() => {
+    props.uploadedImage && props.uploadedImage(image);
+  }, [image]);
 
-//       <View style={imageUploaderStyles.uploadBtnContainer}>
-//         <TouchableOpacity
-//           onPress={addImage}
-//           style={imageUploaderStyles.uploadBtn}>
-//           <Text>{image ? 'Edit' : 'Upload'} Image</Text>
-//           {/* <AntDesign name="camera" size={20} color="black" /> */}
-//         </TouchableOpacity>
-//       </View>
-//     </View>
-//   );
-// };
+  const addImage = async () => {
+    let _image = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.Images,
+      allowsEditing: true,
+      aspect: [4, 3],
+      quality: 1,
+    });
 
-// const imageUploaderStyles = StyleSheet.create({
-//   container: {
-//     elevation: 2,
-//     height: 200,
-//     width: 200,
-//     backgroundColor: '#efefef',
-//     position: 'relative',
-//     borderRadius: 999,
-//     overflow: 'hidden',
-//   },
-//   uploadBtnContainer: {
-//     opacity: 0.7,
-//     position: 'absolute',
-//     right: 0,
-//     bottom: 0,
-//     backgroundColor: 'lightgrey',
-//     width: '100%',
-//     height: '25%',
-//   },
-//   uploadBtn: {
-//     display: 'flex',
-//     alignItems: 'center',
-//     justifyContent: 'center',
-//   },
-// });
+    if (!_image.cancelled) {
+      setImage(_image.uri);
+    }
+  };
 
-// export default RecPhotoUpload;
+  return (
+    <View style={styles.container}>
+      <View style={image ? styles.photoCloseBtn : styles.hidden}>
+        <TouchableOpacity
+          style={styles.closeBtnContainer}
+          onPress={() => setImage(null)}
+        >
+          <View style={styles.closeBtnBg}>
+            <FontAwesomeIcon icon={faTimes} style={styles.closeBtn} />
+          </View>
+        </TouchableOpacity>
+        {image && <Image source={{ uri: image }} style={styles.photo} />}
+      </View>
+
+      <View style={styles.container}>
+        <TouchableOpacity
+          onPress={addImage}
+          style={image ? styles.hidden : styles.photoUpload}
+        >
+          <Text style={styles.photoUploadText}>photo upload</Text>
+        </TouchableOpacity>
+      </View>
+    </View>
+  );
+};
+
+const styles = StyleSheet.create({
+  hidden: {
+    display: "none",
+  },
+  container: {
+    width: "97%",
+  },
+  photoUpload: {
+    width: "100%",
+    height: 50,
+    backgroundColor: Colors.neutral5,
+    borderRadius: 10,
+    borderStyle: "dashed",
+    borderColor: Colors.neutral1,
+    borderWidth: 1,
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  photoUploadText: {
+    color: Colors.neutral1,
+  },
+  photo: {
+    height: 130,
+    width: 130,
+    borderRadius: 10,
+  },
+  closeBtn: {
+    color: Colors.neutral1,
+  },
+  closeBtnBg: {
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    borderRadius: 50,
+    backgroundColor: Colors.neutral5,
+    height: 30,
+    width: 30,
+  },
+  closeBtnContainer: {
+    display: "flex",
+    alignItems: "flex-end",
+    marginBottom: -10,
+    marginRight: -10,
+    zIndex: 1,
+  },
+  photoCloseBtn: {
+    width: 130,
+    display: "flex",
+  },
+});
+
+export default RecPhotoUpload;

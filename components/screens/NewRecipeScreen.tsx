@@ -2,11 +2,10 @@ import React, { useState } from "react";
 import { StyleSheet, View, ScrollView, SafeAreaView, Text } from "react-native";
 import { Colors } from "../../colors";
 import RecInput from "../RecInput";
-import RecSelect from "../RecSelect";
 import RecCheckbox from "../RecCheckbox";
 import RecButton from "../RecButton";
 import RecTagList from "../RecTagList";
-// import RecPhotoUpload from '../RecPhotoUpload';
+import RecPhotoUpload from "../RecPhotoUpload";
 import Parse from "parse/react-native";
 
 const NewRecipeScreen = (props) => {
@@ -18,6 +17,7 @@ const NewRecipeScreen = (props) => {
   const [isFlagged, setIsFlagged] = useState(false);
   const [steps, setSteps] = useState([]);
   const [ingredients, setIngredients] = useState([]);
+  const [photo, setPhoto] = useState("");
 
   const saveRecipe = async () => {
     let Recipe = new Parse.Object("recipe");
@@ -28,7 +28,7 @@ const NewRecipeScreen = (props) => {
       categories,
       isFavorite,
       isFlagged,
-      photo: "url?",
+      photo,
       ingredients,
       steps,
     };
@@ -77,7 +77,7 @@ const NewRecipeScreen = (props) => {
             label="want to try"
             isChecked={(isChecked) => setIsFlagged(isChecked)}
           />
-          {/*<RecPhotoUpload /> */}
+          <RecPhotoUpload uploadedImage={(url) => setPhoto(url)} />
           <RecInput
             placeholder="ingredient"
             title="ingredient"
