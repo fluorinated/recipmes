@@ -11,7 +11,6 @@ const RecPhotoUpload = (props: any) => {
 
   useEffect(() => {
     props.uploadedImage && props.uploadedImage(image);
-    console.log(image);
   }, [image]);
 
   const addImage = async () => {

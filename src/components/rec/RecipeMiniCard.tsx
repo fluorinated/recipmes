@@ -31,7 +31,6 @@ const RecipeMiniCard = (props: any) => {
 
   useEffect(() => {
     setRecipe(props.recipe);
-    console.log("recipe.photo", recipe.photo);
   }, []);
 
   const onClickEllipsis = () => {
@@ -45,13 +44,8 @@ const RecipeMiniCard = (props: any) => {
   return (
     <TouchableOpacity
       style={styles.recipe}
-      onPress={() => props.props.navigate("Recipe")}
+      onPress={() => props.props.navigate("Recipe", recipe)}
     >
-      {/* <Image
-        source={require("@assets/scrambled-eggs.png")}
-        style={styles.photo}
-      /> */}
-
       <Image
         source={{ uri: "data:image/jpeg;base64," + recipe.photo }}
         style={styles.photo}
