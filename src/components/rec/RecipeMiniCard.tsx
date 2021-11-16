@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { StyleSheet, Text, View, Image, TouchableOpacity } from "react-native";
 import { Colors } from "@constants/colors";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
@@ -11,8 +11,28 @@ import {
   faEllipsisV,
 } from "@fortawesome/free-solid-svg-icons";
 
-const RecipeMiniCard = ({ props }: any) => {
+const RecipeMiniCard = (props: any) => {
   const [areActionsShown, setAreActionsShown] = useState(false);
+  const [recipe, setRecipe] = useState({
+    categories: ["breakfast"],
+    ingredients: [
+      { unit: "tsp", amount: 1, title: "ingredient 1" },
+      { unit: "tbsp", amount: 5, title: "ingredient 2" },
+    ],
+    steps: ["Step 1", "Step 2"],
+    title: "scrambled eggs",
+    cookTimeHours: 1,
+    cookTimeMinutes: 30,
+    isFavorite: true,
+    isFlagged: true,
+    photo:
+      "file:///var/mobile/Containers/Data/Application/74B08EF2-95B6-4435-B1ED-8589AB758CB6/Library/Caches/ExponentExperienceData/%2540m2015dominguez%252Frecipmes/ImagePicker/BCB62A00-248F-4293-A781-54E0D2A92852.jpg",
+  });
+
+  useEffect(() => {
+    setRecipe(props.recipe);
+    console.log("recipe.photo", recipe.photo);
+  }, []);
 
   const onClickEllipsis = () => {
     if (areActionsShown) {
@@ -25,24 +45,32 @@ const RecipeMiniCard = ({ props }: any) => {
   return (
     <TouchableOpacity
       style={styles.recipe}
-      onPress={() => props.navigate("Recipe")}
+      onPress={() => props.props.navigate("Recipe")}
     >
-      <Image
+      {/* <Image
         source={require("@assets/scrambled-eggs.png")}
         style={styles.photo}
+      /> */}
+
+      <Image
+        source={{ uri: "data:image/jpeg;base64," + recipe.photo }}
+        style={styles.photo}
       />
+
       <View>
-        <Text style={styles.header}>scrambled eggs</Text>
+        <Text style={styles.header}>{recipe.title}</Text>
         <View>
           <View style={styles.description}>
-            <FontAwesomeIcon
-              icon={faCheck}
-              style={styles.check}
-              color={Colors.neutral2}
-            />
-            <Text style={styles.subHeader}>10 mins</Text>
-            <Text style={styles.separator}>•</Text>
-            <Text style={styles.subHeaderBreakfast}>breakfast</Text>
+            <View style={styles.checkTime}>
+              <FontAwesomeIcon
+                icon={faCheck}
+                style={styles.check}
+                color={Colors.neutral2}
+              />
+              <Text style={styles.subHeader}>
+                {recipe.cookTimeHours}h {recipe.cookTimeMinutes}m
+              </Text>
+            </View>
             <View style={styles.ellipsisContainer}>
               <TouchableOpacity
                 style={styles.ellipsis}
@@ -56,6 +84,9 @@ const RecipeMiniCard = ({ props }: any) => {
               </TouchableOpacity>
             </View>
           </View>
+          <Text style={styles.categories}>
+            {recipe.categories.join(" •\u00A0")}
+          </Text>
         </View>
 
         <View style={areActionsShown ? styles.actions : styles.hidden}>
@@ -92,6 +123,7 @@ const styles = StyleSheet.create({
   },
   photo: {
     height: 100,
+    width: 100,
     borderRadius: 10,
   },
   header: {
@@ -100,11 +132,18 @@ const styles = StyleSheet.create({
   },
   check: {
     marginRight: 10,
+    width: 50,
+  },
+  checkTime: {
+    width: 100,
+    flexDirection: "row",
   },
   description: {
     marginLeft: 20,
     marginTop: 10,
     flexDirection: "row",
+    justifyContent: "space-between",
+    width: 250,
   },
   separator: {
     marginLeft: 5,
@@ -115,10 +154,13 @@ const styles = StyleSheet.create({
   subHeader: {
     fontSize: 15,
     color: Colors.neutral1,
+    width: 80,
   },
-  subHeaderBreakfast: {
+  categories: {
     fontSize: 15,
     color: Colors.neutral2,
+    width: 200,
+    marginLeft: 20,
   },
   actions: {
     flexDirection: "row",
@@ -144,7 +186,6 @@ const styles = StyleSheet.create({
     zIndex: 1,
   },
   ellipsisContainer: {
-    marginLeft: 95,
     zIndex: 1,
   },
 });

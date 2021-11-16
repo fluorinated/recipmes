@@ -7,10 +7,11 @@ import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 import { faTimes } from "@fortawesome/free-solid-svg-icons";
 
 const RecPhotoUpload = (props: any) => {
-  const [image, setImage]: [any, any] = useState(null);
+  const [image, setImage]: [any, any] = useState({ base64: "" });
 
   useEffect(() => {
     props.uploadedImage && props.uploadedImage(image);
+    console.log(image);
   }, [image]);
 
   const addImage = async () => {
@@ -18,32 +19,36 @@ const RecPhotoUpload = (props: any) => {
       mediaTypes: ImagePicker.MediaTypeOptions.Images,
       allowsEditing: true,
       aspect: [4, 3],
+      base64: true,
       quality: 1,
     });
 
     if (!_image.cancelled) {
-      setImage(_image.uri);
+      setImage(_image.base64);
     }
   };
 
   return (
     <View style={styles.container}>
-      <View style={image ? styles.photoCloseBtn : styles.hidden}>
+      <View style={image.base64 !== "" ? styles.photoCloseBtn : styles.hidden}>
         <TouchableOpacity
           style={styles.closeBtnContainer}
-          onPress={() => setImage(null)}
+          onPress={() => setImage({ base64: "" })}
         >
           <View style={styles.closeBtnBg}>
             <FontAwesomeIcon icon={faTimes} style={styles.closeBtn} />
           </View>
         </TouchableOpacity>
-        <Image source={{ uri: image }} style={styles.photo} />
+        <Image
+          source={{ uri: "data:image/jpeg;base64," + image }}
+          style={styles.photo}
+        />
       </View>
 
       <View style={styles.container}>
         <TouchableOpacity
           onPress={addImage}
-          style={image ? styles.hidden : styles.photoUpload}
+          style={image.base64 !== "" ? styles.hidden : styles.photoUpload}
         >
           <Text style={styles.photoUploadText}>photo upload</Text>
         </TouchableOpacity>

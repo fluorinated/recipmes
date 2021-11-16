@@ -1,24 +1,30 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { StyleSheet, ScrollView, SafeAreaView } from "react-native";
 import RecipeMiniCard from "../rec/RecipeMiniCard";
 import { Colors } from "../../constants/colors";
 import RecButton from "../rec/RecButton";
+import Parse from "parse/react-native";
+import { Recipe } from "@models/Recipe";
 
 const RecipesScreen = ({ navigation }: any) => {
-  // const getRecipe = async () => {
-  //   const parseQuery = new Parse.Query("GameScore");
+  const [recipes, setRecipes]: [any, any] = useState([]);
 
-  //   console.log("get recipe");
+  useEffect(() => {
+    getRecipe();
+  }, []);
 
-  //   try {
-  //     let results = await parseQuery.find();
-  //     console.log("got it", results);
-  //     return true;
-  //   } catch (e) {
-  //     console.log("e", e);
-  //     return false;
-  //   }
-  // };
+  const getRecipe = async () => {
+    const query = new Parse.Query("recipe");
+
+    query.find().then(
+      (results) => {
+        setRecipes(JSON.parse(JSON.stringify(results)));
+      },
+      (error) => {
+        console.log("e", error);
+      }
+    );
+  };
 
   return (
     <SafeAreaView style={styles.background}>
@@ -27,15 +33,9 @@ const RecipesScreen = ({ navigation }: any) => {
           handleClick={() => navigation.navigate("NewRecipe")}
           label="add new"
         />
-        <RecipeMiniCard props={navigation} />
-        <RecipeMiniCard props={navigation} />
-        <RecipeMiniCard props={navigation} />
-        <RecipeMiniCard props={navigation} />
-        <RecipeMiniCard props={navigation} />
-        <RecipeMiniCard props={navigation} />
-        <RecipeMiniCard props={navigation} />
-        <RecipeMiniCard props={navigation} />
-        <RecipeMiniCard props={navigation} />
+        {recipes.map((recipe: any, index: number) => (
+          <RecipeMiniCard props={navigation} recipe={recipe} key={index} />
+        ))}
       </ScrollView>
     </SafeAreaView>
   );
