@@ -9,6 +9,7 @@ import {
   faTrash,
   faCheck,
 } from "@fortawesome/free-solid-svg-icons";
+import RecIconButton from "@rec/RecIconButton";
 
 const RecipeScreen = (props: any) => {
   const [recipe, setRecipe] = useState({
@@ -35,18 +36,10 @@ const RecipeScreen = (props: any) => {
     <View style={styles.background}>
       <View style={styles.recipe}>
         <View style={styles.actions}>
-          <View style={styles.actionContainer}>
-            <FontAwesomeIcon icon={faPlus} style={styles.action} />
-          </View>
-          <View style={styles.actionContainer}>
-            <FontAwesomeIcon icon={faHeart} style={styles.action} />
-          </View>
-          <View style={styles.actionContainer}>
-            <FontAwesomeIcon icon={faFlag} style={styles.action} />
-          </View>
-          <View style={styles.actionContainer}>
-            <FontAwesomeIcon icon={faTrash} style={styles.action} />
-          </View>
+          <RecIconButton icon={faPlus} />
+          <RecIconButton icon={faHeart} />
+          <RecIconButton icon={faFlag} />
+          <RecIconButton icon={faTrash} />
         </View>
         <Image
           source={{ uri: "data:image/jpeg;base64," + recipe.photo }}
@@ -87,13 +80,13 @@ const styles = StyleSheet.create({
   background: {
     backgroundColor: Colors.neutral7,
     flex: 1,
+    margin: 10,
+    fontFamily: "Kailasa",
     alignItems: "center",
   },
   recipe: {
-    width: "95%",
-    marginTop: 10,
+    width: "100%",
     flexDirection: "column",
-    fontFamily: "Kailasa",
   },
   photo: {
     height: 200,
@@ -127,15 +120,6 @@ const styles = StyleSheet.create({
     width: "100%",
     marginBottom: 20,
     marginTop: 10,
-  },
-  action: {
-    backgroundColor: Colors.neutral5,
-  },
-  actionContainer: {
-    backgroundColor: Colors.neutral5,
-    padding: 10,
-    borderRadius: 10,
-    marginRight: 20,
   },
   stepTitle: {
     fontSize: 20,

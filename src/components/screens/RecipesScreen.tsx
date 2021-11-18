@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { StyleSheet, ScrollView, SafeAreaView } from "react-native";
-import RecipeMiniCard from "../rec/RecipeMiniCard";
-import { Colors } from "../../constants/colors";
-import RecButton from "../rec/RecButton";
+import RecMiniCard from "@rec/RecMiniCard";
+import { Colors } from "@constants/colors";
+import RecButton from "@rec/RecButton";
 import Parse from "parse/react-native";
 import { Recipe } from "@models/Recipe";
 
@@ -34,7 +34,7 @@ const RecipesScreen = ({ navigation }: any) => {
           label="add new"
         />
         {recipes.map((recipe: any, index: number) => (
-          <RecipeMiniCard props={navigation} recipe={recipe} key={index} />
+          <RecMiniCard props={navigation} recipe={recipe} key={index} />
         ))}
       </ScrollView>
     </SafeAreaView>
@@ -45,6 +45,8 @@ const styles = StyleSheet.create({
   background: {
     backgroundColor: Colors.neutral7,
     flex: 1,
+    margin: 10,
+    fontFamily: "Kailasa",
   },
 });
 

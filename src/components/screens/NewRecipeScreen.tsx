@@ -115,10 +115,12 @@ const styles = StyleSheet.create({
   background: {
     backgroundColor: Colors.neutral7,
     flex: 1,
-    marginBottom: 80,
+    margin: 10,
+    fontFamily: "Kailasa",
+    marginBottom: 110,
   },
   inputsContainer: {
-    margin: 10,
+    marginBottom: 30,
     width: "100%",
   },
   row: {

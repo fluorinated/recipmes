@@ -4,34 +4,68 @@ import { Colors } from "@constants/colors";
 
 const RecButton = (props: any) => {
   return (
-    <View style={styles.addNewContainer}>
+    <View
+      style={
+        props.type === "secondary"
+          ? secondaryStyles.container
+          : primaryStyles.container
+      }
+    >
       <TouchableOpacity
-        style={styles.addNewButton}
+        style={
+          props.type === "secondary"
+            ? secondaryStyles.button
+            : primaryStyles.button
+        }
         onPress={() => props.handleClick()}
       >
-        <Text style={styles.addNewText}>{props.label}</Text>
+        <Text
+          style={
+            props.type === "secondary"
+              ? secondaryStyles.text
+              : primaryStyles.text
+          }
+        >
+          {props.label}
+        </Text>
       </TouchableOpacity>
     </View>
   );
 };
 
-const styles = StyleSheet.create({
-  addNewContainer: {
+const primaryStyles = StyleSheet.create({
+  container: {
     backgroundColor: Colors.neutral7,
-    padding: 10,
     display: "flex",
-    marginTop: 10,
     width: "100%",
   },
-  addNewButton: {
+  button: {
     backgroundColor: Colors.purple1,
     padding: 20,
     alignItems: "center",
     borderRadius: 5,
   },
-  addNewText: {
+  text: {
     color: Colors.white,
     fontSize: 18,
+    fontFamily: "Kailasa",
+  },
+});
+
+const secondaryStyles = StyleSheet.create({
+  container: {
+    backgroundColor: Colors.neutral7,
+    display: "flex",
+  },
+  button: {
+    backgroundColor: Colors.neutral6,
+    padding: 15,
+    alignItems: "center",
+    borderRadius: 10,
+  },
+  text: {
+    color: Colors.neutral1,
+    fontSize: 15,
     fontFamily: "Kailasa",
   },
 });

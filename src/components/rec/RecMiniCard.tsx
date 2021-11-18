@@ -10,8 +10,9 @@ import {
   faCheck,
   faEllipsisV,
 } from "@fortawesome/free-solid-svg-icons";
+import RecIconButton from "@rec/RecIconButton";
 
-const RecipeMiniCard = (props: any) => {
+const RecMiniCard = (props: any) => {
   const [areActionsShown, setAreActionsShown] = useState(false);
   const [recipe, setRecipe] = useState({
     categories: ["breakfast"],
@@ -65,18 +66,7 @@ const RecipeMiniCard = (props: any) => {
                 {recipe.cookTimeHours}h {recipe.cookTimeMinutes}m
               </Text>
             </View>
-            <View style={styles.ellipsisContainer}>
-              <TouchableOpacity
-                style={styles.ellipsis}
-                onPressIn={onClickEllipsis}
-              >
-                <FontAwesomeIcon
-                  icon={faEllipsisV}
-                  style={styles.action}
-                  color={Colors.neutral1}
-                />
-              </TouchableOpacity>
-            </View>
+            <RecIconButton icon={faEllipsisV} handleClick={onClickEllipsis} />
           </View>
           <Text style={styles.categories}>
             {recipe.categories.join(" •\u00A0")}
@@ -84,18 +74,10 @@ const RecipeMiniCard = (props: any) => {
         </View>
 
         <View style={areActionsShown ? styles.actions : styles.hidden}>
-          <View style={styles.actionContainer}>
-            <FontAwesomeIcon icon={faPlus} style={styles.action} />
-          </View>
-          <View style={styles.actionContainer}>
-            <FontAwesomeIcon icon={faHeart} style={styles.action} />
-          </View>
-          <View style={styles.actionContainer}>
-            <FontAwesomeIcon icon={faFlag} style={styles.action} />
-          </View>
-          <View style={styles.actionContainer}>
-            <FontAwesomeIcon icon={faTrash} style={styles.action} />
-          </View>
+          <RecIconButton icon={faPlus} />
+          <RecIconButton icon={faHeart} />
+          <RecIconButton icon={faFlag} />
+          <RecIconButton icon={faTrash} />
         </View>
       </View>
     </TouchableOpacity>
@@ -109,8 +91,7 @@ const styles = StyleSheet.create({
   recipe: {
     backgroundColor: Colors.neutral7,
     borderRadius: 10,
-    padding: 10,
-    width: "95%",
+    paddingTop: 15,
     marginTop: 10,
     flexDirection: "row",
     fontFamily: "Kailasa",
@@ -137,7 +118,7 @@ const styles = StyleSheet.create({
     marginTop: 10,
     flexDirection: "row",
     justifyContent: "space-between",
-    width: 250,
+    width: 270,
   },
   separator: {
     marginLeft: 5,
@@ -161,27 +142,8 @@ const styles = StyleSheet.create({
     justifyContent: "flex-end",
     alignItems: "center",
     width: "83%",
-  },
-  action: {
-    backgroundColor: Colors.neutral5,
-  },
-  actionContainer: {
-    backgroundColor: Colors.neutral5,
-    padding: 10,
-    borderRadius: 10,
-    marginRight: 20,
-    marginTop: 20,
-  },
-  ellipsis: {
-    backgroundColor: Colors.neutral5,
-    padding: 10,
-    borderRadius: 7,
-    width: 38,
-    zIndex: 1,
-  },
-  ellipsisContainer: {
-    zIndex: 1,
+    marginTop: 10,
   },
 });
 
-export default RecipeMiniCard;
+export default RecMiniCard;

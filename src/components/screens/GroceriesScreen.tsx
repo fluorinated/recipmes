@@ -1,23 +1,21 @@
+import { Colors } from "@constants/colors";
 import React from "react";
 import { StyleSheet, Text, View } from "react-native";
 
 const GroceriesScreen = () => {
   return (
-    <View>
+    <View style={styles.background}>
       <Text>Groceries Screen</Text>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
-  description: {
-    fontSize: 18,
-    textAlign: "center",
-    color: "#656565",
-    marginTop: 65,
-  },
-  container: {
+  background: {
+    backgroundColor: Colors.neutral7,
     flex: 1,
+    margin: 10,
+    fontFamily: "Kailasa",
   },
 });
 

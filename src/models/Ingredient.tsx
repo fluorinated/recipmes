@@ -1,4 +1,4 @@
-import { Unit } from "./Unit";
+import { Unit } from "@models/Unit";
 
 export interface Ingredient {
   title: string;

@@ -91,14 +91,21 @@ const RecInput = (props: any) => {
     }
   };
 
+  const getSize = () => {
+    if (props.size === "half") {
+      return 190;
+    } else if (props.size === "third") {
+      return 260;
+    } else {
+      return 390;
+    }
+  };
+
   return (
     <View style={[styles.inputContainer, { marginRight: props.marginRight }]}>
       {inputs.map((num, index) => {
         return (
-          <View
-            style={{ width: props.size === "half" ? 190 : 390 }}
-            key={`input-${num}`}
-          >
+          <View style={{ width: getSize() }} key={`input-${num}`}>
             <Text style={props.title ? styles.inputTitle : styles.hidden}>
               {num === 0 ? props.title : `${props.title} ${num + 1}`}
             </Text>
@@ -112,6 +119,7 @@ const RecInput = (props: any) => {
               placeholderTextColor={Colors.neutral2}
               onChangeText={(text) => handleChangeText(text, index)}
               keyboardType={props.keyboardType}
+              value={props.value}
             ></TextInput>
             {showIngredientsInputs(index)}
             <TouchableOpacity

@@ -9,13 +9,14 @@ import { Colors } from "@constants/colors";
 import RecipesScreen from "@screens/RecipesScreen";
 import RecipeScreen from "@screens/RecipeScreen";
 import NewRecipeScreen from "@screens/NewRecipeScreen";
+import MenusScreen from "@screens/MenusScreen";
 import MenuScreen from "@screens/MenuScreen";
 import IngredientsScreen from "@screens/IngredientsScreen";
 import GroceriesScreen from "@screens/GroceriesScreen";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 import {
   faBookOpen,
-  faUtensils,
+  faClipboard,
   faCarrot,
   faList,
 } from "@fortawesome/free-solid-svg-icons";
@@ -128,18 +129,42 @@ export default function App() {
             )}
           </Tab.Screen>
           <Tab.Screen
-            name="Menu"
+            name="Menus"
             options={{
               tabBarIcon: ({ color, size }) => (
                 <FontAwesomeIcon
-                  icon={faUtensils}
+                  icon={faClipboard}
                   color={Colors.white}
                   size={size}
                 />
               ),
             }}
-            component={MenuScreen}
-          />
+          >
+            {() => (
+              <MenuStack.Navigator>
+                <MenuStack.Screen
+                  name="MenusHome"
+                  component={MenusScreen}
+                  options={{
+                    title: "Menus",
+                    header: () => <View />,
+                  }}
+                />
+                <MenuStack.Screen
+                  name="Menu"
+                  component={MenuScreen}
+                  options={{
+                    title: "Menu",
+                    headerStyle: {
+                      backgroundColor: Colors.white,
+                    },
+                    headerTintColor: Colors.purple1,
+                    headerTitle: () => <View />,
+                  }}
+                />
+              </MenuStack.Navigator>
+            )}
+          </Tab.Screen>
           <Tab.Screen
             name="Ingredients"
             options={{
@@ -151,7 +176,7 @@ export default function App() {
                 />
               ),
             }}
-            component={MenuScreen}
+            component={IngredientsScreen}
           />
           <Tab.Screen
             name="Groceries"
@@ -164,7 +189,7 @@ export default function App() {
                 />
               ),
             }}
-            component={MenuScreen}
+            component={GroceriesScreen}
           />
         </Tab.Navigator>
       </NavigationContainer>

@@ -61,7 +61,7 @@ const styles = StyleSheet.create({
     display: "none",
   },
   container: {
-    width: "97%",
+    width: "100%",
   },
   photoUpload: {
     width: "100%",
