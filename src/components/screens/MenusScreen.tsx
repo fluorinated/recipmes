@@ -10,12 +10,19 @@ import { getDateNumeric } from "@utils/format-date";
 import RecIconButton from "@rec/RecIconButton";
 import { faPen, faTrash } from "@fortawesome/free-solid-svg-icons";
 import { SafeAreaView } from "react-native-safe-area-context";
+import { TouchableOpacity } from "react-native-gesture-handler";
+import { Recipe } from "models/Recipe";
 
-const MenusScreen = ({ navigation }: any) => {
+const MenusScreen = (props: any) => {
   const [menus, setMenus]: [any, any] = useState([]);
+  const [recipe, setRecipe]: [any, any] = useState({});
+  const [isSaved, setIsSaved]: [boolean, any] = useState(false);
 
   useEffect(() => {
     getMenus();
+    if (props.route?.params?.recipe) {
+      setRecipe(props.route.params.recipe);
+    }
   }, []);
 
   const getMenus = async () => {
@@ -39,9 +46,40 @@ const MenusScreen = ({ navigation }: any) => {
     };
     try {
       let response = await Menu.save(newMenu);
-      navigation.navigate("Menu");
+      props.navigation.navigate("Menu");
     } catch (e) {
       console.log("e", e);
+    }
+  };
+
+  const addRecipeToMenu = async (menu: any, recipe: Recipe) => {
+    var Menu = Parse.Object.extend("menu");
+    var query = new Parse.Query(Menu);
+    query.equalTo("objectId", menu.objectId);
+    await query.first().then((menuObj: any) => {
+      const currentMenu = JSON.parse(JSON.stringify(menuObj));
+      const Menu = Parse.Object.extend("menu");
+      const parseMenu = new Menu(currentMenu);
+      if (
+        !menu.recipes.some((menuRec: any) => {
+          // would be better to test the whole object in the future
+          return menuRec.title === recipe.title;
+        })
+      ) {
+        parseMenu.set("recipes", [...menu.recipes, recipe]);
+      }
+      parseMenu.save();
+      setIsSaved(true);
+    });
+  };
+
+  const onClickMenu = (menu: any) => {
+    if (!isSaved) {
+      addRecipeToMenu(menu, recipe);
+      setIsSaved(false);
+      props.navigation.goBack();
+    } else {
+      props.navigation.navigate("Menu", menu);
     }
   };
 
@@ -62,7 +100,11 @@ const MenusScreen = ({ navigation }: any) => {
         <SafeAreaView>
           <ScrollView>
             {menus.map((menu: any, index: number) => (
-              <View style={styles.listEntry} key={index}>
+              <TouchableOpacity
+                style={styles.listEntry}
+                key={index}
+                onPress={() => onClickMenu(menu)}
+              >
                 <View style={styles.textContainer}>
                   <Text style={styles.title}>{menu.title}</Text>
                   <Text style={styles.date}>
@@ -79,7 +121,7 @@ const MenusScreen = ({ navigation }: any) => {
                     handleClick={() => console.log("hi")}
                   />
                 </View>
-              </View>
+              </TouchableOpacity>
             ))}
           </ScrollView>
         </SafeAreaView>

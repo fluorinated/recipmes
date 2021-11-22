@@ -23,12 +23,12 @@
         },
         "android": {
             "adaptiveIcon": {
-                "foregroundImage": "./assets/images/adaptive-icon.png",
+                "foregroundImage": "./src/assets/recipmes-logo.png",
                 "backgroundColor": "#ffffff"
             }
         },
         "web": {
-            "favicon": "./assets/images/favicon.png"
+            "favicon": "./src/assets/recipmes-logo.png"
         }
     }
 }

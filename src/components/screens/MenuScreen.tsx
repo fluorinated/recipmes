@@ -1,14 +1,55 @@
-import React from "react";
-import { StyleSheet, Text, View } from "react-native";
+import React, { useState } from "react";
+import { StyleSheet, Text, View, ScrollView } from "react-native";
 import RecButton from "@rec/RecButton";
 import { faBinoculars } from "@fortawesome/free-solid-svg-icons";
 import { Colors } from "@constants/colors";
 import RecEmptyState from "@rec/RecEmptyState";
 import RecInputLabel from "@rec/RecInputLabel";
-import { Menu } from "@models/Menu";
 import { FoodCategory } from "@models/FoodCategory";
+import { Recipe } from "@models/Recipe";
+import RecMiniCard from "@rec/RecMiniCard";
+import { SafeAreaView } from "react-native-safe-area-context";
 
-const MenuScreen = ({ navigation }: any) => {
+const MenuScreen = (props: any) => {
+  const [menu, setMenu] = useState(props.route.params);
+
+  const includesCategory = (recipe: Recipe, category: FoodCategory) =>
+    recipe.categories?.includes(category);
+
+  const getCategories = (category: FoodCategory) => {
+    return (
+      <View>
+        {menu.recipes.map((recipe: Recipe, index: number) => (
+          <View
+            style={includesCategory(recipe, category) ? {} : styles.hidden}
+            key={index}
+          >
+            <RecMiniCard
+              navigation={props.navigation}
+              recipe={recipe}
+              key={index}
+            />
+          </View>
+        ))}
+      </View>
+    );
+  };
+
+  const getSections = () => {
+    return (
+      <View>
+        {Object.values(FoodCategory).map((category, i) => (
+          <View key={i}>
+            <Text style={styles.title} key={i}>
+              {category}
+            </Text>
+            {getCategories(category)}
+          </View>
+        ))}
+      </View>
+    );
+  };
+
   return (
     <View style={styles.background}>
       {false ? (
@@ -17,20 +58,18 @@ const MenuScreen = ({ navigation }: any) => {
             icon={faBinoculars}
             header="no recipes found"
             subheader="view a recipe and use the actions to add a recipe to a menu"
-            handleClick={() => navigation.navigate("Recipes")}
+            handleClick={() => props.navigation.navigate("Recipes")}
             buttonLabel="view recipes"
           />
         </View>
       ) : (
-        <View>
-          <RecButton label="add ingredients to groceries" />
-          <RecInputLabel placeholder="menu title" inputTitle="menu title" />
-          <View>
-            {Object.keys(FoodCategory).map((category) => (
-              <Text style={styles.title}>{category.toLowerCase()}</Text>
-            ))}
-          </View>
-        </View>
+        <SafeAreaView>
+          <ScrollView>
+            <RecButton label="add ingredients to groceries" />
+            <RecInputLabel placeholder={menu.title} inputTitle="menu title" />
+            <View>{getSections()}</View>
+          </ScrollView>
+        </SafeAreaView>
       )}
     </View>
   );
@@ -42,6 +81,9 @@ const styles = StyleSheet.create({
     flex: 1,
     margin: 10,
     fontFamily: "Kailasa",
+  },
+  hidden: {
+    display: "none",
   },
   emptyStateContainer: {
     display: "flex",

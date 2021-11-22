@@ -45,7 +45,7 @@ const RecMiniCard = (props: any) => {
   return (
     <TouchableOpacity
       style={styles.recipe}
-      onPress={() => props.props.navigate("Recipe", recipe)}
+      onPress={() => props.navigation.navigate("Recipe", recipe)}
     >
       <Image
         source={{ uri: "data:image/jpeg;base64," + recipe.photo }}
@@ -69,12 +69,20 @@ const RecMiniCard = (props: any) => {
             <RecIconButton icon={faEllipsisV} handleClick={onClickEllipsis} />
           </View>
           <Text style={styles.categories}>
-            {recipe.categories.join(" •\u00A0")}
+            {recipe.categories?.join(" •\u00A0")}
           </Text>
         </View>
 
         <View style={areActionsShown ? styles.actions : styles.hidden}>
-          <RecIconButton icon={faPlus} />
+          <RecIconButton
+            icon={faPlus}
+            handleClick={() =>
+              props.navigation.navigate("Menus", {
+                screen: "MenusHome",
+                params: { recipe },
+              })
+            }
+          />
           <RecIconButton icon={faHeart} />
           <RecIconButton icon={faFlag} />
           <RecIconButton icon={faTrash} />
