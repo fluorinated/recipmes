@@ -15,15 +15,14 @@ import { Recipe } from "models/Recipe";
 
 const MenusScreen = (props: any) => {
   const [menus, setMenus]: [any, any] = useState([]);
-  const [recipe, setRecipe]: [any, any] = useState({});
+  const [recipe, setRecipe]: [any, any] = useState(
+    props.route?.params?.recipe || {}
+  );
   const [isSaved, setIsSaved]: [boolean, any] = useState(false);
 
   useEffect(() => {
     getMenus();
-    if (props.route?.params?.recipe) {
-      setRecipe(props.route.params.recipe);
-    }
-  }, []);
+  });
 
   const getMenus = async () => {
     const query = new Parse.Query("menu");
@@ -33,7 +32,7 @@ const MenusScreen = (props: any) => {
         setMenus(JSON.parse(JSON.stringify(results)));
       },
       (error) => {
-        console.log("e", error);
+        console.log("[MenusScreen] getMenus error:", error);
       }
     );
   };
@@ -48,7 +47,7 @@ const MenusScreen = (props: any) => {
       let response = await Menu.save(newMenu);
       props.navigation.navigate("Menu");
     } catch (e) {
-      console.log("e", e);
+      console.log("[MenusScreen] saveNewMenu error:", e);
     }
   };
 
@@ -74,7 +73,7 @@ const MenusScreen = (props: any) => {
   };
 
   const onClickMenu = (menu: any) => {
-    if (!isSaved) {
+    if (!isSaved && Object.keys(recipe).length !== 0) {
       addRecipeToMenu(menu, recipe);
       setIsSaved(false);
       props.navigation.goBack();

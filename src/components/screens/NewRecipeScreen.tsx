@@ -12,7 +12,7 @@ import { FoodCategory } from "@models/FoodCategory";
 import { Ingredient } from "@models/Ingredient";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 
-const NewRecipeScreen = () => {
+const NewRecipeScreen = (props: any) => {
   const [recipeTitle, setRecipeTitle]: [string, any] = useState("");
   const [cookTimeHours, setCookTimeHours]: [number, any] = useState(0);
   const [cookTimeMinutes, setCookTimeMinutes]: [number, any] = useState(0);
@@ -38,9 +38,16 @@ const NewRecipeScreen = () => {
     };
     try {
       let response = await Recipe.save(newRecipe);
-      console.log("saved", response);
+      props.navigation.navigate("Recipes", {
+        screen: "RecipesHome",
+        params: { isShowing: true, isError: false },
+      });
     } catch (e) {
-      console.log("e", e);
+      props.navigation.navigate("Recipes", {
+        screen: "RecipesHome",
+        params: { isShowing: true, isError: false, errorMessage: e },
+      });
+      console.log("[NewRecipeScreen] saveRecipe error:", e);
     }
   };
 

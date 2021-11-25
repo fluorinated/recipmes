@@ -28,6 +28,7 @@ const MenuScreen = (props: any) => {
               navigation={props.navigation}
               recipe={recipe}
               key={index}
+              isMenu
             />
           </View>
         ))}

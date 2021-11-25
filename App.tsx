@@ -4,7 +4,6 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { LinearGradient } from "expo-linear-gradient";
-import { BlurView } from "expo-blur";
 import { Colors } from "@constants/colors";
 import RecipesScreen from "@screens/RecipesScreen";
 import RecipeScreen from "@screens/RecipeScreen";
@@ -35,20 +34,6 @@ const RecipesStack = createNativeStackNavigator();
 const MenuStack = createNativeStackNavigator();
 const GroceriesStack = createNativeStackNavigator();
 const IngredientsStack = createNativeStackNavigator();
-{
-  // tabBarBackground: () => (
-  //   <LinearGradient colors={['#4c669f', '#3b5998', '#192f6a']}>
-  //     <Text>Sign in with Facebook</Text>
-  //   </LinearGradient>
-  // ),
-  // tabBarBackground: () => (
-  //   <BlurView
-  //     tint="light"
-  //     intensity={100}
-  //     style={StyleSheet.absoluteFill}
-  //   />
-  // ),
-}
 
 export default function App() {
   const isLoadingComplete = useCachedResources();
@@ -62,10 +47,17 @@ export default function App() {
           screenOptions={{
             tabBarStyle: {
               position: "absolute",
-              backgroundColor: Colors.purple1,
             },
-            tabBarActiveBackgroundColor: Colors.purple2,
-            tabBarInactiveBackgroundColor: Colors.purple1,
+            tabBarBackground: () => (
+              <LinearGradient
+                colors={[Colors.pink1, Colors.purple1]}
+                style={{ height: "100%" }}
+                start={[0.0, 0.5]}
+                end={[1.0, 0.5]}
+                locations={[0.0, 1.0]}
+              ></LinearGradient>
+            ),
+            tabBarActiveBackgroundColor: `${Colors.neutral1}20`,
             tabBarInactiveTintColor: Colors.white,
             tabBarActiveTintColor: Colors.white,
             tabBarItemStyle: {

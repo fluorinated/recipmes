@@ -11,4 +11,10 @@ export const Colors = {
   pink1: "#FE7FCB",
   purple1: "#A913F0",
   purple2: "rgba(130, 5, 188, 0.7)",
+  red1: "#9A7575",
+  red2: "#B79191",
+  red3: "#E7B9B9",
+  green1: "#788074",
+  green2: "#AEB8A8",
+  green3: "#C9D6C1",
 };
