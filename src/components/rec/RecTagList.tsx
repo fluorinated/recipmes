@@ -61,13 +61,15 @@ const RecTagList = (props: any) => {
 
 const styles = StyleSheet.create({
   tag: {
-    backgroundColor: Colors.neutral5,
+    backgroundColor: `${Colors.neutral6}50`,
     paddingLeft: 15,
     paddingRight: 15,
     paddingTop: 10,
     paddingBottom: 10,
     marginRight: 5,
     borderRadius: 30,
+    borderWidth: 1,
+    borderColor: Colors.neutral6,
   },
   tagSelected: {
     backgroundColor: Colors.neutral2,
@@ -77,6 +79,8 @@ const styles = StyleSheet.create({
     paddingBottom: 10,
     marginRight: 5,
     borderRadius: 30,
+    borderWidth: 1,
+    borderColor: `${Colors.neutral1}80`,
   },
   tagText: {
     color: Colors.neutral1,

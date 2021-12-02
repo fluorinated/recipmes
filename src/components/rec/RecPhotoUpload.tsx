@@ -4,7 +4,7 @@ import * as ImagePicker from "expo-image-picker";
 import { Colors } from "@constants/colors";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 
-import { faTimes } from "@fortawesome/free-solid-svg-icons";
+import { faCamera, faTimes } from "@fortawesome/free-solid-svg-icons";
 
 const RecPhotoUpload = (props: any) => {
   const [image, setImage]: [any, any] = useState({ base64: "" });
@@ -35,7 +35,7 @@ const RecPhotoUpload = (props: any) => {
           onPress={() => setImage({ base64: "" })}
         >
           <View style={styles.closeBtnBg}>
-            <FontAwesomeIcon icon={faTimes} style={styles.closeBtn} />
+            <FontAwesomeIcon icon={faTimes} style={styles.icon} />
           </View>
         </TouchableOpacity>
         <Image
@@ -49,7 +49,8 @@ const RecPhotoUpload = (props: any) => {
           onPress={addImage}
           style={image.base64 !== "" ? styles.hidden : styles.photoUpload}
         >
-          <Text style={styles.photoUploadText}>photo upload</Text>
+          <FontAwesomeIcon icon={faCamera} style={styles.icon} />
+          <Text style={styles.photoUploadText}>{props.text}</Text>
         </TouchableOpacity>
       </View>
     </View>
@@ -66,10 +67,10 @@ const styles = StyleSheet.create({
   photoUpload: {
     width: "100%",
     height: 50,
-    backgroundColor: Colors.neutral5,
+    backgroundColor: Colors.neutral6,
     borderRadius: 10,
-    borderStyle: "dashed",
-    borderColor: Colors.neutral1,
+    borderStyle: "solid",
+    borderColor: Colors.neutral4,
     borderWidth: 1,
     display: "flex",
     alignItems: "center",
@@ -83,7 +84,7 @@ const styles = StyleSheet.create({
     width: 130,
     borderRadius: 10,
   },
-  closeBtn: {
+  icon: {
     color: Colors.neutral1,
   },
   closeBtnBg: {

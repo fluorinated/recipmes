@@ -24,18 +24,18 @@ import {
 } from "@expo-google-fonts/courier-prime";
 const RecToast = (props: any) => {
   const [isOpen, setIsOpen] = useState(props.isShowing);
-  const [isError, setIsError] = useState(props.isError);
+  const [isError, setIsError] = useState(!!props.errorMessage);
 
   useEffect(() => {
     setIsOpen(props.isShowing);
     if (!isError) {
       setTimeout(() => setIsOpen(false), 3000);
     }
-  }, [props.isShowing]);
-
-  let [fontsLoaded] = useFonts({
-    CourierPrime_400Regular,
   });
+
+  // let [fontsLoaded] = useFonts({
+  //   CourierPrime_400Regular,
+  // });
 
   const onClickClose = () => {
     setIsOpen(false);
@@ -116,7 +116,7 @@ const styles = StyleSheet.create({
   errorMessage: {
     padding: 5,
     fontSize: 18,
-    fontFamily: "CourierPrime_400Regular",
+    // fontFamily: "CourierPrime_400Regular",
   },
   iconMessage: {
     display: "flex",

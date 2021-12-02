@@ -11,6 +11,7 @@ import { Recipe } from "@models/Recipe";
 import { FoodCategory } from "@models/FoodCategory";
 import { Ingredient } from "@models/Ingredient";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
+import RecMultiInput from "@rec/RecMultiInput";
 
 const NewRecipeScreen = (props: any) => {
   const [recipeTitle, setRecipeTitle]: [string, any] = useState("");
@@ -36,19 +37,26 @@ const NewRecipeScreen = (props: any) => {
       ingredients,
       steps,
     };
-    try {
-      let response = await Recipe.save(newRecipe);
-      props.navigation.navigate("Recipes", {
-        screen: "RecipesHome",
-        params: { isShowing: true, isError: false },
-      });
-    } catch (e) {
-      props.navigation.navigate("Recipes", {
-        screen: "RecipesHome",
-        params: { isShowing: true, isError: false, errorMessage: e },
-      });
-      console.log("[NewRecipeScreen] saveRecipe error:", e);
-    }
+    let response = await Recipe.save(newRecipe).then(
+      (results) => {
+        console.log("results", results);
+        props.navigation.navigate("Recipes", {
+          screen: "RecipesHome",
+          params: { isShowing: true, errorMessage: null },
+        });
+      },
+      (error) => {
+        const { message, code } = JSON.parse(JSON.stringify(error));
+        props.navigation.navigate("Recipes", {
+          screen: "RecipesHome",
+          params: {
+            isShowing: true,
+            errorMessage: `${code} ${message}`,
+          },
+        });
+        console.log("[NewRecipeScreen] saveRecipe error:", error);
+      }
+    );
   };
 
   return (
@@ -56,12 +64,12 @@ const NewRecipeScreen = (props: any) => {
       <KeyboardAwareScrollView>
         <View style={styles.inputsContainer}>
           <RecInput
-            placeholder="recipe"
-            title="recipe"
+            placeholder="recipe title"
+            title="recipe title"
             handleChangeText={(text: string) => setRecipeTitle(text)}
           />
           <Text style={styles.cookTime}>cook time</Text>
-          <View style={styles.row}>
+          <View style={[styles.row, styles.container]}>
             <RecInput
               placeholder="hours"
               title="hours"
@@ -82,33 +90,42 @@ const NewRecipeScreen = (props: any) => {
               keyboardType="numeric"
             />
           </View>
-          <RecTagList
-            listType="food"
-            selectedTags={(tags: FoodCategory[]) => setCategories(tags)}
-          />
-          <RecCheckbox
-            label="favorite"
-            isChecked={(isChecked: boolean) => setIsFavorite(isChecked)}
-          />
-          <RecCheckbox
-            label="want to try"
-            isChecked={(isChecked: boolean) => setIsFlagged(isChecked)}
-          />
-          <RecPhotoUpload uploadedImage={(url: string) => setPhoto(url)} />
-          <RecInput
+          <View style={styles.container}>
+            <RecTagList
+              listType="food"
+              selectedTags={(tags: FoodCategory[]) => setCategories(tags)}
+            />
+          </View>
+
+          <View style={styles.container}>
+            <RecCheckbox
+              label="favorite"
+              isChecked={(isChecked: boolean) => setIsFavorite(isChecked)}
+            />
+            <RecCheckbox
+              label="want to try"
+              isChecked={(isChecked: boolean) => setIsFlagged(isChecked)}
+            />
+          </View>
+
+          <View style={styles.container}>
+            <RecPhotoUpload
+              text="upload recipe photo"
+              uploadedImage={(url: string) => setPhoto(url)}
+            />
+          </View>
+
+          <RecMultiInput
             placeholder="ingredient"
             title="ingredient"
-            isMany={true}
-            isIngredients={true}
+            isIngredients
             ingredients={(ingredients: Ingredient[]) =>
               setIngredients(ingredients)
             }
-            handleChangeText={() => {}}
-          ></RecInput>
-          <RecInput
+          />
+          <RecMultiInput
             placeholder="step"
             title="step"
-            isMany={true}
             handleChangeText={(text: string[]) => setSteps(text)}
           />
         </View>
@@ -137,6 +154,9 @@ const styles = StyleSheet.create({
     marginTop: 20,
     marginLeft: 5,
     color: Colors.neutral1,
+  },
+  container: {
+    paddingBottom: 20,
   },
 });
 

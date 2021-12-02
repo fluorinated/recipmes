@@ -6553,6 +6553,11 @@
     "css-select" "^2.1.0"
     "css-tree" "^1.0.0-alpha.39"
 
+"react-native-swipe-gestures@^1.0.5":
+  "integrity" "sha512-Ns7Bn9H/Tyw278+5SQx9oAblDZ7JixyzeOczcBK8dipQk2pD7Djkcfnf1nB/8RErAmMLL9iXgW0QHqiII8AhKw=="
+  "resolved" "https://registry.npmjs.org/react-native-swipe-gestures/-/react-native-swipe-gestures-1.0.5.tgz"
+  "version" "1.0.5"
+
 "react-native-unimodules@~0.15.0":
   "integrity" "sha512-FDeGO9fFMLcegvgTxDCdchyhXvIDPB5DqZU1CBwm4eXFkrRFORPybbwOyA5+srd7ZBbhS0FtFgJg0wzWCq1VPQ=="
   "resolved" "https://registry.npmjs.org/react-native-unimodules/-/react-native-unimodules-0.15.0.tgz"

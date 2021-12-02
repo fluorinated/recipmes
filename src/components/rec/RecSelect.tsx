@@ -3,7 +3,6 @@ import {
   StyleSheet,
   Text,
   View,
-  FlatList,
   TouchableOpacity,
   ScrollView,
 } from "react-native";
@@ -11,6 +10,8 @@ import { TextInput } from "react-native-gesture-handler";
 import { Colors } from "@constants/colors";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 import { faChevronDown, faChevronUp } from "@fortawesome/free-solid-svg-icons";
+import { SafeAreaView } from "react-native-safe-area-context";
+import { Unit } from "@models/Unit";
 
 const RecSelect = (props: any) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -29,11 +30,21 @@ const RecSelect = (props: any) => {
     isOpen ? setIsOpen(false) : setIsOpen(true);
   };
 
+  const getSize = () => {
+    if (props.size === "half") {
+      return 190;
+    } else if (props.size === "third") {
+      return 260;
+    } else {
+      return 390;
+    }
+  };
+
   return (
     <View
       style={[
         styles.inputContainer,
-        { width: props.size === "half" ? 190 : 390 },
+        { width: props.width || getSize() },
         { marginRight: props.marginRight },
       ]}
     >
@@ -45,37 +56,48 @@ const RecSelect = (props: any) => {
         style={styles.chevDown}
         color={Colors.neutral1}
       />
-      {/* onPress={onChevClick} */}
-
       <TextInput
-        style={styles.input}
+        style={[
+          styles.input,
+          props.backgroundColor
+            ? { backgroundColor: props.backgroundColor }
+            : {},
+        ]}
         placeholder={props.placeholder}
-        placeholderTextColor={Colors.neutral2}
+        placeholderTextColor={
+          props.placeholderTextColor
+            ? props.placeholderTextColor
+            : Colors.neutral2
+        }
         editable={false}
         onPressIn={onChevClick}
       >
         {value}
       </TextInput>
-      <ScrollView style={isOpen ? styles.list : styles.hidden}>
-        <FlatList
-          data={[
-            { key: "tsp" },
-            { key: "tbsp" },
-            { key: "mL" },
-            { key: "g" },
-            { key: "mg" },
-            { key: "lb" },
-            { key: "L" },
-            { key: "gallon" },
+      <SafeAreaView style={isOpen ? {} : styles.hidden}>
+        <ScrollView
+          style={[
+            styles.list,
+            props.backgroundColor
+              ? { backgroundColor: props.backgroundColor }
+              : {},
           ]}
-          style={[styles.flatList]}
-          renderItem={({ item }) => (
-            <TouchableOpacity onPress={() => onPress(item.key)}>
-              <Text style={styles.listItem}>{item.key} </Text>
+        >
+          {Object.values(Unit).map((unit, i) => (
+            <TouchableOpacity key={i} onPress={() => onPress(unit)}>
+              <Text
+                style={[
+                  styles.listItem,
+                  { width: props.width || getSize() },
+                  { marginRight: props.marginRight },
+                ]}
+              >
+                {unit}
+              </Text>
             </TouchableOpacity>
-          )}
-        />
-      </ScrollView>
+          ))}
+        </ScrollView>
+      </SafeAreaView>
     </View>
   );
 };
@@ -109,22 +131,15 @@ const styles = StyleSheet.create({
     paddingBottom: 15,
     paddingLeft: 10,
     color: Colors.neutral1,
-    width: 180,
-  },
-  flatList: {
-    marginTop: "-5%",
-    backgroundColor: Colors.neutral5,
-    width: "100%",
-    borderBottomRightRadius: 8,
-    borderBottomLeftRadius: 8,
-    paddingBottom: 15,
   },
   list: {
-    marginTop: "-5%",
-    height: 100,
+    marginTop: "-30%",
+    backgroundColor: Colors.neutral5,
+    width: "100%",
+    maxHeight: 100,
     borderBottomRightRadius: 8,
     borderBottomLeftRadius: 8,
-    width: "100%",
+    overflow: "hidden",
   },
   absolute: {
     position: "absolute",
@@ -132,7 +147,7 @@ const styles = StyleSheet.create({
   chevDown: {
     position: "absolute",
     marginTop: 55,
-    marginLeft: 160,
+    marginLeft: 150,
     zIndex: 1,
   },
 });

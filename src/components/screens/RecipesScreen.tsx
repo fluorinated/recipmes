@@ -5,9 +5,10 @@ import { Colors } from "@constants/colors";
 import RecButton from "@rec/RecButton";
 import Parse from "parse/react-native";
 import RecToast from "@rec/RecToast";
+import { mockDataRecipes } from "@constants/mock-data";
 
 const RecipesScreen = (props: any) => {
-  const [recipes, setRecipes]: [any, any] = useState([]);
+  const [recipes, setRecipes]: [any, any] = useState(mockDataRecipes);
   const [toast, setToast]: [any, any] = useState({
     isShowing: props.route?.params?.isShowing || false,
     errorMessage: props.route?.params?.errorMessage || null,
@@ -15,20 +16,29 @@ const RecipesScreen = (props: any) => {
   });
 
   useEffect(() => {
-    getRecipe();
+    // getRecipe();
   });
 
   const getRecipe = async () => {
     const query = new Parse.Query("recipe");
 
+    const delay = (ms: number) => new Promise((res) => setTimeout(res, ms));
+
+    await delay(3000);
+
     await query.find().then(
       (results) => {
+        console.log("results", results);
         setRecipes(JSON.parse(JSON.stringify(results)));
-        setToast({ isShowing: true, isError: false, errorMessage: null });
+        setToast({ isShowing: true, errorMessage: null });
       },
       (error) => {
         console.log("[RecipesScreen] getRecipe error:", error);
-        setToast({ isShowing: true, isError: true, errorMessage: error });
+        const { message, code } = JSON.parse(JSON.stringify(error));
+        setToast({
+          isShowing: true,
+          errorMessage: `${code} ${message}`,
+        });
       }
     );
   };

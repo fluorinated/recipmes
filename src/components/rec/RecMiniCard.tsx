@@ -12,6 +12,10 @@ import {
   faUtensils,
 } from "@fortawesome/free-solid-svg-icons";
 import RecIconButton from "@rec/RecIconButton";
+import { mockPhoto } from "@constants/mock-photo";
+import GestureRecognizer, {
+  swipeDirections,
+} from "react-native-swipe-gestures";
 
 const RecMiniCard = (props: any) => {
   const [areActionsShown, setAreActionsShown] = useState(false);
@@ -28,8 +32,7 @@ const RecMiniCard = (props: any) => {
       cookTimeMinutes: 30,
       isFavorite: true,
       isFlagged: true,
-      photo:
-        "file:///var/mobile/Containers/Data/Application/74B08EF2-95B6-4435-B1ED-8589AB758CB6/Library/Caches/ExponentExperienceData/%2540m2015dominguez%252Frecipmes/ImagePicker/BCB62A00-248F-4293-A781-54E0D2A92852.jpg",
+      photo: mockPhoto,
     }
   );
 
@@ -42,78 +45,82 @@ const RecMiniCard = (props: any) => {
   };
 
   return (
-    <TouchableOpacity
-      style={styles.recipe}
-      onPress={() => props.navigation.navigate("Recipe", recipe)}
+    <GestureRecognizer
+      onSwipe={(direction, state) => console.log(direction, state)}
     >
-      <Image
-        source={{ uri: "data:image/jpeg;base64," + recipe.photo }}
-        style={styles.photo}
-      />
+      <TouchableOpacity
+        style={styles.recipe}
+        onPress={() => props.navigation.navigate("Recipe", recipe)}
+      >
+        <Image
+          source={{ uri: "data:image/jpeg;base64," + recipe.photo }}
+          style={styles.photo}
+        />
 
-      <View>
-        <Text style={styles.header}>{recipe.title}</Text>
         <View>
-          <View style={styles.description}>
-            <View style={styles.checkTime}>
-              <FontAwesomeIcon
-                icon={faCheck}
-                style={styles.check}
-                color={Colors.neutral3}
-              />
-              <Text style={styles.subHeader}>
-                {recipe.cookTimeHours}h {recipe.cookTimeMinutes}m
-              </Text>
-            </View>
-            <View style={styles.categories}>
-              {recipe.categories?.map((category: string, i: number) => (
-                <Text style={styles.category} key={i}>
-                  {category}
+          <Text style={styles.header}>{recipe.title}</Text>
+          <View>
+            <View style={styles.description}>
+              <View style={styles.checkTime}>
+                <FontAwesomeIcon
+                  icon={faCheck}
+                  style={styles.check}
+                  color={Colors.neutral3}
+                />
+                <Text style={styles.subHeader}>
+                  {recipe.cookTimeHours}h {recipe.cookTimeMinutes}m
                 </Text>
-              ))}
+              </View>
+              <View style={styles.categories}>
+                {recipe.categories?.map((category: string, i: number) => (
+                  <Text style={styles.category} key={i}>
+                    {category}
+                  </Text>
+                ))}
+              </View>
+            </View>
+
+            <View
+              style={[
+                styles.ellipsisContainer,
+                {
+                  backgroundColor: areActionsShown
+                    ? Colors.neutral6
+                    : Colors.neutral7,
+                },
+              ]}
+            >
+              <RecIconButton icon={faEllipsisV} handleClick={onClickEllipsis} />
             </View>
           </View>
 
-          <View
-            style={[
-              styles.ellipsisContainer,
-              {
-                backgroundColor: areActionsShown
-                  ? Colors.neutral6
-                  : Colors.neutral7,
-              },
-            ]}
-          >
-            <RecIconButton icon={faEllipsisV} handleClick={onClickEllipsis} />
+          <View style={areActionsShown ? styles.actions : styles.hidden}>
+            {props.isMenu ? (
+              <RecIconButton
+                icon={faUtensils}
+                handleClick={() => console.log("mark as eaten")}
+                margin={20}
+              />
+            ) : (
+              <RecIconButton
+                icon={faPlus}
+                handleClick={() =>
+                  props.navigation.navigate("Menus", {
+                    screen: "MenusHome",
+                    params: { recipe },
+                  })
+                }
+                margin={20}
+              />
+            )}
+
+            <RecIconButton icon={faHeart} margin={20} />
+            <RecIconButton icon={faFlag} margin={20} />
+            <RecIconButton icon={faTrash} margin={20} />
           </View>
         </View>
-
-        <View style={areActionsShown ? styles.actions : styles.hidden}>
-          {props.isMenu ? (
-            <RecIconButton
-              icon={faUtensils}
-              handleClick={() => console.log("mark as eaten")}
-              margin={20}
-            />
-          ) : (
-            <RecIconButton
-              icon={faPlus}
-              handleClick={() =>
-                props.navigation.navigate("Menus", {
-                  screen: "MenusHome",
-                  params: { recipe },
-                })
-              }
-              margin={20}
-            />
-          )}
-
-          <RecIconButton icon={faHeart} margin={20} />
-          <RecIconButton icon={faFlag} margin={20} />
-          <RecIconButton icon={faTrash} margin={20} />
-        </View>
-      </View>
-    </TouchableOpacity>
+      </TouchableOpacity>
+    </GestureRecognizer>
   );
 };
 
@@ -176,8 +183,8 @@ const styles = StyleSheet.create({
   },
   category: {
     borderRadius: 13,
-    backgroundColor: `${Colors.neutral6}70`,
-    borderColor: Colors.neutral4,
+    backgroundColor: `${Colors.neutral6}50`,
+    borderColor: Colors.neutral6,
     color: Colors.neutral2,
     paddingTop: 5,
     paddingBottom: 5,

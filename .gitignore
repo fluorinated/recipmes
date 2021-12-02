@@ -2,3 +2,5 @@
 /ios/Pods
 /android
 .DS_Store
+.expo
+.vscode
