@@ -1086,6 +1086,11 @@
   "resolved" "https://registry.npmjs.org/@expo-google-fonts/courier-prime/-/courier-prime-0.2.0.tgz"
   "version" "0.2.0"
 
+"@expo-google-fonts/dm-sans@^0.2.0":
+  "integrity" "sha512-PsqVpbas6ySK/ERDRNW0OmiuIf9bJPQWDID1wyNACZuSk91d5OdJkd8BpqvQJirpJKggIGmybJ/ESxZLQCgJ9g=="
+  "resolved" "https://registry.npmjs.org/@expo-google-fonts/dm-sans/-/dm-sans-0.2.0.tgz"
+  "version" "0.2.0"
+
 "@expo-google-fonts/inconsolata@^0.2.0":
   "integrity" "sha512-EP1kLmUPtcRU9KbXi1BJi/gX/U0ACSNjeBNP5uQIWk7kL3uDb7J5XDZUn8JS6EDu06e/V3aC427Q7k2WgfdtwQ=="
   "resolved" "https://registry.npmjs.org/@expo-google-fonts/inconsolata/-/inconsolata-0.2.0.tgz"

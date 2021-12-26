@@ -15,7 +15,8 @@ export default function useCachedResources() {
         // Load fonts
         await Font.loadAsync({
           ...FontAwesome.font,
-          "space-mono": require("../assets/fonts/SpaceMono-Regular.ttf"),
+          // "DM Sans":
+          //   "https://fonts.googleapis.com/css2?family=DM+Sans&display=swap",
         });
       } catch (e) {
         // We might want to provide this error information to an error reporting service

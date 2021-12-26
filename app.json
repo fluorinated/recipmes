@@ -10,7 +10,7 @@
         "splash": {
             "image": "./src/assets/recipmes-logo.png",
             "resizeMode": "contain",
-            "backgroundColor": "#A913F0"
+            "backgroundColor": "#C0BB87"
         },
         "updates": {
             "fallbackToCacheTimeout": 0
@@ -24,7 +24,7 @@
         "android": {
             "adaptiveIcon": {
                 "foregroundImage": "./src/assets/recipmes-logo.png",
-                "backgroundColor": "#ffffff"
+                "backgroundColor": "#C0BB87"
             }
         },
         "web": {

@@ -38,7 +38,7 @@ const styles = StyleSheet.create({
     display: "none",
   },
   icon: {
-    color: Colors.purple1,
+    color: Colors.neutral2,
     marginRight: 30,
   },
   emptyState: {

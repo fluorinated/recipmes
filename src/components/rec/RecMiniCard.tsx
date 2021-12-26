@@ -1,5 +1,12 @@
 import React, { useState } from "react";
-import { StyleSheet, Text, View, Image, TouchableOpacity } from "react-native";
+import {
+  StyleSheet,
+  Text,
+  View,
+  ImageBackground,
+  TouchableOpacity,
+  ScrollView,
+} from "react-native";
 import { Colors } from "@constants/colors";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 import {
@@ -16,6 +23,11 @@ import { mockPhoto } from "@constants/mock-photo";
 import GestureRecognizer, {
   swipeDirections,
 } from "react-native-swipe-gestures";
+import { BlurView } from "expo-blur";
+
+import { useFonts, Inter_400Regular } from "@expo-google-fonts/inter";
+import { DMSans_400Regular } from "@expo-google-fonts/dm-sans";
+import RecTagList from "./RecTagList";
 
 const RecMiniCard = (props: any) => {
   const [areActionsShown, setAreActionsShown] = useState(false);
@@ -36,6 +48,11 @@ const RecMiniCard = (props: any) => {
     }
   );
 
+  let [fontsLoaded] = useFonts({
+    Inter_400Regular,
+    DMSans_400Regular,
+  });
+
   const onClickEllipsis = () => {
     if (areActionsShown) {
       setAreActionsShown(false);
@@ -45,42 +62,53 @@ const RecMiniCard = (props: any) => {
   };
 
   return (
-    <GestureRecognizer
-      onSwipe={(direction, state) => console.log(direction, state)}
-    >
+    // onSwipe={(direction, state) => console.log(direction, state)}
+    <GestureRecognizer>
       <TouchableOpacity
         style={styles.recipe}
         onPress={() => props.navigation.navigate("Recipe", recipe)}
       >
-        <Image
-          source={{ uri: "data:image/jpeg;base64," + recipe.photo }}
-          style={styles.photo}
+        <View style={styles.headerCheckTime}>
+          <Text
+            style={[
+              styles.header,
+              fontsLoaded ? { fontFamily: "DMSans_400Regular" } : {},
+            ]}
+            ellipsizeMode="tail"
+            numberOfLines={2}
+          >
+            {recipe.title}
+          </Text>
+          <View style={styles.checkTime}>
+            <FontAwesomeIcon
+              icon={faCheck}
+              style={styles.check}
+              color={Colors.neutral1}
+            />
+            <Text style={styles.subHeader}>
+              {recipe.cookTimeHours}h {recipe.cookTimeMinutes}m
+            </Text>
+          </View>
+        </View>
+
+        <RecTagList
+          list={recipe.categories}
+          style="secondary"
+          selectedTags={(tags: any[]) => console.log(tags)}
         />
-
-        <View>
-          <Text style={styles.header}>{recipe.title}</Text>
-          <View>
+        {/* <ScrollView horizontal={true} style={styles.categories}>
+          {recipe.categories?.map((category: string, i: number) => (
+            <Text style={styles.category} key={i}>
+              {category}
+            </Text>
+          ))}
+        </ScrollView> */}
+        {/* <View>
             <View style={styles.description}>
-              <View style={styles.checkTime}>
-                <FontAwesomeIcon
-                  icon={faCheck}
-                  style={styles.check}
-                  color={Colors.neutral3}
-                />
-                <Text style={styles.subHeader}>
-                  {recipe.cookTimeHours}h {recipe.cookTimeMinutes}m
-                </Text>
-              </View>
-              <View style={styles.categories}>
-                {recipe.categories?.map((category: string, i: number) => (
-                  <Text style={styles.category} key={i}>
-                    {category}
-                  </Text>
-                ))}
-              </View>
-            </View>
+             
+            </View> */}
 
-            <View
+        {/* <View
               style={[
                 styles.ellipsisContainer,
                 {
@@ -91,10 +119,10 @@ const RecMiniCard = (props: any) => {
               ]}
             >
               <RecIconButton icon={faEllipsisV} handleClick={onClickEllipsis} />
-            </View>
-          </View>
+            </View> */}
+        {/* </View> */}
 
-          <View style={areActionsShown ? styles.actions : styles.hidden}>
+        {/* <View style={areActionsShown ? styles.actions : styles.hidden}>
             {props.isMenu ? (
               <RecIconButton
                 icon={faUtensils}
@@ -117,8 +145,7 @@ const RecMiniCard = (props: any) => {
             <RecIconButton icon={faHeart} margin={20} />
             <RecIconButton icon={faFlag} margin={20} />
             <RecIconButton icon={faTrash} margin={20} />
-          </View>
-        </View>
+          </View>*/}
       </TouchableOpacity>
     </GestureRecognizer>
   );
@@ -129,63 +156,55 @@ const styles = StyleSheet.create({
     display: "none",
   },
   recipe: {
-    backgroundColor: Colors.neutral7,
+    backgroundColor: "transparent",
     borderRadius: 10,
-    paddingTop: 15,
-    marginTop: 10,
-    flexDirection: "row",
     fontFamily: "Kailasa",
-  },
-  photo: {
-    height: 100,
-    width: 100,
-    borderRadius: 5,
-    marginRight: 15,
+    height: 120,
+    width: 370,
+    borderBottomColor: Colors.neutral4,
+    borderBottomWidth: 1,
   },
   header: {
-    fontSize: 20,
-    color: Colors.neutral1,
+    fontSize: 23,
+    color: Colors.black,
+    maxWidth: 270,
+  },
+  headerCheckTime: {
+    display: "flex",
+    flexDirection: "row",
+    width: 380,
+    height: 80,
+    justifyContent: "space-between",
+    alignItems: "flex-start",
+    paddingTop: 20,
   },
   check: {
     marginRight: 10,
     width: 50,
   },
   checkTime: {
+    paddingTop: 5,
     width: 100,
     flexDirection: "row",
   },
-  description: {
-    marginTop: 10,
-    flexDirection: "column",
-    justifyContent: "space-between",
-    width: 270,
-    paddingBottom: 100,
-  },
-  separator: {
-    marginLeft: 5,
-    marginRight: 5,
-    fontSize: 15,
-    color: Colors.neutral1,
-  },
   subHeader: {
     fontSize: 15,
-    color: Colors.neutral2,
+    color: Colors.neutral1,
     width: 80,
   },
   categories: {
     fontSize: 15,
-    width: "100%",
+    width: 200,
     paddingRight: 45,
     paddingTop: 10,
-    display: "flex",
+    overflow: "scroll",
     flexDirection: "row",
-    flexWrap: "wrap",
   },
   category: {
     borderRadius: 13,
-    backgroundColor: `${Colors.neutral6}50`,
-    borderColor: Colors.neutral6,
-    color: Colors.neutral2,
+    backgroundColor: `${Colors.white}50`,
+    borderColor: Colors.neutral4,
+    color: Colors.neutral1,
     paddingTop: 5,
     paddingBottom: 5,
     paddingRight: 8,

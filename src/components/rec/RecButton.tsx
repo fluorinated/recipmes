@@ -1,8 +1,15 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
 import { Colors } from "@constants/colors";
 
+import { useFonts, Inter_400Regular } from "@expo-google-fonts/inter";
+
 const RecButton = (props: any) => {
+  let [fontsLoaded] = useFonts({
+    Inter_400Regular,
+  });
+  // useEffect(() => {}, [fontsLoaded]);
+
   return (
     <View
       style={
@@ -20,11 +27,11 @@ const RecButton = (props: any) => {
         onPress={() => props.handleClick()}
       >
         <Text
-          style={
-            props.type === "secondary"
-              ? secondaryStyles.text
-              : primaryStyles.text
-          }
+          style={[
+            primaryStyles.text,
+            fontsLoaded ? { fontFamily: "Inter_400Regular" } : {},
+            props.type === "secondary" ? secondaryStyles.text : {},
+          ]}
         >
           {props.label}
         </Text>
@@ -37,18 +44,27 @@ const primaryStyles = StyleSheet.create({
   container: {
     backgroundColor: Colors.neutral7,
     display: "flex",
-    width: "100%",
+    width: "95%",
+    margin: 10,
   },
   button: {
-    backgroundColor: Colors.purple1,
+    backgroundColor: Colors.yellow5,
     padding: 20,
     alignItems: "center",
     borderRadius: 5,
+    borderWidth: 1,
+    borderColor: Colors.yellow3,
+    shadowColor: Colors.yellow1,
+    shadowOffset: {
+      width: 2,
+      height: 2,
+    },
+    shadowOpacity: 0.4,
+    textShadowRadius: 5,
   },
   text: {
-    color: Colors.white,
-    fontSize: 18,
-    fontFamily: "Kailasa",
+    color: Colors.yellow1,
+    fontSize: 22,
   },
 });
 

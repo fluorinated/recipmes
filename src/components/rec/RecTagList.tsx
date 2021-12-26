@@ -11,7 +11,13 @@ import { Colors } from "@constants/colors";
 import { FoodCategory } from "@models/FoodCategory";
 
 const RecTagList = (props: any) => {
+  const [list, setList]: [any[] | FoodCategory[], any] = useState(
+    props.list || Object.values(FoodCategory)
+  );
   const [selectedTags, setSelectedTags]: [string[], any] = useState([]);
+  const [isSecondary, setIsSecondary]: [boolean, any] = useState(
+    props.style === "secondary"
+  );
 
   useEffect(() => {
     props.selectedTags(selectedTags);
@@ -31,29 +37,41 @@ const RecTagList = (props: any) => {
   const isTagSelected = (tag: string) =>
     selectedTags.find((selectedTag) => selectedTag === tag);
 
-  const getTags = (props: any) => {
-    let list: [] | FoodCategory[] = [];
-    if (props.listType === "food") {
-      list = Object.values(FoodCategory);
-    }
-    return list.map((tag) => (
-      <TouchableOpacity
-        style={isTagSelected(tag) ? styles.tagSelected : styles.tag}
-        onPress={() => onClickTag(tag)}
-        key={tag}
-      >
-        <Text
-          style={isTagSelected(tag) ? styles.tagTextSelected : styles.tagText}
-        >
-          {tag}
-        </Text>
-      </TouchableOpacity>
-    ));
-  };
   return (
     <SafeAreaView>
       <ScrollView horizontal={true}>
-        <View style={styles.tagList}>{getTags(props)}</View>
+        <View
+          style={[
+            styles.tagList,
+            {
+              marginTop: props.marginTop,
+              marginLeft: props.marginLeft,
+              marginRight: props.marginRight,
+              marginBottom: props.marginBottom,
+            },
+          ]}
+        >
+          {list.map((tag) => (
+            <TouchableOpacity
+              style={[
+                isTagSelected(tag) ? styles.tagSelected : styles.tag,
+                isSecondary ? styles.tagSecondary : {},
+              ]}
+              onPress={() => onClickTag(tag)}
+              key={tag}
+              disabled={isSecondary}
+            >
+              <Text
+                style={[
+                  isSecondary ? styles.tagTextSecondary : styles.tagText,
+                  isTagSelected(tag) ? styles.tagTextSelected : {},
+                ]}
+              >
+                {tag}
+              </Text>
+            </TouchableOpacity>
+          ))}
+        </View>
       </ScrollView>
     </SafeAreaView>
   );
@@ -61,7 +79,7 @@ const RecTagList = (props: any) => {
 
 const styles = StyleSheet.create({
   tag: {
-    backgroundColor: `${Colors.neutral6}50`,
+    backgroundColor: `${Colors.white}80`,
     paddingLeft: 15,
     paddingRight: 15,
     paddingTop: 10,
@@ -69,7 +87,7 @@ const styles = StyleSheet.create({
     marginRight: 5,
     borderRadius: 30,
     borderWidth: 1,
-    borderColor: Colors.neutral6,
+    borderColor: `${Colors.neutral4}90`,
   },
   tagSelected: {
     backgroundColor: Colors.neutral2,
@@ -80,10 +98,26 @@ const styles = StyleSheet.create({
     marginRight: 5,
     borderRadius: 30,
     borderWidth: 1,
-    borderColor: `${Colors.neutral1}80`,
+    borderColor: "transparent",
+  },
+  tagSecondary: {
+    backgroundColor: `${Colors.white}40`,
+    paddingLeft: 10,
+    paddingRight: 10,
+    paddingTop: 5,
+    paddingBottom: 5,
+    marginRight: 5,
+    borderRadius: 30,
+    borderWidth: 1,
+    borderColor: `${Colors.neutral5}90`,
   },
   tagText: {
+    color: Colors.neutral2,
+    fontSize: 13,
+  },
+  tagTextSecondary: {
     color: Colors.neutral1,
+    fontSize: 13,
   },
   tagTextSelected: {
     color: Colors.white,
@@ -91,9 +125,6 @@ const styles = StyleSheet.create({
   tagList: {
     flex: 1,
     flexDirection: "row",
-    marginTop: 10,
-    marginBottom: 5,
-    marginRight: 15,
   },
 });
 

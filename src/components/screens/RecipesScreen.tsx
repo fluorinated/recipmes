@@ -5,10 +5,22 @@ import { Colors } from "@constants/colors";
 import RecButton from "@rec/RecButton";
 import Parse from "parse/react-native";
 import RecToast from "@rec/RecToast";
-import { mockDataRecipes } from "@constants/mock-data";
+import {
+  mockDataRecipe,
+  mockDataRecipe2,
+  mockDataRecipes,
+} from "@constants/mock-data";
+import RecCard from "components/rec/RecCard";
+import RecSearch from "components/rec/RecSearch";
+import RecTagList from "components/rec/RecTagList";
+import { FoodCategory } from "models/FoodCategory";
 
 const RecipesScreen = (props: any) => {
-  const [recipes, setRecipes]: [any, any] = useState(mockDataRecipes);
+  const [recipes, setRecipes]: [any, any] = useState([
+    mockDataRecipe,
+    mockDataRecipe2,
+    mockDataRecipe,
+  ]);
   const [toast, setToast]: [any, any] = useState({
     isShowing: props.route?.params?.isShowing || false,
     errorMessage: props.route?.params?.errorMessage || null,
@@ -56,13 +68,47 @@ const RecipesScreen = (props: any) => {
           handleClick={() => props.navigation.navigate("NewRecipe")}
           label="add new"
         />
-        {recipes.map((recipe: any, index: number) => (
+        {/* <RecCard>
+          {recipes.map((recipe: any, index: number) => (
+            <RecMiniCard
+              navigation={props.navigation}
+              recipe={recipe}
+              key={index}
+            />
+          ))}
+        </RecCard> */}
+        <RecCard search tags>
           <RecMiniCard
             navigation={props.navigation}
-            recipe={recipe}
-            key={index}
+            recipe={recipes[0]}
+            key={0}
           />
-        ))}
+          <RecMiniCard
+            navigation={props.navigation}
+            recipe={recipes[1]}
+            key={1}
+          />
+          <RecMiniCard
+            navigation={props.navigation}
+            recipe={recipes[2]}
+            key={2}
+          />
+          <RecMiniCard
+            navigation={props.navigation}
+            recipe={recipes[2]}
+            key={3}
+          />
+          <RecMiniCard
+            navigation={props.navigation}
+            recipe={recipes[1]}
+            key={4}
+          />
+          <RecMiniCard
+            navigation={props.navigation}
+            recipe={recipes[2]}
+            key={5}
+          />
+        </RecCard>
       </ScrollView>
     </SafeAreaView>
   );
@@ -71,7 +117,6 @@ const RecipesScreen = (props: any) => {
 const styles = StyleSheet.create({
   background: {
     backgroundColor: Colors.neutral7,
-    margin: 10,
     flex: 1,
     fontFamily: "Kailasa",
   },

@@ -50,16 +50,16 @@ export default function App() {
             },
             tabBarBackground: () => (
               <LinearGradient
-                colors={[Colors.pink1, Colors.purple1]}
+                colors={[Colors.yellow5, Colors.yellow4]}
                 style={{ height: "100%" }}
                 start={[0.0, 0.5]}
                 end={[1.0, 0.5]}
                 locations={[0.0, 1.0]}
               ></LinearGradient>
             ),
-            tabBarActiveBackgroundColor: `${Colors.neutral1}20`,
-            tabBarInactiveTintColor: Colors.white,
-            tabBarActiveTintColor: Colors.white,
+            tabBarActiveBackgroundColor: `${Colors.yellow1}10`,
+            tabBarInactiveTintColor: Colors.yellow1,
+            tabBarActiveTintColor: Colors.yellow1,
             tabBarItemStyle: {
               marginLeft: 15,
               marginRight: 15,
@@ -69,7 +69,6 @@ export default function App() {
             },
             tabBarShowLabel: false,
           }}
-          // fontFamily: "Kailasa",
         >
           <Tab.Screen
             name="Recipes"
@@ -77,7 +76,7 @@ export default function App() {
               tabBarIcon: ({ color, size }) => (
                 <FontAwesomeIcon
                   icon={faBookOpen}
-                  color={Colors.white}
+                  color={Colors.yellow1}
                   size={size}
                 />
               ),
@@ -99,9 +98,9 @@ export default function App() {
                   options={{
                     title: "NewRecipe",
                     headerStyle: {
-                      backgroundColor: Colors.white,
+                      backgroundColor: Colors.yellow1,
                     },
-                    headerTintColor: Colors.purple1,
+                    headerTintColor: Colors.yellow1,
                     headerTitle: () => <View />,
                   }}
                 />
@@ -111,9 +110,9 @@ export default function App() {
                   options={{
                     title: "Recipe",
                     headerStyle: {
-                      backgroundColor: Colors.white,
+                      backgroundColor: Colors.yellow1,
                     },
-                    headerTintColor: Colors.purple1,
+                    headerTintColor: Colors.yellow1,
                     headerTitle: () => <View />,
                   }}
                 />
@@ -126,7 +125,7 @@ export default function App() {
               tabBarIcon: ({ color, size }) => (
                 <FontAwesomeIcon
                   icon={faClipboard}
-                  color={Colors.white}
+                  color={Colors.yellow1}
                   size={size}
                 />
               ),
@@ -150,7 +149,7 @@ export default function App() {
                     headerStyle: {
                       backgroundColor: Colors.white,
                     },
-                    headerTintColor: Colors.purple1,
+                    headerTintColor: Colors.yellow1,
                     headerTitle: () => <View />,
                   }}
                 />
@@ -163,7 +162,7 @@ export default function App() {
               tabBarIcon: ({ color, size }) => (
                 <FontAwesomeIcon
                   icon={faCarrot}
-                  color={Colors.white}
+                  color={Colors.yellow1}
                   size={size}
                 />
               ),
@@ -176,7 +175,7 @@ export default function App() {
               tabBarIcon: ({ color, size }) => (
                 <FontAwesomeIcon
                   icon={faList}
-                  color={Colors.white}
+                  color={Colors.yellow1}
                   size={size}
                 />
               ),
