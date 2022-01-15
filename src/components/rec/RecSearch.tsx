@@ -15,7 +15,15 @@ const RecSearch = (props: any) => {
 
   return (
     <View
-      style={styles.container}
+      style={[
+        styles.container,
+        {
+          marginTop: props.marginTop,
+          marginLeft: props.marginLeft,
+          marginRight: props.marginRight,
+          marginBottom: props.marginBottom,
+        },
+      ]}
       onLayout={(event) => setHeight(event.nativeEvent.layout.height)}
     >
       <FontAwesomeIcon
@@ -38,7 +46,7 @@ const RecSearch = (props: any) => {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: "transparent",
+    backgroundColor: Colors.white,
     display: "flex",
     width: "95%",
     marginTop: 10,
@@ -47,21 +55,6 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     borderRadius: 5,
-  },
-  button: {
-    backgroundColor: Colors.yellow5,
-    padding: 20,
-    alignItems: "center",
-    borderRadius: 5,
-    borderWidth: 1,
-    borderColor: Colors.yellow3,
-    shadowColor: Colors.yellow1,
-    shadowOffset: {
-      width: 2,
-      height: 2,
-    },
-    shadowOpacity: 0.4,
-    textShadowRadius: 5,
   },
   input: {
     color: Colors.neutral1,

@@ -110,7 +110,6 @@ const styles = StyleSheet.create({
     color: Colors.neutral1,
     marginTop: 10,
     marginLeft: 5,
-    fontFamily: "Kailasa",
     width: "100%",
   },
   input: {
@@ -121,7 +120,6 @@ const styles = StyleSheet.create({
     padding: 10,
     borderRadius: 8,
     width: "100%",
-    fontFamily: "Kailasa",
   },
   inputContainer: {
     alignItems: "flex-start",

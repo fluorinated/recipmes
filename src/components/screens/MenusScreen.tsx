@@ -111,14 +111,10 @@ const MenusScreen = (props: any) => {
                   </Text>
                 </View>
                 <View style={styles.actions}>
-                  <RecIconButton
-                    icon={faPen}
-                    handleClick={() => console.log("hi")}
-                  />
-                  <RecIconButton
-                    icon={faTrash}
-                    handleClick={() => console.log("hi")}
-                  />
+                  <View style={{ marginRight: 10 }}>
+                    <RecIconButton icon={faPen} handleClick={() => ``} />
+                  </View>
+                  <RecIconButton icon={faTrash} handleClick={() => ``} />
                 </View>
               </TouchableOpacity>
             ))}
@@ -132,9 +128,6 @@ const MenusScreen = (props: any) => {
 const styles = StyleSheet.create({
   background: {
     backgroundColor: Colors.neutral7,
-    flex: 1,
-    margin: 10,
-    fontFamily: "Kailasa",
   },
   emptyStateContainer: {
     display: "flex",
@@ -161,12 +154,13 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "flex-end",
     alignItems: "center",
-    width: "75%",
+    width: "70%",
   },
   listEntry: {
     display: "flex",
     flexDirection: "row",
     alignItems: "center",
+    paddingHorizontal: 15,
   },
   textContainer: {
     flexDirection: "column",

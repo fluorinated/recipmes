@@ -44,26 +44,27 @@ const primaryStyles = StyleSheet.create({
   container: {
     backgroundColor: Colors.neutral7,
     display: "flex",
-    width: "95%",
-    margin: 10,
+    width: "90%",
+    margin: 20,
   },
   button: {
-    backgroundColor: Colors.yellow5,
+    backgroundColor: Colors.pink1,
     padding: 20,
     alignItems: "center",
     borderRadius: 5,
     borderWidth: 1,
-    borderColor: Colors.yellow3,
-    shadowColor: Colors.yellow1,
+    borderColor: Colors.pink2,
+    shadowColor: Colors.pink3,
     shadowOffset: {
-      width: 2,
+      width: -2,
       height: 2,
     },
     shadowOpacity: 0.4,
-    textShadowRadius: 5,
+    shadowRadius: 1,
+    textShadowRadius: 1,
   },
   text: {
-    color: Colors.yellow1,
+    color: Colors.black,
     fontSize: 22,
   },
 });
@@ -82,7 +83,6 @@ const secondaryStyles = StyleSheet.create({
   text: {
     color: Colors.neutral1,
     fontSize: 15,
-    fontFamily: "Kailasa",
   },
 });
 

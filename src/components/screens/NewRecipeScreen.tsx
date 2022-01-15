@@ -39,7 +39,7 @@ const NewRecipeScreen = (props: any) => {
     };
     let response = await Recipe.save(newRecipe).then(
       (results) => {
-        console.log("results", results);
+        // console.log("results", results);
         props.navigation.navigate("Recipes", {
           screen: "RecipesHome",
           params: { isShowing: true, errorMessage: null },
@@ -140,7 +140,6 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.neutral7,
     flex: 1,
     margin: 10,
-    fontFamily: "Kailasa",
     marginBottom: 110,
   },
   inputsContainer: {

@@ -15,7 +15,6 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.neutral7,
     flex: 1,
     margin: 10,
-    fontFamily: "Kailasa",
   },
 });
 

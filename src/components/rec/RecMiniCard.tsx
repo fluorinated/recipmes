@@ -3,7 +3,7 @@ import {
   StyleSheet,
   Text,
   View,
-  ImageBackground,
+  Image,
   TouchableOpacity,
   ScrollView,
 } from "react-native";
@@ -68,34 +68,43 @@ const RecMiniCard = (props: any) => {
         style={styles.recipe}
         onPress={() => props.navigation.navigate("Recipe", recipe)}
       >
-        <View style={styles.headerCheckTime}>
-          <Text
-            style={[
-              styles.header,
-              fontsLoaded ? { fontFamily: "DMSans_400Regular" } : {},
-            ]}
-            ellipsizeMode="tail"
-            numberOfLines={2}
-          >
-            {recipe.title}
-          </Text>
-          <View style={styles.checkTime}>
-            <FontAwesomeIcon
-              icon={faCheck}
-              style={styles.check}
-              color={Colors.neutral1}
-            />
-            <Text style={styles.subHeader}>
-              {recipe.cookTimeHours}h {recipe.cookTimeMinutes}m
+        <Image
+          source={{
+            uri: "data:image/jpeg;base64," + recipe.photo,
+          }}
+          style={[styles.photo]}
+        ></Image>
+        <View>
+          <View style={styles.headerCheckTime}>
+            <Text
+              style={[
+                styles.header,
+                fontsLoaded ? { fontFamily: "DMSans_400Regular" } : {},
+              ]}
+              ellipsizeMode="tail"
+              numberOfLines={2}
+            >
+              {recipe.title}
             </Text>
+            <View style={styles.checkTime}>
+              <FontAwesomeIcon
+                icon={faCheck}
+                style={styles.check}
+                color={Colors.neutral1}
+              />
+              <Text style={styles.subHeader}>
+                {recipe.cookTimeHours}h {recipe.cookTimeMinutes}m
+              </Text>
+            </View>
           </View>
-        </View>
 
-        <RecTagList
-          list={recipe.categories}
-          style="secondary"
-          selectedTags={(tags: any[]) => console.log(tags)}
-        />
+          <RecTagList
+            list={recipe.categories}
+            style="secondary"
+            selectedTags={(tags: any[]) => `${tags}`}
+            marginLeft={10}
+          />
+        </View>
         {/* <ScrollView horizontal={true} style={styles.categories}>
           {recipe.categories?.map((category: string, i: number) => (
             <Text style={styles.category} key={i}>
@@ -156,36 +165,47 @@ const styles = StyleSheet.create({
     display: "none",
   },
   recipe: {
+    display: "flex",
+    flexDirection: "row",
     backgroundColor: "transparent",
-    borderRadius: 10,
-    fontFamily: "Kailasa",
     height: 120,
-    width: 370,
-    borderBottomColor: Colors.neutral4,
+    width: 420,
+    borderBottomColor: Colors.neutral7,
     borderBottomWidth: 1,
+    marginBottom: 15,
+  },
+  photo: {
+    height: 100,
+    width: 100,
+    borderRadius: 5,
+    marginLeft: 15,
+    borderColor: Colors.neutral6,
+    borderWidth: 1,
   },
   header: {
     fontSize: 23,
     color: Colors.black,
-    maxWidth: 270,
+    width: 200,
   },
   headerCheckTime: {
     display: "flex",
     flexDirection: "row",
-    width: 380,
-    height: 80,
+    width: 250,
     justifyContent: "space-between",
     alignItems: "flex-start",
-    paddingTop: 20,
+    marginLeft: 15,
+    paddingBottom: 10,
   },
   check: {
     marginRight: 10,
     width: 50,
   },
   checkTime: {
-    paddingTop: 5,
-    width: 100,
+    padding: 5,
+    width: 80,
     flexDirection: "row",
+    borderRadius: 5,
+    backgroundColor: Colors.neutral7,
   },
   subHeader: {
     fontSize: 15,

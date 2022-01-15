@@ -1,102 +1,39 @@
 import React, { useState } from "react";
-import { StyleSheet, View, ImageBackground, Text } from "react-native";
+import { StyleSheet, View } from "react-native";
 import { Colors } from "@constants/colors";
 import { ScrollView } from "react-native-gesture-handler";
 import RecSearch from "./RecSearch";
 import RecTagList from "./RecTagList";
 import { FoodCategory } from "models/FoodCategory";
-import { BlurView } from "expo-blur";
 
 const RecCard = (props: any) => {
-  const getMarginTop = () => {
-    let marginTop = 0;
-    if (props.search) {
-      marginTop = marginTop + 80;
-    }
-    if (props.tags) {
-      marginTop = marginTop + 30;
-    }
-    return marginTop;
-  };
-  const [scrollPosition, setScrollPosition]: [number, any] = useState(0);
-  const [marginTop, setMarginTop]: [number, any] = useState(getMarginTop());
-  const [bgRef, setBgRef]: [any, any] = useState(null);
-
   return (
-    <View style={styles.container}>
-      <View style={styles.background}>
-        <View
-          style={{
-            height: marginTop,
-            width: 400,
-            zIndex: -1,
-            backgroundColor: "transparent",
-          }}
+    <View
+      style={[
+        styles.card,
+        {
+          paddingTop: props.paddingTop,
+          paddingLeft: props.paddingLeft,
+          paddingRight: props.paddingRight,
+          paddingBottom: props.paddingBottom,
+        },
+      ]}
+    >
+      <View style={styles.searchTags}>
+        <RecSearch
+          label="search"
+          marginLeft={20}
+          style={props.search ? {} : styles.hidden}
         />
-        <BlurView
-          style={{
-            width: "100%",
-            height: 50,
-            opacity: 0.5,
-          }}
-          intensity={1000}
-        ></BlurView>
 
-        <ScrollView style={styles.bgScroll} ref={(ref) => setBgRef(ref)}>
-          {props?.children?.map((child: any, i: number) => (
-            <ImageBackground
-              source={{
-                uri: "data:image/jpeg;base64," + child?.props?.recipe?.photo,
-              }}
-              style={[styles.photo]}
-              blurRadius={10}
-              key={i}
-            ></ImageBackground>
-          ))}
-        </ScrollView>
-
-        <BlurView
-          style={{
-            width: "100%",
-            height: 50,
-            opacity: 0.5,
-          }}
-          intensity={1000}
-        ></BlurView>
+        <RecTagList
+          listType="food"
+          selectedTags={(tags: FoodCategory[]) => `${tags}`}
+          marginLeft={15}
+          style={props.tags ? {} : styles.hidden}
+        />
       </View>
-
-      <View style={styles.shadow2}>
-        <View style={styles.shadow}>
-          <BlurView style={styles.card} intensity={10}>
-            <RecSearch
-              label="search"
-              style={props.search ? {} : styles.hidden}
-            />
-            <RecTagList
-              listType="food"
-              selectedTags={(tags: FoodCategory[]) => console.log(tags)}
-              marginTop={10}
-              marginBottom={24}
-              marginLeft={0}
-              marginRight={0}
-              style={props.tags ? {} : styles.hidden}
-            />
-            <ScrollView
-              onScroll={(e) =>
-                bgRef.scrollTo({
-                  x: 0,
-                  y: e.nativeEvent.contentOffset.y + 5,
-                  animated: false,
-                })
-              }
-              scrollEventThrottle={1}
-              style={{ height: 350 }}
-            >
-              {props.children}
-            </ScrollView>
-          </BlurView>
-        </View>
-      </View>
+      <ScrollView style={styles.children}>{props.children}</ScrollView>
     </View>
   );
 };
@@ -105,74 +42,28 @@ const styles = StyleSheet.create({
   hidden: {
     display: "none",
   },
-  container: {},
   card: {
-    padding: 15,
-    paddingBottom: 50,
-    height: 580,
-    borderRadius: 10,
-    borderWidth: 1,
-    backgroundColor: `${Colors.white}50`,
-    borderColor: `${Colors.white}50`,
-
-    textShadowColor: "transparent",
-    textShadowRadius: 0,
     overflow: "scroll",
-  },
-  shadow: {
-    height: 580,
-    borderRadius: 10,
-    borderWidth: 1,
-    backgroundColor: `${Colors.white}60`,
-    borderColor: `${Colors.white}50`,
-
-    shadowColor: Colors.black,
-    shadowOffset: {
-      width: 1,
-      height: -1,
-    },
-    shadowOpacity: 0.5,
-    textShadowColor: "transparent",
-    textShadowRadius: 0,
-  },
-  shadow2: {
-    height: 580,
-    paddingBottom: 50,
-    margin: 5,
-    borderRadius: 10,
-    borderWidth: 1,
-    backgroundColor: `${Colors.white}50`,
-    borderColor: `${Colors.white}10`,
-
-    shadowColor: Colors.black,
-    shadowOffset: {
-      width: 1,
-      height: 1,
-    },
-    shadowOpacity: 0.5,
-    textShadowColor: "transparent",
-    textShadowRadius: 0,
-  },
-  photo: {
-    height: 120,
+    padding: 15,
+    paddingBottom: 0,
     width: 430,
-    opacity: 1,
-    shadowColor: `${Colors.black}80`,
-    shadowOffset: {
-      width: 4,
-      height: -4,
-    },
-    shadowOpacity: 1.0,
+    height: 630,
+    borderWidth: 1,
+    backgroundColor: Colors.white,
+    borderColor: Colors.neutral4,
   },
-  background: {
-    position: "absolute",
-    maxHeight: 580,
+  searchTags: {
+    width: "100%",
+    height: 105,
+    backgroundColor: Colors.white,
+    shadowColor: Colors.neutral4,
+    shadowOffset: { width: -2, height: 2 },
+    shadowOpacity: 0.2,
+    shadowRadius: 4,
+    textShadowColor: "transparent",
   },
-  bgScroll: {
-    zIndex: -1,
-    overflow: "hidden",
-    marginTop: -5,
-    marginBottom: -5,
+  children: {
+    marginTop: 20,
   },
 });
 

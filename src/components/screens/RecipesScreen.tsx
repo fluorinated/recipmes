@@ -40,7 +40,7 @@ const RecipesScreen = (props: any) => {
 
     await query.find().then(
       (results) => {
-        console.log("results", results);
+        // console.log("results", results);
         setRecipes(JSON.parse(JSON.stringify(results)));
         setToast({ isShowing: true, errorMessage: null });
       },
@@ -56,19 +56,19 @@ const RecipesScreen = (props: any) => {
   };
 
   return (
-    <SafeAreaView style={styles.background}>
-      <ScrollView>
-        <RecToast
-          message={toast.isError ? "error" : "success"}
-          isShowing={toast.isShowing}
-          isError={toast.isError}
-          errorMessage={toast.errorMessage}
-        />
-        <RecButton
-          handleClick={() => props.navigation.navigate("NewRecipe")}
-          label="add new"
-        />
-        {/* <RecCard>
+    <View style={styles.background}>
+      {/* <ScrollView> */}
+      <RecToast
+        message={toast.isError ? "error" : "success"}
+        isShowing={toast.isShowing}
+        isError={toast.isError}
+        errorMessage={toast.errorMessage}
+      />
+      <RecButton
+        handleClick={() => props.navigation.navigate("NewRecipe")}
+        label="add new"
+      />
+      {/* <RecCard>
           {recipes.map((recipe: any, index: number) => (
             <RecMiniCard
               navigation={props.navigation}
@@ -77,40 +77,40 @@ const RecipesScreen = (props: any) => {
             />
           ))}
         </RecCard> */}
-        <RecCard search tags>
-          <RecMiniCard
-            navigation={props.navigation}
-            recipe={recipes[0]}
-            key={0}
-          />
-          <RecMiniCard
-            navigation={props.navigation}
-            recipe={recipes[1]}
-            key={1}
-          />
-          <RecMiniCard
-            navigation={props.navigation}
-            recipe={recipes[2]}
-            key={2}
-          />
-          <RecMiniCard
-            navigation={props.navigation}
-            recipe={recipes[2]}
-            key={3}
-          />
-          <RecMiniCard
-            navigation={props.navigation}
-            recipe={recipes[1]}
-            key={4}
-          />
-          <RecMiniCard
-            navigation={props.navigation}
-            recipe={recipes[2]}
-            key={5}
-          />
-        </RecCard>
-      </ScrollView>
-    </SafeAreaView>
+      <RecCard search tags paddingLeft={0}>
+        <RecMiniCard
+          navigation={props.navigation}
+          recipe={recipes[0]}
+          key={0}
+        />
+        <RecMiniCard
+          navigation={props.navigation}
+          recipe={recipes[1]}
+          key={1}
+        />
+        <RecMiniCard
+          navigation={props.navigation}
+          recipe={recipes[2]}
+          key={2}
+        />
+        <RecMiniCard
+          navigation={props.navigation}
+          recipe={recipes[2]}
+          key={3}
+        />
+        <RecMiniCard
+          navigation={props.navigation}
+          recipe={recipes[1]}
+          key={4}
+        />
+        <RecMiniCard
+          navigation={props.navigation}
+          recipe={recipes[2]}
+          key={5}
+        />
+      </RecCard>
+      {/* </ScrollView> */}
+    </View>
   );
 };
 
@@ -118,7 +118,7 @@ const styles = StyleSheet.create({
   background: {
     backgroundColor: Colors.neutral7,
     flex: 1,
-    fontFamily: "Kailasa",
+    overflow: "hidden",
   },
 });
 

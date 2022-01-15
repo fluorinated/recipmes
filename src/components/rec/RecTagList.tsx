@@ -34,8 +34,8 @@ const RecTagList = (props: any) => {
     }
   };
 
-  const isTagSelected = (tag: string) =>
-    selectedTags.find((selectedTag) => selectedTag === tag);
+  const isTagSelected = (tag: string): boolean =>
+    !!selectedTags.find((selectedTag) => selectedTag === tag);
 
   return (
     <SafeAreaView>
@@ -54,7 +54,8 @@ const RecTagList = (props: any) => {
           {list.map((tag) => (
             <TouchableOpacity
               style={[
-                isTagSelected(tag) ? styles.tagSelected : styles.tag,
+                styles.tag,
+                isTagSelected(tag) ? styles.tagSelected : {},
                 isSecondary ? styles.tagSecondary : {},
               ]}
               onPress={() => onClickTag(tag)}
@@ -79,41 +80,40 @@ const RecTagList = (props: any) => {
 
 const styles = StyleSheet.create({
   tag: {
-    backgroundColor: `${Colors.white}80`,
-    paddingLeft: 15,
-    paddingRight: 15,
-    paddingTop: 10,
-    paddingBottom: 10,
+    backgroundColor: Colors.white,
+    paddingHorizontal: 13,
+    paddingVertical: 7,
+    marginVertical: 10,
     marginRight: 5,
     borderRadius: 30,
     borderWidth: 1,
-    borderColor: `${Colors.neutral4}90`,
+    borderColor: Colors.neutral5,
   },
   tagSelected: {
     backgroundColor: Colors.neutral2,
-    paddingLeft: 15,
-    paddingRight: 15,
-    paddingTop: 10,
-    paddingBottom: 10,
-    marginRight: 5,
-    borderRadius: 30,
-    borderWidth: 1,
     borderColor: "transparent",
   },
   tagSecondary: {
-    backgroundColor: `${Colors.white}40`,
-    paddingLeft: 10,
-    paddingRight: 10,
-    paddingTop: 5,
-    paddingBottom: 5,
+    backgroundColor: Colors.white,
+    paddingHorizontal: 9,
+    paddingVertical: 5,
     marginRight: 5,
     borderRadius: 30,
     borderWidth: 1,
-    borderColor: `${Colors.neutral5}90`,
+    borderColor: Colors.neutral7,
+    shadowColor: Colors.neutral4,
+    shadowOpacity: 0.3,
+    shadowRadius: 1,
+    shadowOffset: {
+      width: -0.5,
+      height: 0.5,
+    },
+    marginVertical: 1,
+    marginHorizontal: 1,
   },
   tagText: {
     color: Colors.neutral2,
-    fontSize: 13,
+    fontSize: 14,
   },
   tagTextSecondary: {
     color: Colors.neutral1,

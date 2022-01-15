@@ -1,5 +1,5 @@
 import * as React from "react";
-import { View } from "react-native";
+import { StatusBar, View } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
@@ -50,12 +50,17 @@ export default function App() {
             },
             tabBarBackground: () => (
               <LinearGradient
-                colors={[Colors.yellow5, Colors.yellow4]}
+                colors={[Colors.pink1, Colors.yellow4]}
                 style={{ height: "100%" }}
                 start={[0.0, 0.5]}
                 end={[1.0, 0.5]}
                 locations={[0.0, 1.0]}
-              ></LinearGradient>
+              >
+                <StatusBar
+                  barStyle="dark-content"
+                  networkActivityIndicatorVisible={true}
+                />
+              </LinearGradient>
             ),
             tabBarActiveBackgroundColor: `${Colors.yellow1}10`,
             tabBarInactiveTintColor: Colors.yellow1,
@@ -73,6 +78,12 @@ export default function App() {
           <Tab.Screen
             name="Recipes"
             options={{
+              headerStyle: {
+                backgroundColor: Colors.yellow4,
+                borderBottomWidth: 0.5,
+                borderBottomColor: `${Colors.yellow3}50`,
+              },
+              headerTintColor: Colors.yellow1,
               tabBarIcon: ({ color, size }) => (
                 <FontAwesomeIcon
                   icon={faBookOpen}
@@ -98,10 +109,21 @@ export default function App() {
                   options={{
                     title: "NewRecipe",
                     headerStyle: {
-                      backgroundColor: Colors.yellow1,
+                      backgroundColor: Colors.yellow4,
                     },
                     headerTintColor: Colors.yellow1,
-                    headerTitle: () => <View />,
+                    headerTitle: () => (
+                      <View
+                        style={{
+                          position: "absolute",
+                          width: 420,
+                          height: 1,
+                          borderBottomWidth: 1,
+                          borderBottomColor: `${Colors.yellow3}50`,
+                          paddingTop: 45,
+                        }}
+                      />
+                    ),
                   }}
                 />
                 <RecipesStack.Screen
@@ -110,10 +132,21 @@ export default function App() {
                   options={{
                     title: "Recipe",
                     headerStyle: {
-                      backgroundColor: Colors.yellow1,
+                      backgroundColor: Colors.yellow4,
                     },
                     headerTintColor: Colors.yellow1,
-                    headerTitle: () => <View />,
+                    headerTitle: () => (
+                      <View
+                        style={{
+                          position: "absolute",
+                          width: 420,
+                          height: 1,
+                          borderBottomWidth: 1,
+                          borderBottomColor: `${Colors.yellow3}50`,
+                          paddingTop: 45,
+                        }}
+                      />
+                    ),
                   }}
                 />
               </RecipesStack.Navigator>
@@ -122,6 +155,13 @@ export default function App() {
           <Tab.Screen
             name="Menus"
             options={{
+              title: "Menus",
+              headerStyle: {
+                backgroundColor: Colors.yellow4,
+                borderBottomWidth: 0.5,
+                borderBottomColor: `${Colors.yellow3}50`,
+              },
+              headerTintColor: Colors.yellow1,
               tabBarIcon: ({ color, size }) => (
                 <FontAwesomeIcon
                   icon={faClipboard}
@@ -147,10 +187,21 @@ export default function App() {
                   options={{
                     title: "Menu",
                     headerStyle: {
-                      backgroundColor: Colors.white,
+                      backgroundColor: Colors.yellow4,
                     },
                     headerTintColor: Colors.yellow1,
-                    headerTitle: () => <View />,
+                    headerTitle: () => (
+                      <View
+                        style={{
+                          position: "absolute",
+                          width: 420,
+                          height: 1,
+                          borderBottomWidth: 1,
+                          borderBottomColor: `${Colors.yellow3}50`,
+                          paddingTop: 45,
+                        }}
+                      />
+                    ),
                   }}
                 />
               </MenuStack.Navigator>
@@ -159,6 +210,12 @@ export default function App() {
           <Tab.Screen
             name="Ingredients"
             options={{
+              headerStyle: {
+                backgroundColor: Colors.yellow4,
+                borderBottomWidth: 0.5,
+                borderBottomColor: `${Colors.yellow3}50`,
+              },
+              headerTintColor: Colors.yellow1,
               tabBarIcon: ({ color, size }) => (
                 <FontAwesomeIcon
                   icon={faCarrot}
@@ -172,6 +229,12 @@ export default function App() {
           <Tab.Screen
             name="Groceries"
             options={{
+              headerStyle: {
+                backgroundColor: Colors.yellow4,
+                borderBottomWidth: 0.5,
+                borderBottomColor: `${Colors.yellow3}50`,
+              },
+              headerTintColor: Colors.yellow1,
               tabBarIcon: ({ color, size }) => (
                 <FontAwesomeIcon
                   icon={faList}

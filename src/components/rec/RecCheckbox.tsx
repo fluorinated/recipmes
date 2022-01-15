@@ -48,7 +48,6 @@ const styles = StyleSheet.create({
   },
   label: {
     color: Colors.neutral1,
-    fontFamily: "Kailasa",
     width: "100%",
   },
   checkbox: {
