@@ -49,6 +49,7 @@ const RecTagList = (props: any) => {
               marginRight: props.marginRight,
               marginBottom: props.marginBottom,
             },
+            isSecondary && styles.tagListSecondary,
           ]}
         >
           {list.map((tag, i) => (
@@ -97,7 +98,6 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.white,
     paddingHorizontal: 9,
     paddingVertical: 5,
-    marginRight: 5,
     borderRadius: 30,
     borderWidth: 1,
     borderColor: Colors.neutral7,
@@ -108,15 +108,14 @@ const styles = StyleSheet.create({
       width: -0.5,
       height: 0.5,
     },
-    marginVertical: 1,
-    marginHorizontal: 1,
+    marginVertical: 2,
   },
   tagText: {
     color: Colors.neutral2,
     fontSize: 14,
   },
   tagTextSecondary: {
-    color: Colors.neutral1,
+    color: Colors.neutral3,
     fontSize: 13,
   },
   tagTextSelected: {
@@ -125,6 +124,10 @@ const styles = StyleSheet.create({
   tagList: {
     flex: 1,
     flexDirection: "row",
+  },
+  tagListSecondary: {
+    flexWrap: "wrap",
+    width: 200,
   },
 });
 

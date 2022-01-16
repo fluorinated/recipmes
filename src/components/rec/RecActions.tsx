@@ -11,16 +11,27 @@ import {
 
 const RecActions = (props: any) => {
   return (
-    <View style={styles.actions}>
+    <View
+      style={[
+        styles.actions,
+        {
+          marginTop: props.marginTop,
+          marginLeft: props.marginLeft,
+          marginRight: props.marginRight,
+          marginBottom: props.marginBottom,
+        },
+      ]}
+    >
       <RecIconButton
         margin={15}
         icon={faPlus}
         handleClick={props.handleClick}
+        dark={props.dark}
       />
-      <RecIconButton margin={15} icon={faHeart} />
-      <RecIconButton margin={15} icon={faFlag} />
-      <RecIconButton margin={15} icon={faPen} />
-      <RecIconButton margin={15} icon={faTrash} />
+      <RecIconButton margin={15} icon={faHeart} dark={props.dark} />
+      <RecIconButton margin={15} icon={faFlag} dark={props.dark} />
+      <RecIconButton margin={15} icon={faPen} dark={props.dark} />
+      <RecIconButton margin={15} icon={faTrash} dark={props.dark} />
     </View>
   );
 };
@@ -34,7 +45,6 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     width: 420,
-    marginBottom: 15,
   },
 });
 

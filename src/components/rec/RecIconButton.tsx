@@ -3,13 +3,23 @@ import { StyleSheet, View, TouchableOpacity } from "react-native";
 import { Colors } from "@constants/colors";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 
+const getTheme = (props: any) => {
+  return props.dark ? styles.darkBg : styles.lightBg;
+};
+
 const RecIconButton = (props: any) => {
   return (
     <TouchableOpacity onPress={props.handleClick}>
-      <View style={[styles.actionContainer, { marginRight: props.margin }]}>
+      <View
+        style={[
+          styles.container,
+          getTheme(props),
+          { marginRight: props.margin },
+        ]}
+      >
         <FontAwesomeIcon
           icon={props.icon}
-          style={styles.action}
+          style={getTheme(props)}
           size={props.size ?? 23}
           color={props.color ?? Colors.neutral1}
         />
@@ -19,13 +29,15 @@ const RecIconButton = (props: any) => {
 };
 
 const styles = StyleSheet.create({
-  action: {
-    backgroundColor: Colors.neutral6,
-  },
-  actionContainer: {
-    backgroundColor: Colors.neutral6,
+  container: {
     padding: 10,
     borderRadius: 10,
+  },
+  lightBg: {
+    backgroundColor: Colors.neutral7,
+  },
+  darkBg: {
+    backgroundColor: Colors.neutral6,
   },
 });
 

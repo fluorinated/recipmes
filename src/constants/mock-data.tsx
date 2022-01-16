@@ -34,7 +34,15 @@ export const mockDataRecipe = {
 
 export const mockDataRecipe2 = {
   _id: "HvNN4svAWi",
-  categories: ["breakfast", "lunch", "dinner", "drink", "dessert", "appetizer"],
+  categories: [
+    "breakfast",
+    "lunch",
+    "dinner",
+    "drink",
+    "dessert",
+    "appetizer",
+    "snack",
+  ],
   ingredients: [
     { unit: "tsp.", amount: "2", title: "chopped onions" },
     { unit: "tsp.", amount: "3.4", title: "vanilla extract" },
@@ -132,6 +140,8 @@ export const mockRecipe3: Recipe = {
     FoodCategory.Dessert,
     FoodCategory.Appetizer,
     FoodCategory.Breakfast,
+    FoodCategory.Dinner,
+    FoodCategory.Drink,
   ],
   ingredients: [
     { unit: Unit.Ounce, amount: "2", title: "sliced apples" },

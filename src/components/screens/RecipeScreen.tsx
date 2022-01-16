@@ -31,7 +31,7 @@ const RecipeScreen = (props: any) => {
 
   return (
     <View style={styles.background}>
-      <RecActions />
+      <RecActions marginBottom={15} dark />
       <RecCard
         paddingLeft={0}
         paddingRight={0}
@@ -130,6 +130,7 @@ const styles = StyleSheet.create({
   stepContent: {
     color: Colors.neutral1,
     marginTop: 3,
+    marginRight: 10,
   },
   step: {
     flexDirection: "row",

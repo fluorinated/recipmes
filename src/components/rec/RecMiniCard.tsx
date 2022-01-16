@@ -5,13 +5,11 @@ import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 import { faCheck } from "@fortawesome/free-solid-svg-icons";
 import { mockPhoto } from "@constants/mock-photo";
 import GestureRecognizer from "react-native-swipe-gestures";
-// import GestureRecognizer, {
-//   swipeDirections,
-// } from "react-native-swipe-gestures";
 
 import { useFonts, Inter_400Regular } from "@expo-google-fonts/inter";
 import { DMSans_400Regular } from "@expo-google-fonts/dm-sans";
 import RecTagList from "@rec/RecTagList";
+import RecActions from "./RecActions";
 
 const RecMiniCard = (props: any) => {
   const [areActionsShown, setAreActionsShown] = useState(false);
@@ -37,27 +35,17 @@ const RecMiniCard = (props: any) => {
     DMSans_400Regular,
   });
 
-  const onClickEllipsis = () => {
-    if (areActionsShown) {
-      setAreActionsShown(false);
-    } else {
-      setAreActionsShown(true);
-    }
+  const toggleActionsVisibility = (direction: string): void => {
+    ["SWIPE_LEFT", "SWIPE_RIGHT"].includes(direction) &&
+      setAreActionsShown(!areActionsShown);
   };
 
   return (
     <GestureRecognizer
-      onSwipe={(direction, state) =>
-        console.log(
-          "TO-DO: add actions on swipe",
-          direction,
-          state,
-          swipeDirections
-        )
-      }
+      onSwipe={(direction, state) => toggleActionsVisibility(direction)}
     >
       <TouchableOpacity
-        style={styles.recipe}
+        style={areActionsShown ? styles.hidden : styles.recipe}
         onPress={() => props.navigation.navigate("Recipe", recipe)}
       >
         <Image
@@ -98,6 +86,9 @@ const RecMiniCard = (props: any) => {
           />
         </View>
       </TouchableOpacity>
+      <View style={areActionsShown ? styles.recipe : styles.hidden}>
+        <RecActions />
+      </View>
     </GestureRecognizer>
   );
 };
@@ -109,7 +100,7 @@ const styles = StyleSheet.create({
   recipe: {
     display: "flex",
     flexDirection: "row",
-    height: 120,
+    minHeight: 120,
     width: 420,
     backgroundColor: Colors.white,
     borderBottomColor: Colors.neutral7,
