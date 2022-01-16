@@ -12,8 +12,8 @@ const IngredientsScreen = () => {
 
 const styles = StyleSheet.create({
   background: {
-    backgroundColor: Colors.neutral7,
     flex: 1,
+    backgroundColor: Colors.neutral7,
     margin: 10,
   },
 });

@@ -2,11 +2,11 @@ import React, { useEffect } from "react";
 import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
 import { Colors } from "@constants/colors";
 
-import { useFonts, Inter_400Regular } from "@expo-google-fonts/inter";
+import { useFonts, DMSans_400Regular } from "@expo-google-fonts/dm-sans";
 
 const RecButton = (props: any) => {
   let [fontsLoaded] = useFonts({
-    Inter_400Regular,
+    DMSans_400Regular,
   });
   // useEffect(() => {}, [fontsLoaded]);
 
@@ -28,9 +28,10 @@ const RecButton = (props: any) => {
       >
         <Text
           style={[
-            primaryStyles.text,
-            fontsLoaded ? { fontFamily: "Inter_400Regular" } : {},
-            props.type === "secondary" ? secondaryStyles.text : {},
+            fontsLoaded && { fontFamily: "DMSans_400Regular" },
+            props.type === "secondary"
+              ? secondaryStyles.text
+              : primaryStyles.text,
           ]}
         >
           {props.label}
@@ -48,7 +49,7 @@ const primaryStyles = StyleSheet.create({
     margin: 20,
   },
   button: {
-    backgroundColor: Colors.pink1,
+    backgroundColor: Colors.pink4,
     padding: 20,
     alignItems: "center",
     borderRadius: 5,

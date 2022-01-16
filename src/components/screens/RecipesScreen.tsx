@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { StyleSheet, ScrollView, SafeAreaView, View, Text } from "react-native";
+import { StyleSheet, View } from "react-native";
 import RecMiniCard from "@rec/RecMiniCard";
 import { Colors } from "@constants/colors";
 import RecButton from "@rec/RecButton";
@@ -8,30 +8,28 @@ import RecToast from "@rec/RecToast";
 import {
   mockDataRecipe,
   mockDataRecipe2,
-  mockDataRecipes,
+  mockDataRecipe3,
 } from "@constants/mock-data";
-import RecCard from "components/rec/RecCard";
-import RecSearch from "components/rec/RecSearch";
-import RecTagList from "components/rec/RecTagList";
-import { FoodCategory } from "models/FoodCategory";
+import RecCard from "@rec/RecCard";
+import { Recipe } from "@models/Recipe";
 
 const RecipesScreen = (props: any) => {
   const [recipes, setRecipes]: [any, any] = useState([
     mockDataRecipe,
     mockDataRecipe2,
-    mockDataRecipe,
+    mockDataRecipe3,
   ]);
   const [toast, setToast]: [any, any] = useState({
-    isShowing: props.route?.params?.isShowing || false,
-    errorMessage: props.route?.params?.errorMessage || null,
-    isError: props.route?.params?.isError || false,
+    isShowing: props.route?.params?.isShowing ?? false,
+    errorMessage: props.route?.params?.errorMessage ?? null,
+    isError: props.route?.params?.isError ?? false,
   });
 
   useEffect(() => {
     // getRecipe();
   });
 
-  const getRecipe = async () => {
+  const getRecipe = async (): Promise<void> => {
     const query = new Parse.Query("recipe");
 
     const delay = (ms: number) => new Promise((res) => setTimeout(res, ms));
@@ -57,7 +55,6 @@ const RecipesScreen = (props: any) => {
 
   return (
     <View style={styles.background}>
-      {/* <ScrollView> */}
       <RecToast
         message={toast.isError ? "error" : "success"}
         isShowing={toast.isShowing}
@@ -66,59 +63,24 @@ const RecipesScreen = (props: any) => {
       />
       <RecButton
         handleClick={() => props.navigation.navigate("NewRecipe")}
-        label="add new"
+        label="add recipe"
       />
-      {/* <RecCard>
-          {recipes.map((recipe: any, index: number) => (
-            <RecMiniCard
-              navigation={props.navigation}
-              recipe={recipe}
-              key={index}
-            />
-          ))}
-        </RecCard> */}
-      <RecCard search tags paddingLeft={0}>
-        <RecMiniCard
-          navigation={props.navigation}
-          recipe={recipes[0]}
-          key={0}
-        />
-        <RecMiniCard
-          navigation={props.navigation}
-          recipe={recipes[1]}
-          key={1}
-        />
-        <RecMiniCard
-          navigation={props.navigation}
-          recipe={recipes[2]}
-          key={2}
-        />
-        <RecMiniCard
-          navigation={props.navigation}
-          recipe={recipes[2]}
-          key={3}
-        />
-        <RecMiniCard
-          navigation={props.navigation}
-          recipe={recipes[1]}
-          key={4}
-        />
-        <RecMiniCard
-          navigation={props.navigation}
-          recipe={recipes[2]}
-          key={5}
-        />
+      <RecCard search tags paddingLeft={0} paddingBottom={200}>
+        {recipes.map((recipe: Recipe, i: number) => (
+          <RecMiniCard navigation={props.navigation} recipe={recipe} key={i} />
+        ))}
+        {recipes.map((recipe: Recipe, i: number) => (
+          <RecMiniCard navigation={props.navigation} recipe={recipe} key={i} />
+        ))}
       </RecCard>
-      {/* </ScrollView> */}
     </View>
   );
 };
 
 const styles = StyleSheet.create({
   background: {
-    backgroundColor: Colors.neutral7,
     flex: 1,
-    overflow: "hidden",
+    backgroundColor: Colors.neutral7,
   },
 });
 

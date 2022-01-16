@@ -67,7 +67,11 @@ const MenuScreen = (props: any) => {
         <SafeAreaView>
           <ScrollView>
             <RecButton label="add ingredients to groceries" />
-            <RecInputLabel placeholder={menu.title} inputTitle="menu title" />
+            <RecInputLabel
+              placeholder={menu.title}
+              inputTitle="menu title"
+              handleDeleteClick={() => `dlt`}
+            />
             <View>{getSections()}</View>
           </ScrollView>
         </SafeAreaView>
@@ -78,8 +82,8 @@ const MenuScreen = (props: any) => {
 
 const styles = StyleSheet.create({
   background: {
-    backgroundColor: Colors.neutral7,
     flex: 1,
+    backgroundColor: Colors.neutral7,
     margin: 10,
   },
   hidden: {

@@ -11,12 +11,12 @@ import RecIconButton from "@rec/RecIconButton";
 import { faPen, faTrash } from "@fortawesome/free-solid-svg-icons";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { TouchableOpacity } from "react-native-gesture-handler";
-import { Recipe } from "models/Recipe";
+import { Recipe } from "@models/Recipe";
 
 const MenusScreen = (props: any) => {
   const [menus, setMenus]: [any, any] = useState([]);
   const [recipe, setRecipe]: [any, any] = useState(
-    props.route?.params?.recipe || {}
+    props.route?.params?.recipe ?? {}
   );
   const [isSaved, setIsSaved]: [boolean, any] = useState(false);
 
@@ -24,7 +24,7 @@ const MenusScreen = (props: any) => {
     getMenus();
   });
 
-  const getMenus = async () => {
+  const getMenus = async (): Promise<void> => {
     const query = new Parse.Query("menu");
 
     query.find().then(
@@ -37,7 +37,7 @@ const MenusScreen = (props: any) => {
     );
   };
 
-  const saveNewMenu = async () => {
+  const saveNewMenu = async (): Promise<void> => {
     let Menu = new Parse.Object("menu");
     const newMenu: Menu = {
       title: "menu title",
@@ -51,7 +51,7 @@ const MenusScreen = (props: any) => {
     }
   };
 
-  const addRecipeToMenu = async (menu: any, recipe: Recipe) => {
+  const addRecipeToMenu = async (menu: any, recipe: Recipe): Promise<void> => {
     var Menu = Parse.Object.extend("menu");
     var query = new Parse.Query(Menu);
     query.equalTo("objectId", menu.objectId);
@@ -72,7 +72,7 @@ const MenusScreen = (props: any) => {
     });
   };
 
-  const onClickMenu = (menu: any) => {
+  const onClickMenu = (menu: any): void => {
     if (!isSaved && Object.keys(recipe).length !== 0) {
       addRecipeToMenu(menu, recipe);
       setIsSaved(false);
@@ -135,16 +135,16 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   description: {
-    fontSize: 18,
     textAlign: "center",
-    color: "#656565",
+    color: Colors.neutral2,
+    fontSize: 18,
     marginTop: 65,
   },
   title: {
+    color: Colors.black,
     fontSize: 32,
     paddingTop: 15,
     paddingBottom: 15,
-    color: Colors.black,
   },
   date: {
     color: Colors.neutral2,

@@ -1,10 +1,10 @@
-import React, { useState } from "react";
+import React from "react";
 import { StyleSheet, View } from "react-native";
 import { Colors } from "@constants/colors";
 import { ScrollView } from "react-native-gesture-handler";
 import RecSearch from "./RecSearch";
 import RecTagList from "./RecTagList";
-import { FoodCategory } from "models/FoodCategory";
+import { FoodCategory } from "@models/FoodCategory";
 
 const RecCard = (props: any) => {
   return (
@@ -19,21 +19,30 @@ const RecCard = (props: any) => {
         },
       ]}
     >
-      <View style={styles.searchTags}>
-        <RecSearch
-          label="search"
-          marginLeft={20}
-          style={props.search ? {} : styles.hidden}
-        />
+      <View
+        style={
+          props.search && props.tags
+            ? styles.searchTagsContainer
+            : styles.hidden
+        }
+      >
+        <View style={!props.search && styles.hidden}>
+          <RecSearch label="search" marginLeft={20} />
+        </View>
 
-        <RecTagList
-          listType="food"
-          selectedTags={(tags: FoodCategory[]) => `${tags}`}
-          marginLeft={15}
-          style={props.tags ? {} : styles.hidden}
-        />
+        <View style={!props.tags && styles.hidden}>
+          <RecTagList
+            listType="food"
+            selectedTags={(tags: FoodCategory[]) => `${tags}`}
+            marginLeft={15}
+          />
+        </View>
       </View>
-      <ScrollView style={styles.children}>{props.children}</ScrollView>
+      <ScrollView
+        style={(props.search || props.tags) && styles.childrenStickyHeader}
+      >
+        {props.children}
+      </ScrollView>
     </View>
   );
 };
@@ -45,14 +54,12 @@ const styles = StyleSheet.create({
   card: {
     overflow: "scroll",
     padding: 15,
-    paddingBottom: 0,
     width: 430,
-    height: 630,
     borderWidth: 1,
     backgroundColor: Colors.white,
     borderColor: Colors.neutral4,
   },
-  searchTags: {
+  searchTagsContainer: {
     width: "100%",
     height: 105,
     backgroundColor: Colors.white,
@@ -60,10 +67,9 @@ const styles = StyleSheet.create({
     shadowOffset: { width: -2, height: 2 },
     shadowOpacity: 0.2,
     shadowRadius: 4,
-    textShadowColor: "transparent",
   },
-  children: {
-    marginTop: 20,
+  childrenStickyHeader: {
+    marginTop: 1,
   },
 });
 

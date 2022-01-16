@@ -67,8 +67,8 @@ const styles = StyleSheet.create({
     width: 150,
   },
   emptyStateBtn: {
-    paddingTop: 20,
     width: 150,
+    paddingTop: 20,
   },
 });
 

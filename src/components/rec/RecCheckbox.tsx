@@ -11,28 +11,21 @@ const RecCheckbox = (props: any) => {
     props.isChecked(isChecked);
   }, [isChecked]);
 
-  const onPress = () => {
-    if (isChecked) {
-      setIsChecked(false);
-    } else {
-      setIsChecked(true);
-    }
-  };
-
   return (
     <View style={styles.checkboxContainer}>
       <TouchableOpacity
-        style={
-          isChecked
-            ? [styles.checkbox, styles.checked]
-            : [styles.checkbox, styles.unchecked]
-        }
-        onPress={onPress}
+        style={[
+          styles.checkbox,
+          !isChecked && !props.dark && styles.unchecked,
+          !isChecked && props.dark && styles.uncheckedDark,
+          isChecked && styles.checked,
+        ]}
+        onPress={() => setIsChecked(!isChecked)}
       >
         <FontAwesomeIcon
-          style={isChecked ? {} : styles.hidden}
-          color={Colors.white}
+          color={Colors.yellow1}
           icon={faCheck}
+          style={isChecked ? {} : styles.hidden}
         />
       </TouchableOpacity>
       <Text style={props.label ? styles.label : styles.hidden}>
@@ -47,21 +40,20 @@ const styles = StyleSheet.create({
     display: "none",
   },
   label: {
-    color: Colors.neutral1,
     width: "100%",
+    color: Colors.neutral1,
   },
   checkbox: {
-    height: 30,
-    width: 30,
-    color: Colors.neutral1,
-    padding: 10,
-    borderRadius: 8,
-    marginTop: 10,
-    marginBottom: 10,
-    marginRight: 10,
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
+    height: 30,
+    width: 30,
+    color: Colors.neutral1,
+    borderRadius: 8,
+    padding: 10,
+    marginVertical: 10,
+    marginRight: 10,
   },
   checkboxContainer: {
     display: "flex",
@@ -69,9 +61,14 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   checked: {
-    backgroundColor: Colors.pink1,
+    backgroundColor: Colors.pink4,
   },
   unchecked: {
+    backgroundColor: Colors.neutral7,
+    borderWidth: 1,
+    borderColor: Colors.neutral5,
+  },
+  uncheckedDark: {
     backgroundColor: Colors.neutral5,
   },
 });

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { StyleSheet, View } from "react-native";
 import { Colors } from "@constants/colors";
 
@@ -8,7 +8,6 @@ import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
 
 const RecSearch = (props: any) => {
-  const [height, setHeight] = useState(0);
   let [fontsLoaded] = useFonts({
     Inter_400Regular,
   });
@@ -24,7 +23,6 @@ const RecSearch = (props: any) => {
           marginBottom: props.marginBottom,
         },
       ]}
-      onLayout={(event) => setHeight(event.nativeEvent.layout.height)}
     >
       <FontAwesomeIcon
         icon={faSearch}
@@ -35,7 +33,7 @@ const RecSearch = (props: any) => {
       <TextInput
         style={[
           styles.input,
-          fontsLoaded ? { fontFamily: "Inter_400Regular" } : {},
+          fontsLoaded && { fontFamily: "Inter_400Regular" },
         ]}
         placeholderTextColor={Colors.neutral2}
         placeholder={props.label}
@@ -46,21 +44,20 @@ const RecSearch = (props: any) => {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: Colors.white,
     display: "flex",
-    width: "95%",
-    marginTop: 10,
-    marginRight: 10,
-    marginLeft: 10,
     flexDirection: "row",
     alignItems: "center",
+    width: "95%",
+    backgroundColor: Colors.white,
+    marginTop: 10,
+    marginHorizontal: 10,
     borderRadius: 5,
   },
   input: {
-    color: Colors.neutral1,
-    fontSize: 22,
     width: "85%",
     height: 30,
+    color: Colors.neutral1,
+    fontSize: 22,
     margin: 10,
   },
   icon: {

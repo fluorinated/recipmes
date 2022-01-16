@@ -101,10 +101,12 @@ const NewRecipeScreen = (props: any) => {
             <RecCheckbox
               label="favorite"
               isChecked={(isChecked: boolean) => setIsFavorite(isChecked)}
+              dark
             />
             <RecCheckbox
               label="want to try"
               isChecked={(isChecked: boolean) => setIsFlagged(isChecked)}
+              dark
             />
           </View>
 
@@ -137,10 +139,10 @@ const NewRecipeScreen = (props: any) => {
 
 const styles = StyleSheet.create({
   background: {
-    backgroundColor: Colors.neutral7,
     flex: 1,
+    backgroundColor: Colors.neutral7,
     margin: 10,
-    marginBottom: 110,
+    marginBottom: 100,
   },
   inputsContainer: {
     marginBottom: 30,
@@ -150,9 +152,9 @@ const styles = StyleSheet.create({
     flexDirection: "row",
   },
   cookTime: {
+    color: Colors.neutral1,
     marginTop: 20,
     marginLeft: 5,
-    color: Colors.neutral1,
   },
   container: {
     paddingBottom: 20,

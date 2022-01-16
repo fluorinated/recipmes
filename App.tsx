@@ -50,7 +50,7 @@ export default function App() {
             },
             tabBarBackground: () => (
               <LinearGradient
-                colors={[Colors.pink1, Colors.yellow4]}
+                colors={[Colors.pink4, Colors.yellow4]}
                 style={{ height: "100%" }}
                 start={[0.0, 0.5]}
                 end={[1.0, 0.5]}
@@ -109,21 +109,10 @@ export default function App() {
                   options={{
                     title: "NewRecipe",
                     headerStyle: {
-                      backgroundColor: Colors.yellow4,
+                      backgroundColor: Colors.neutral7,
                     },
                     headerTintColor: Colors.yellow1,
-                    headerTitle: () => (
-                      <View
-                        style={{
-                          position: "absolute",
-                          width: 420,
-                          height: 1,
-                          borderBottomWidth: 1,
-                          borderBottomColor: `${Colors.yellow3}50`,
-                          paddingTop: 45,
-                        }}
-                      />
-                    ),
+                    headerTitle: () => <View />,
                   }}
                 />
                 <RecipesStack.Screen
@@ -132,21 +121,10 @@ export default function App() {
                   options={{
                     title: "Recipe",
                     headerStyle: {
-                      backgroundColor: Colors.yellow4,
+                      backgroundColor: Colors.neutral7,
                     },
                     headerTintColor: Colors.yellow1,
-                    headerTitle: () => (
-                      <View
-                        style={{
-                          position: "absolute",
-                          width: 420,
-                          height: 1,
-                          borderBottomWidth: 1,
-                          borderBottomColor: `${Colors.yellow3}50`,
-                          paddingTop: 45,
-                        }}
-                      />
-                    ),
+                    headerTitle: () => <View />,
                   }}
                 />
               </RecipesStack.Navigator>
@@ -187,21 +165,10 @@ export default function App() {
                   options={{
                     title: "Menu",
                     headerStyle: {
-                      backgroundColor: Colors.yellow4,
+                      backgroundColor: Colors.neutral7,
                     },
                     headerTintColor: Colors.yellow1,
-                    headerTitle: () => (
-                      <View
-                        style={{
-                          position: "absolute",
-                          width: 420,
-                          height: 1,
-                          borderBottomWidth: 1,
-                          borderBottomColor: `${Colors.yellow3}50`,
-                          paddingTop: 45,
-                        }}
-                      />
-                    ),
+                    headerTitle: () => <View />,
                   }}
                 />
               </MenuStack.Navigator>

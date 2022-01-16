@@ -12,7 +12,7 @@ import { FoodCategory } from "@models/FoodCategory";
 
 const RecTagList = (props: any) => {
   const [list, setList]: [any[] | FoodCategory[], any] = useState(
-    props.list || Object.values(FoodCategory)
+    props.list ?? Object.values(FoodCategory)
   );
   const [selectedTags, setSelectedTags]: [string[], any] = useState([]);
   const [isSecondary, setIsSecondary]: [boolean, any] = useState(
@@ -51,21 +51,21 @@ const RecTagList = (props: any) => {
             },
           ]}
         >
-          {list.map((tag) => (
+          {list.map((tag, i) => (
             <TouchableOpacity
               style={[
                 styles.tag,
-                isTagSelected(tag) ? styles.tagSelected : {},
-                isSecondary ? styles.tagSecondary : {},
+                isTagSelected(tag) && styles.tagSelected,
+                isSecondary && styles.tagSecondary,
               ]}
               onPress={() => onClickTag(tag)}
-              key={tag}
+              key={i}
               disabled={isSecondary}
             >
               <Text
                 style={[
                   isSecondary ? styles.tagTextSecondary : styles.tagText,
-                  isTagSelected(tag) ? styles.tagTextSelected : {},
+                  isTagSelected(tag) && styles.tagTextSelected,
                 ]}
               >
                 {tag}

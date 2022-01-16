@@ -27,9 +27,7 @@ const RecInputLabel = (props: any) => {
     setIsInputShown(true);
   };
   const handleDeleteClick = () => {
-    if (props.handleDeleteClick) {
-      props.handleDeleteClick();
-    }
+    props.handleDeleteClick && props.handleDeleteClick();
   };
 
   return (
@@ -69,27 +67,27 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 25,
+    color: Colors.black,
     paddingTop: 15,
     paddingBottom: 15,
-    color: Colors.black,
   },
   titleActions: {
+    display: "flex",
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
     width: "100%",
-    display: "flex",
     marginTop: 10,
   },
   actions: {
     flexDirection: "row",
   },
   inputActions: {
+    display: "flex",
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "flex-end",
     width: "100%",
-    display: "flex",
     marginTop: 10,
   },
 });

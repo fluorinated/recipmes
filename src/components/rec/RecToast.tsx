@@ -3,34 +3,26 @@ import {
   StyleSheet,
   Text,
   View,
-  FlatList,
   TouchableOpacity,
   ScrollView,
 } from "react-native";
-import { TextInput } from "react-native-gesture-handler";
 import { Colors } from "@constants/colors";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
-import {
-  faCheck,
-  faChevronDown,
-  faChevronUp,
-  faExclamation,
-} from "@fortawesome/free-solid-svg-icons";
+import { faCheck, faExclamation } from "@fortawesome/free-solid-svg-icons";
 import { faTimes } from "@fortawesome/free-solid-svg-icons";
 import { SafeAreaView } from "react-native-safe-area-context";
 import {
   useFonts,
   CourierPrime_400Regular,
 } from "@expo-google-fonts/courier-prime";
+
 const RecToast = (props: any) => {
-  const [isOpen, setIsOpen] = useState(props.isShowing);
+  const [isOpen, setIsOpen] = useState(props.isShowing ?? false);
   const [isError, setIsError] = useState(!!props.errorMessage);
 
   useEffect(() => {
     setIsOpen(props.isShowing);
-    if (!isError) {
-      setTimeout(() => setIsOpen(false), 3000);
-    }
+    !isError && setTimeout(() => setIsOpen(false), 3000);
   });
 
   // let [fontsLoaded] = useFonts({
@@ -43,24 +35,10 @@ const RecToast = (props: any) => {
 
   return (
     <View
-      style={
-        isOpen
-          ? [
-              styles.container,
-              isError
-                ? {
-                    top: 440,
-                    backgroundColor: Colors.red3,
-                    borderColor: Colors.red2,
-                  }
-                : {
-                    top: 590,
-                    backgroundColor: Colors.green3,
-                    borderColor: Colors.green2,
-                  },
-            ]
-          : styles.hidden
-      }
+      style={[
+        isOpen ? styles.container : styles.hidden,
+        isError ? styles.containerError : styles.containerSuccess,
+      ]}
     >
       <TouchableOpacity style={styles.closeBtn} onPress={onClickClose}>
         <FontAwesomeIcon
@@ -102,6 +80,16 @@ const styles = StyleSheet.create({
     padding: 30,
     borderRadius: 10,
     borderWidth: 1,
+  },
+  containerError: {
+    top: 440,
+    backgroundColor: Colors.red2,
+    borderColor: Colors.red1,
+  },
+  containerSuccess: {
+    top: 590,
+    backgroundColor: Colors.green2,
+    borderColor: Colors.green1,
   },
   closeBtn: {
     display: "flex",

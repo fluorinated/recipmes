@@ -2,14 +2,11 @@ import React, { useState, useEffect } from "react";
 import { StyleSheet, Text, View, Image } from "react-native";
 import { Colors } from "@constants/colors";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
-import {
-  faPlus,
-  faHeart,
-  faFlag,
-  faTrash,
-  faCheck,
-} from "@fortawesome/free-solid-svg-icons";
-import RecIconButton from "@rec/RecIconButton";
+import { faCheck } from "@fortawesome/free-solid-svg-icons";
+import RecActions from "@rec/RecActions";
+import RecCard from "@rec/RecCard";
+import RecTagList from "@rec/RecTagList";
+import RecCheckbox from "@rec/RecCheckbox";
 
 const RecipeScreen = (props: any) => {
   const [recipe, setRecipe] = useState({
@@ -34,73 +31,86 @@ const RecipeScreen = (props: any) => {
 
   return (
     <View style={styles.background}>
-      <View style={styles.recipe}>
-        <View style={styles.actions}>
-          <RecIconButton icon={faPlus} />
-          <RecIconButton icon={faHeart} />
-          <RecIconButton icon={faFlag} />
-          <RecIconButton icon={faTrash} />
-        </View>
+      <RecActions />
+      <RecCard
+        paddingLeft={0}
+        paddingRight={0}
+        paddingTop={0}
+        paddingBottom={150}
+      >
         <Image
-          source={{ uri: "data:image/jpeg;base64," + recipe.photo }}
+          source={{ uri: `data:image/jpeg;base64,${recipe.photo}` }}
           style={styles.photo}
         />
-        <Text style={styles.title}>{recipe.title}</Text>
-        <View style={styles.description}>
-          <FontAwesomeIcon icon={faCheck} style={styles.check} />
-          <Text>
-            {recipe.cookTimeHours}h {recipe.cookTimeMinutes}m
+        <View style={styles.mainContent}>
+          <Text style={styles.title} ellipsizeMode="tail" numberOfLines={3}>
+            {recipe.title}
           </Text>
-          <Text style={styles.separator}>•</Text>
-          <Text>{recipe.categories.join(" •\u00A0")}</Text>
-        </View>
-        <Text style={styles.subtitle}>ingredients</Text>
-        {recipe.ingredients.map((ingredient, i) => (
-          <Text key={i}>
-            •{" "}
-            {`${ingredient.amount} ${ingredient.unit} ${ingredient.title}`.replace(
-              /\s+/g,
-              " "
-            )}
-          </Text>
-        ))}
-        <Text style={styles.subtitle}>how to make</Text>
-        {recipe.steps.map((step, i) => (
-          <View style={styles.step} key={i}>
-            <Text style={styles.stepTitle}>{i + 1}.</Text>
-            <Text>{step}</Text>
+          <View style={styles.description}>
+            <FontAwesomeIcon icon={faCheck} style={styles.check} />
+            <Text>
+              {recipe.cookTimeHours}h {recipe.cookTimeMinutes}m
+            </Text>
+            <Text style={styles.separator}>•</Text>
+            <Text>500 calories</Text>
           </View>
-        ))}
-      </View>
+          <RecTagList
+            list={recipe.categories}
+            style="secondary"
+            selectedTags={(tags: any[]) => `${tags}`}
+            marginTop={10}
+          />
+          <Text style={styles.subtitle}>ingredients</Text>
+          {recipe.ingredients.map((ingredient, i) => (
+            <RecCheckbox
+              label={`${ingredient.amount} ${ingredient.unit} ${ingredient.title}`.replace(
+                /\s+/g,
+                " "
+              )}
+              isChecked={(isChecked: boolean) => true}
+              key={i}
+            />
+          ))}
+          <Text style={styles.subtitle}>how to make</Text>
+          {recipe.steps.map((step, i) => (
+            <View style={styles.step} key={i}>
+              <Text style={styles.stepTitle}>{i + 1}.</Text>
+              <Text style={styles.stepContent}>{step}</Text>
+            </View>
+          ))}
+        </View>
+      </RecCard>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
   background: {
-    backgroundColor: Colors.neutral7,
     flex: 1,
-    margin: 10,
     alignItems: "center",
-  },
-  recipe: {
-    width: "100%",
     flexDirection: "column",
+    width: "100%",
+    backgroundColor: Colors.neutral7,
+    paddingTop: 10,
   },
   photo: {
-    height: 200,
+    height: 300,
     width: "100%",
     borderRadius: 10,
   },
+  mainContent: {
+    paddingHorizontal: 25,
+  },
   title: {
-    fontSize: 25,
-    paddingTop: 15,
-    paddingBottom: 15,
+    fontSize: 30,
+    fontFamily: "DMSans_400Regular",
+    paddingVertical: 15,
   },
   subtitle: {
-    fontSize: 22,
-    paddingTop: 15,
-    paddingBottom: 15,
+    fontSize: 25,
+    fontFamily: "DMSans_400Regular",
+    paddingTop: 25,
+    paddingBottom: 5,
   },
   description: {
     flexDirection: "row",
@@ -109,25 +119,22 @@ const styles = StyleSheet.create({
     marginRight: 10,
   },
   separator: {
-    marginLeft: 5,
-    marginRight: 5,
-  },
-  actions: {
-    flexDirection: "row",
-    justifyContent: "flex-end",
-    alignItems: "center",
-    width: "100%",
-    marginBottom: 20,
-    marginTop: 10,
+    marginHorizontal: 5,
   },
   stepTitle: {
-    fontSize: 20,
-    paddingRight: 5,
     width: 20,
+    fontSize: 20,
+    color: Colors.black,
+    paddingRight: 5,
+  },
+  stepContent: {
+    color: Colors.neutral1,
+    marginTop: 3,
   },
   step: {
     flexDirection: "row",
-    alignItems: "baseline",
+    alignItems: "flex-start",
+    paddingBottom: 10,
   },
 });
 

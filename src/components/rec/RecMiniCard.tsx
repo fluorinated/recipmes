@@ -1,33 +1,17 @@
 import React, { useState } from "react";
-import {
-  StyleSheet,
-  Text,
-  View,
-  Image,
-  TouchableOpacity,
-  ScrollView,
-} from "react-native";
+import { StyleSheet, Text, View, Image, TouchableOpacity } from "react-native";
 import { Colors } from "@constants/colors";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
-import {
-  faPlus,
-  faHeart,
-  faFlag,
-  faTrash,
-  faCheck,
-  faEllipsisV,
-  faUtensils,
-} from "@fortawesome/free-solid-svg-icons";
-import RecIconButton from "@rec/RecIconButton";
+import { faCheck } from "@fortawesome/free-solid-svg-icons";
 import { mockPhoto } from "@constants/mock-photo";
-import GestureRecognizer, {
-  swipeDirections,
-} from "react-native-swipe-gestures";
-import { BlurView } from "expo-blur";
+import GestureRecognizer from "react-native-swipe-gestures";
+// import GestureRecognizer, {
+//   swipeDirections,
+// } from "react-native-swipe-gestures";
 
 import { useFonts, Inter_400Regular } from "@expo-google-fonts/inter";
 import { DMSans_400Regular } from "@expo-google-fonts/dm-sans";
-import RecTagList from "./RecTagList";
+import RecTagList from "@rec/RecTagList";
 
 const RecMiniCard = (props: any) => {
   const [areActionsShown, setAreActionsShown] = useState(false);
@@ -62,8 +46,16 @@ const RecMiniCard = (props: any) => {
   };
 
   return (
-    // onSwipe={(direction, state) => console.log(direction, state)}
-    <GestureRecognizer>
+    <GestureRecognizer
+      onSwipe={(direction, state) =>
+        console.log(
+          "TO-DO: add actions on swipe",
+          direction,
+          state,
+          swipeDirections
+        )
+      }
+    >
       <TouchableOpacity
         style={styles.recipe}
         onPress={() => props.navigation.navigate("Recipe", recipe)}
@@ -105,56 +97,6 @@ const RecMiniCard = (props: any) => {
             marginLeft={10}
           />
         </View>
-        {/* <ScrollView horizontal={true} style={styles.categories}>
-          {recipe.categories?.map((category: string, i: number) => (
-            <Text style={styles.category} key={i}>
-              {category}
-            </Text>
-          ))}
-        </ScrollView> */}
-        {/* <View>
-            <View style={styles.description}>
-             
-            </View> */}
-
-        {/* <View
-              style={[
-                styles.ellipsisContainer,
-                {
-                  backgroundColor: areActionsShown
-                    ? Colors.neutral6
-                    : Colors.neutral7,
-                },
-              ]}
-            >
-              <RecIconButton icon={faEllipsisV} handleClick={onClickEllipsis} />
-            </View> */}
-        {/* </View> */}
-
-        {/* <View style={areActionsShown ? styles.actions : styles.hidden}>
-            {props.isMenu ? (
-              <RecIconButton
-                icon={faUtensils}
-                handleClick={() => console.log("mark as eaten")}
-                margin={20}
-              />
-            ) : (
-              <RecIconButton
-                icon={faPlus}
-                handleClick={() =>
-                  props.navigation.navigate("Menus", {
-                    screen: "MenusHome",
-                    params: { recipe },
-                  })
-                }
-                margin={20}
-              />
-            )}
-
-            <RecIconButton icon={faHeart} margin={20} />
-            <RecIconButton icon={faFlag} margin={20} />
-            <RecIconButton icon={faTrash} margin={20} />
-          </View>*/}
       </TouchableOpacity>
     </GestureRecognizer>
   );
@@ -167,58 +109,59 @@ const styles = StyleSheet.create({
   recipe: {
     display: "flex",
     flexDirection: "row",
-    backgroundColor: "transparent",
     height: 120,
     width: 420,
+    backgroundColor: Colors.white,
     borderBottomColor: Colors.neutral7,
     borderBottomWidth: 1,
-    marginBottom: 15,
+    paddingVertical: 10,
   },
   photo: {
     height: 100,
     width: 100,
-    borderRadius: 5,
-    marginLeft: 15,
     borderColor: Colors.neutral6,
     borderWidth: 1,
+    borderRadius: 5,
+    marginLeft: 15,
   },
   header: {
+    width: 180,
     fontSize: 23,
     color: Colors.black,
-    width: 200,
   },
   headerCheckTime: {
     display: "flex",
     flexDirection: "row",
-    width: 250,
-    justifyContent: "space-between",
-    alignItems: "flex-start",
+    justifyContent: "flex-start",
+    width: 270,
+    maxWidth: 270,
+    paddingBottom: 5,
     marginLeft: 15,
-    paddingBottom: 10,
   },
   check: {
-    marginRight: 10,
-    width: 50,
+    alignSelf: "center",
+    marginRight: 5,
   },
   checkTime: {
-    padding: 5,
-    width: 80,
+    height: 25,
     flexDirection: "row",
-    borderRadius: 5,
     backgroundColor: Colors.neutral7,
+    borderRadius: 5,
+    marginLeft: 5,
+    padding: 5,
   },
   subHeader: {
+    alignSelf: "center",
     fontSize: 15,
     color: Colors.neutral1,
-    width: 80,
   },
   categories: {
-    fontSize: 15,
+    flexDirection: "row",
     width: 200,
+    fontSize: 15,
     paddingRight: 45,
     paddingTop: 10,
     overflow: "scroll",
-    flexDirection: "row",
   },
   category: {
     borderRadius: 13,
@@ -236,26 +179,26 @@ const styles = StyleSheet.create({
   },
   actions: {
     flexDirection: "row",
+    alignSelf: "flex-end",
+    position: "absolute",
     width: "100%",
     backgroundColor: Colors.neutral6,
     borderRadius: 5,
-    alignSelf: "flex-end",
     marginTop: 100,
     padding: 10,
-    position: "absolute",
     zIndex: 100,
   },
   ellipsisContainer: {
-    height: 90,
     flexDirection: "row",
     alignItems: "flex-start",
     alignSelf: "flex-end",
     position: "absolute",
+    height: 90,
+    borderTopRightRadius: 5,
+    borderTopLeftRadius: 5,
     paddingLeft: 2,
     marginTop: 10,
     paddingTop: 10,
-    borderTopRightRadius: 5,
-    borderTopLeftRadius: 5,
   },
 });
 

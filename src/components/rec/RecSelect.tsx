@@ -21,22 +21,19 @@ const RecSelect = (props: any) => {
     props.selectedValue(value);
   }, [value]);
 
-  const onPress = (key: string) => {
+  const onSelectItem = (key: string): void => {
     setValue(key);
     setIsOpen(false);
   };
 
-  const onChevClick = () => {
-    isOpen ? setIsOpen(false) : setIsOpen(true);
-  };
-
-  const getSize = () => {
-    if (props.size === "half") {
-      return 190;
-    } else if (props.size === "third") {
-      return 260;
-    } else {
-      return 390;
+  const getSize = (): number => {
+    switch (props.size) {
+      case "half":
+        return 190;
+      case "third":
+        return 260;
+      default:
+        return 390;
     }
   };
 
@@ -44,8 +41,8 @@ const RecSelect = (props: any) => {
     <View
       style={[
         styles.inputContainer,
-        { width: props.width || getSize() },
-        { marginRight: props.marginRight },
+        { width: props.width ?? getSize() },
+        props.marginRight && { marginRight: props.marginRight },
       ]}
     >
       <Text style={props.title ? styles.inputTitle : styles.hidden}>
@@ -59,9 +56,7 @@ const RecSelect = (props: any) => {
       <TextInput
         style={[
           styles.input,
-          props.backgroundColor
-            ? { backgroundColor: props.backgroundColor }
-            : {},
+          props.backgroundColor && { backgroundColor: props.backgroundColor },
         ]}
         placeholder={props.placeholder}
         placeholderTextColor={
@@ -70,26 +65,24 @@ const RecSelect = (props: any) => {
             : Colors.neutral2
         }
         editable={false}
-        onPressIn={onChevClick}
+        onPressIn={() => setIsOpen(!isOpen)}
       >
         {value}
       </TextInput>
-      <SafeAreaView style={isOpen ? {} : styles.hidden}>
+      <SafeAreaView style={!isOpen && styles.hidden}>
         <ScrollView
           style={[
             styles.list,
-            props.backgroundColor
-              ? { backgroundColor: props.backgroundColor }
-              : {},
+            props.backgroundColor && { backgroundColor: props.backgroundColor },
           ]}
         >
           {Object.values(Unit).map((unit, i) => (
-            <TouchableOpacity key={i} onPress={() => onPress(unit)}>
+            <TouchableOpacity key={i} onPress={() => onSelectItem(unit)}>
               <Text
                 style={[
                   styles.listItem,
-                  { width: props.width || getSize() },
-                  { marginRight: props.marginRight },
+                  { width: props.width ?? getSize() },
+                  props.marginRight && { marginRight: props.marginRight },
                 ]}
               >
                 {unit}
@@ -107,37 +100,37 @@ const styles = StyleSheet.create({
     display: "none",
   },
   inputTitle: {
+    width: "100%",
     color: Colors.neutral1,
     marginTop: 10,
     marginLeft: 5,
-    width: "100%",
   },
   input: {
     height: 50,
-    marginTop: 10,
-    backgroundColor: Colors.neutral5,
-    color: Colors.neutral1,
-    padding: 10,
-    borderRadius: 8,
     width: "100%",
+    marginTop: 10,
+    color: Colors.neutral1,
+    backgroundColor: Colors.neutral6,
+    borderRadius: 8,
+    padding: 10,
   },
   inputContainer: {
     alignItems: "flex-start",
   },
   listItem: {
+    color: Colors.neutral1,
     paddingTop: 15,
     paddingBottom: 15,
     paddingLeft: 10,
-    color: Colors.neutral1,
   },
   list: {
-    marginTop: "-30%",
-    backgroundColor: Colors.neutral5,
-    width: "100%",
     maxHeight: 100,
+    width: "100%",
+    overflow: "hidden",
+    marginTop: "-30%",
+    backgroundColor: Colors.neutral6,
     borderBottomRightRadius: 8,
     borderBottomLeftRadius: 8,
-    overflow: "hidden",
   },
   absolute: {
     position: "absolute",

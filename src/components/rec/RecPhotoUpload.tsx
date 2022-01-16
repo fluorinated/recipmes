@@ -3,7 +3,6 @@ import { Image, View, TouchableOpacity, Text, StyleSheet } from "react-native";
 import * as ImagePicker from "expo-image-picker";
 import { Colors } from "@constants/colors";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
-
 import { faCamera, faTimes } from "@fortawesome/free-solid-svg-icons";
 
 const RecPhotoUpload = (props: any) => {
@@ -39,7 +38,7 @@ const RecPhotoUpload = (props: any) => {
           </View>
         </TouchableOpacity>
         <Image
-          source={{ uri: "data:image/jpeg;base64," + image }}
+          source={{ uri: `data:image/jpeg;base64${image}` }}
           style={styles.photo}
         />
       </View>
@@ -65,16 +64,16 @@ const styles = StyleSheet.create({
     width: "100%",
   },
   photoUpload: {
-    width: "100%",
-    height: 50,
-    backgroundColor: Colors.neutral6,
-    borderRadius: 10,
-    borderStyle: "solid",
-    borderColor: Colors.neutral4,
-    borderWidth: 1,
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
+    width: "100%",
+    height: 50,
+    backgroundColor: Colors.neutral6,
+    borderColor: Colors.neutral4,
+    borderWidth: 1,
+    borderRadius: 10,
+    borderStyle: "solid",
   },
   photoUploadText: {
     color: Colors.neutral1,
@@ -91,10 +90,10 @@ const styles = StyleSheet.create({
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
-    borderRadius: 50,
-    backgroundColor: Colors.neutral5,
     height: 30,
     width: 30,
+    backgroundColor: Colors.neutral5,
+    borderRadius: 50,
   },
   closeBtnContainer: {
     display: "flex",
@@ -104,8 +103,8 @@ const styles = StyleSheet.create({
     zIndex: 1,
   },
   photoCloseBtn: {
-    width: 130,
     display: "flex",
+    width: 130,
   },
 });
 

@@ -86,11 +86,16 @@ const RecMultiInput = (props: any) => {
   };
 
   return (
-    <View style={[styles.inputContainer, { marginRight: props.marginRight }]}>
+    <View
+      style={[
+        styles.inputContainer,
+        props.marginRight && { marginRight: props.marginRight },
+      ]}
+    >
       {inputs.map((num, index) => {
         return (
           <View key={index}>
-            <View style={props.isIngredients ? styles.ingredientContainer : {}}>
+            <View style={props.isIngredients && styles.ingredientContainer}>
               <RecInput
                 placeholder={
                   num === 0
@@ -163,12 +168,12 @@ const styles = StyleSheet.create({
     flexDirection: "row",
   },
   ingredientContainer: {
-    borderRadius: 5,
-    marginTop: 10,
-    borderWidth: 1,
-    borderColor: Colors.neutral5,
     display: "flex",
     alignItems: "center",
+    borderColor: Colors.neutral5,
+    borderWidth: 1,
+    borderRadius: 5,
+    marginTop: 10,
   },
 });
 

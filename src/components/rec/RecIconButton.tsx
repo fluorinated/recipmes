@@ -6,12 +6,12 @@ import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 const RecIconButton = (props: any) => {
   return (
     <TouchableOpacity onPress={props.handleClick}>
-      <View style={{ ...styles.actionContainer, marginRight: props.margin }}>
+      <View style={[styles.actionContainer, { marginRight: props.margin }]}>
         <FontAwesomeIcon
           icon={props.icon}
           style={styles.action}
-          size={props.size || 23}
-          color={props.color || Colors.neutral1}
+          size={props.size ?? 23}
+          color={props.color ?? Colors.neutral1}
         />
       </View>
     </TouchableOpacity>
