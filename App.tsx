@@ -1,28 +1,22 @@
-import * as React from "react";
-import { StatusBar, View } from "react-native";
-import { NavigationContainer } from "@react-navigation/native";
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { LinearGradient } from "expo-linear-gradient";
-import { Colors } from "@constants/colors";
-import RecipesScreen from "@screens/RecipesScreen";
-import RecipeScreen from "@screens/RecipeScreen";
-import NewRecipeScreen from "@screens/NewRecipeScreen";
-import MenusScreen from "@screens/MenusScreen";
-import MenuScreen from "@screens/MenuScreen";
-import IngredientsScreen from "@screens/IngredientsScreen";
-import GroceriesScreen from "@screens/GroceriesScreen";
-import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
-import {
-  faBookOpen,
-  faClipboard,
-  faCarrot,
-  faList,
-} from "@fortawesome/free-solid-svg-icons";
-import Parse from "parse/react-native";
-import AsyncStorage from "@react-native-async-storage/async-storage";
-
-import useCachedResources from "@hooks/useCachedResources";
+import { Colors } from '@constants/colors';
+import { faBookOpen, faCarrot, faClipboard, faList } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
+import useCachedResources from '@hooks/useCachedResources';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import GroceriesScreen from '@screens/GroceriesScreen';
+import IngredientsScreen from '@screens/IngredientsScreen';
+import MenuScreen from '@screens/MenuScreen';
+import MenusScreen from '@screens/MenusScreen';
+import NewRecipeScreen from '@screens/NewRecipeScreen';
+import RecipeScreen from '@screens/RecipeScreen';
+import RecipesScreen from '@screens/RecipesScreen';
+import { LinearGradient } from 'expo-linear-gradient';
+import Parse from 'parse/react-native';
+import * as React from 'react';
+import { StatusBar, View } from 'react-native';
 
 Parse.setAsyncStorage(AsyncStorage);
 Parse.initialize("recipmes", "recipmesJSKey", "recipmesMasterKey619");

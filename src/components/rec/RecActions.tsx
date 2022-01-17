@@ -1,13 +1,7 @@
-import React from "react";
-import { StyleSheet, View } from "react-native";
-import RecIconButton from "@rec/RecIconButton";
-import {
-  faPlus,
-  faHeart,
-  faFlag,
-  faTrash,
-  faPen,
-} from "@fortawesome/free-solid-svg-icons";
+import { faFlag, faHeart, faPen, faPlus, faTrash } from '@fortawesome/free-solid-svg-icons';
+import RecIconButton from '@rec/RecIconButton';
+import React from 'react';
+import { StyleSheet, View } from 'react-native';
 
 const RecActions = (props: any) => {
   return (

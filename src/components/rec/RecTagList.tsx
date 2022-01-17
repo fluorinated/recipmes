@@ -1,14 +1,7 @@
-import React, { useState, useEffect } from "react";
-import {
-  StyleSheet,
-  View,
-  Text,
-  ScrollView,
-  SafeAreaView,
-  TouchableOpacity,
-} from "react-native";
-import { Colors } from "@constants/colors";
-import { FoodCategory } from "@models/FoodCategory";
+import { Colors } from '@constants/colors';
+import { FoodCategory } from '@models/FoodCategory';
+import React, { useEffect, useState } from 'react';
+import { SafeAreaView, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 
 const RecTagList = (props: any) => {
   const [list, setList]: [any[] | FoodCategory[], any] = useState(

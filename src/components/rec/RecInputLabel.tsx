@@ -1,14 +1,9 @@
-import React, { useState } from "react";
-import { StyleSheet, Text, View } from "react-native";
-import {
-  faCheck,
-  faPen,
-  faTimes,
-  faTrash,
-} from "@fortawesome/free-solid-svg-icons";
-import RecIconButton from "@rec/RecIconButton";
-import RecInput from "@rec/RecInput";
-import { Colors } from "@constants/colors";
+import { Colors } from '@constants/colors';
+import { faCheck, faPen, faTimes, faTrash } from '@fortawesome/free-solid-svg-icons';
+import RecIconButton from '@rec/RecIconButton';
+import RecInput from '@rec/RecInput';
+import React, { useState } from 'react';
+import { StyleSheet, Text, View } from 'react-native';
 
 const RecInputLabel = (props: any) => {
   const [isInputShown, setIsInputShown] = useState(false);

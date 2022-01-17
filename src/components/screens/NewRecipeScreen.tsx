@@ -1,17 +1,16 @@
-import React, { useState } from "react";
-import { StyleSheet, View, SafeAreaView, Text } from "react-native";
-import { Colors } from "@constants/colors";
-import RecInput from "@rec/RecInput";
-import RecCheckbox from "@rec/RecCheckbox";
-import RecButton from "@rec/RecButton";
-import RecTagList from "@rec/RecTagList";
-import RecPhotoUpload from "@rec/RecPhotoUpload";
-import Parse from "parse/react-native";
-import { Recipe } from "@models/Recipe";
-import { FoodCategory } from "@models/FoodCategory";
-import { Ingredient } from "@models/Ingredient";
-import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
-import RecMultiInput from "@rec/RecMultiInput";
+import { Colors } from '@constants/colors';
+import { FoodCategory } from '@models/FoodCategory';
+import { Ingredient } from '@models/Ingredient';
+import RecButton from '@rec/RecButton';
+import RecCheckbox from '@rec/RecCheckbox';
+import RecInput from '@rec/RecInput';
+import RecMultiInput from '@rec/RecMultiInput';
+import RecPhotoUpload from '@rec/RecPhotoUpload';
+import RecTagList from '@rec/RecTagList';
+import Parse from 'parse/react-native';
+import React, { useState } from 'react';
+import { SafeAreaView, StyleSheet, Text, View } from 'react-native';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
 const NewRecipeScreen = (props: any) => {
   const [recipeTitle, setRecipeTitle]: [string, any] = useState("");

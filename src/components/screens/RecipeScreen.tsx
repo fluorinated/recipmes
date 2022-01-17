@@ -1,12 +1,12 @@
-import React, { useState, useEffect } from "react";
-import { StyleSheet, Text, View, Image } from "react-native";
-import { Colors } from "@constants/colors";
-import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
-import { faCheck } from "@fortawesome/free-solid-svg-icons";
-import RecActions from "@rec/RecActions";
-import RecCard from "@rec/RecCard";
-import RecTagList from "@rec/RecTagList";
-import RecCheckbox from "@rec/RecCheckbox";
+import { Colors } from '@constants/colors';
+import { faCheck } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
+import RecActions from '@rec/RecActions';
+import RecCard from '@rec/RecCard';
+import RecCheckbox from '@rec/RecCheckbox';
+import RecTagList from '@rec/RecTagList';
+import React, { useEffect, useState } from 'react';
+import { Image, StyleSheet, Text, View } from 'react-native';
 
 const RecipeScreen = (props: any) => {
   const [recipe, setRecipe] = useState({

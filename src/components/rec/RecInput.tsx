@@ -1,6 +1,6 @@
-import React from "react";
-import { StyleSheet, Text, View, TextInput } from "react-native";
-import { Colors } from "@constants/colors";
+import { Colors } from '@constants/colors';
+import React from 'react';
+import { StyleSheet, Text, TextInput, View } from 'react-native';
 
 const RecInput = (props: any) => {
   const getSize = (): number => {

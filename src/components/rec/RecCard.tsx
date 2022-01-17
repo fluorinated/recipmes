@@ -1,11 +1,10 @@
 import { Colors } from '@constants/colors';
 import { FoodCategory } from '@models/FoodCategory';
+import RecSearch from '@rec/RecSearch';
+import RecTagList from '@rec/RecTagList';
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
-
-import RecSearch from './RecSearch';
-import RecTagList from './RecTagList';
 
 const RecCard = (props: any) => {
   return (

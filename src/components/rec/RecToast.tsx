@@ -1,20 +1,9 @@
-import React, { useState, useEffect } from "react";
-import {
-  StyleSheet,
-  Text,
-  View,
-  TouchableOpacity,
-  ScrollView,
-} from "react-native";
-import { Colors } from "@constants/colors";
-import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
-import { faCheck, faExclamation } from "@fortawesome/free-solid-svg-icons";
-import { faTimes } from "@fortawesome/free-solid-svg-icons";
-import { SafeAreaView } from "react-native-safe-area-context";
-import {
-  useFonts,
-  CourierPrime_400Regular,
-} from "@expo-google-fonts/courier-prime";
+import { Colors } from '@constants/colors';
+import { faCheck, faExclamation, faTimes } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
+import React, { useEffect, useState } from 'react';
+import { ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 const RecToast = (props: any) => {
   const [isOpen, setIsOpen] = useState(props.isShowing ?? false);

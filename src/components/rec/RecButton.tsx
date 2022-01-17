@@ -1,8 +1,7 @@
-import React, { useEffect } from "react";
-import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
-import { Colors } from "@constants/colors";
-
-import { useFonts, DMSans_400Regular } from "@expo-google-fonts/dm-sans";
+import { Colors } from '@constants/colors';
+import { DMSans_400Regular, useFonts } from '@expo-google-fonts/dm-sans';
+import React, { useEffect } from 'react';
+import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 
 const RecButton = (props: any) => {
   let [fontsLoaded] = useFonts({

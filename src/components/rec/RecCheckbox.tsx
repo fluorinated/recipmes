@@ -1,8 +1,8 @@
-import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
-import React, { useState, useEffect } from "react";
-import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
-import { faCheck } from "@fortawesome/free-solid-svg-icons";
-import { Colors } from "@constants/colors";
+import { Colors } from '@constants/colors';
+import { faCheck } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
+import React, { useEffect, useState } from 'react';
+import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 
 const RecCheckbox = (props: any) => {
   const [isChecked, setIsChecked] = useState(false);

@@ -1,11 +1,10 @@
-import React from "react";
-import { StyleSheet, View } from "react-native";
-import { Colors } from "@constants/colors";
-
-import { useFonts, Inter_400Regular } from "@expo-google-fonts/inter";
-import { TextInput } from "react-native-gesture-handler";
-import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
-import { faSearch } from "@fortawesome/free-solid-svg-icons";
+import { Colors } from '@constants/colors';
+import { Inter_400Regular, useFonts } from '@expo-google-fonts/inter';
+import { faSearch } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
+import React from 'react';
+import { StyleSheet, View } from 'react-native';
+import { TextInput } from 'react-native-gesture-handler';
 
 const RecSearch = (props: any) => {
   let [fontsLoaded] = useFonts({

@@ -1,17 +1,11 @@
-import React, { useState, useEffect } from "react";
-import {
-  StyleSheet,
-  Text,
-  View,
-  TouchableOpacity,
-  ScrollView,
-} from "react-native";
-import { TextInput } from "react-native-gesture-handler";
-import { Colors } from "@constants/colors";
-import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
-import { faChevronDown, faChevronUp } from "@fortawesome/free-solid-svg-icons";
-import { SafeAreaView } from "react-native-safe-area-context";
-import { Unit } from "@models/Unit";
+import { Colors } from '@constants/colors';
+import { faChevronDown, faChevronUp } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
+import { Unit } from '@models/Unit';
+import React, { useEffect, useState } from 'react';
+import { ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { TextInput } from 'react-native-gesture-handler';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 const RecSelect = (props: any) => {
   const [isOpen, setIsOpen] = useState(false);

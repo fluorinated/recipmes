@@ -1,8 +1,8 @@
-import React from "react";
-import { StyleSheet, Text, View } from "react-native";
-import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
-import { Colors } from "constants/colors";
-import RecButton from "@rec/RecButton";
+import { Colors } from '@constants/colors';
+import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
+import RecButton from '@rec/RecButton';
+import React from 'react';
+import { StyleSheet, Text, View } from 'react-native';
 
 const RecEmptyState = (props: any) => {
   return (

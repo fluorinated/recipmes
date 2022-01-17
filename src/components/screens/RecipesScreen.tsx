@@ -1,17 +1,13 @@
-import React, { useState, useEffect } from "react";
-import { StyleSheet, View } from "react-native";
-import { Colors } from "@constants/colors";
-import RecButton from "@rec/RecButton";
-import Parse from "parse/react-native";
-import RecToast from "@rec/RecToast";
-import {
-  mockDataRecipe,
-  mockDataRecipe2,
-  mockDataRecipe3,
-} from "@constants/mock-data";
-import RecCard from "@rec/RecCard";
-import { Recipe } from "@models/Recipe";
-import RecipeListEntry from "./recipes/RecipeListEntry";
+import { Colors } from '@constants/colors';
+import { mockDataRecipe, mockDataRecipe2, mockDataRecipe3 } from '@constants/mock-data';
+import { Recipe } from '@models/Recipe';
+import RecButton from '@rec/RecButton';
+import RecCard from '@rec/RecCard';
+import RecToast from '@rec/RecToast';
+import RecipeListEntry from '@screens/recipes/RecipeListEntry';
+import Parse from 'parse/react-native';
+import React, { useEffect, useState } from 'react';
+import { StyleSheet, View } from 'react-native';
 
 const RecipesScreen = (props: any) => {
   const [recipes, setRecipes]: [any, any] = useState([

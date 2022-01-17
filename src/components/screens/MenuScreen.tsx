@@ -1,14 +1,14 @@
-import React, { useState } from "react";
-import { StyleSheet, Text, View, ScrollView } from "react-native";
-import RecButton from "@rec/RecButton";
-import { faBinoculars } from "@fortawesome/free-solid-svg-icons";
-import { Colors } from "@constants/colors";
-import RecEmptyState from "@rec/RecEmptyState";
-import RecInputLabel from "@rec/RecInputLabel";
-import { FoodCategory } from "@models/FoodCategory";
-import { Recipe } from "@models/Recipe";
-import { SafeAreaView } from "react-native-safe-area-context";
-import RecipeListEntry from "./recipes/RecipeListEntry";
+import { Colors } from '@constants/colors';
+import { faBinoculars } from '@fortawesome/free-solid-svg-icons';
+import { FoodCategory } from '@models/FoodCategory';
+import { Recipe } from '@models/Recipe';
+import RecButton from '@rec/RecButton';
+import RecEmptyState from '@rec/RecEmptyState';
+import RecInputLabel from '@rec/RecInputLabel';
+import RecipeListEntry from '@screens/recipes/RecipeListEntry';
+import React, { useState } from 'react';
+import { ScrollView, StyleSheet, Text, View } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 const MenuScreen = (props: any) => {
   const [menu, setMenu] = useState(props.route.params);

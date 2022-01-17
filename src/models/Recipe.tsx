@@ -1,5 +1,5 @@
-import { FoodCategory } from "@models/FoodCategory";
-import { Ingredient } from "@models/Ingredient";
+import { FoodCategory } from '@models/FoodCategory';
+import { Ingredient } from '@models/Ingredient';
 
 export interface Recipe {
   title: string;

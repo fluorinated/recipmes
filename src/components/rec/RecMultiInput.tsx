@@ -1,12 +1,12 @@
-import React, { useState, useEffect } from "react";
-import { StyleSheet, View, TouchableOpacity } from "react-native";
-import { Colors } from "@constants/colors";
-import { faMinus, faPlus } from "@fortawesome/free-solid-svg-icons";
-import RecSelect from "@rec/RecSelect";
-import { Ingredient } from "@models/Ingredient";
-import { Unit } from "@models/Unit";
-import RecIconButton from "@rec/RecIconButton";
-import RecInput from "@rec/RecInput";
+import { Colors } from '@constants/colors';
+import { faMinus, faPlus } from '@fortawesome/free-solid-svg-icons';
+import { Ingredient } from '@models/Ingredient';
+import { Unit } from '@models/Unit';
+import RecIconButton from '@rec/RecIconButton';
+import RecInput from '@rec/RecInput';
+import RecSelect from '@rec/RecSelect';
+import React, { useEffect, useState } from 'react';
+import { StyleSheet, TouchableOpacity, View } from 'react-native';
 
 const RecMultiInput = (props: any) => {
   const [inputs, setInputs]: [number[], any] = useState(

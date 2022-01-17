@@ -1,8 +1,8 @@
-import { Recipe } from "@models/Recipe";
-import { FoodCategory } from "models/FoodCategory";
-import { Unit } from "models/Unit";
-import { mockPhoto } from "./mock-photo";
-import { mockPhoto2 } from "./mock-photo-2";
+import { mockPhoto } from '@constants/mock-photo';
+import { mockPhoto2 } from '@constants/mock-photo-2';
+import { FoodCategory } from '@models/FoodCategory';
+import { Recipe } from '@models/Recipe';
+import { Unit } from '@models/Unit';
 
 export const mockDataRecipe = {
   _id: "KgGx7WmHmV",

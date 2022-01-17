@@ -1,14 +1,13 @@
-import React, { useState } from "react";
-import { StyleSheet, Text, View, Image, TouchableOpacity } from "react-native";
-import { Colors } from "@constants/colors";
-import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
-import { faCheck } from "@fortawesome/free-solid-svg-icons";
-import { mockPhoto } from "@constants/mock-photo";
-
-import { useFonts, Inter_400Regular } from "@expo-google-fonts/inter";
-import { DMSans_400Regular } from "@expo-google-fonts/dm-sans";
-import RecTagList from "@rec/RecTagList";
-import RecListEntry from "@rec/RecListEntry";
+import { Colors } from '@constants/colors';
+import { mockPhoto } from '@constants/mock-photo';
+import { DMSans_400Regular } from '@expo-google-fonts/dm-sans';
+import { Inter_400Regular, useFonts } from '@expo-google-fonts/inter';
+import { faCheck } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
+import RecListEntry from '@rec/RecListEntry';
+import RecTagList from '@rec/RecTagList';
+import React, { useState } from 'react';
+import { Image, StyleSheet, Text, View } from 'react-native';
 
 const RecipeListEntry = (props: any) => {
   const [recipe, setRecipe] = useState(

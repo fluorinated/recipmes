@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from "react";
-import { Image, View, TouchableOpacity, Text, StyleSheet } from "react-native";
-import * as ImagePicker from "expo-image-picker";
-import { Colors } from "@constants/colors";
-import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
-import { faCamera, faTimes } from "@fortawesome/free-solid-svg-icons";
+import { Colors } from '@constants/colors';
+import { faCamera, faTimes } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
+import * as ImagePicker from 'expo-image-picker';
+import React, { useEffect, useState } from 'react';
+import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 
 const RecPhotoUpload = (props: any) => {
   const [image, setImage]: [any, any] = useState({ base64: "" });

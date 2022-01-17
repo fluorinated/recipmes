@@ -1,12 +1,11 @@
-import React, { useState } from "react";
-import { StyleSheet, Text, View } from "react-native";
-import { Colors } from "@constants/colors";
-import GestureRecognizer from "react-native-swipe-gestures";
-
-import { useFonts, Inter_400Regular } from "@expo-google-fonts/inter";
-import { DMSans_400Regular } from "@expo-google-fonts/dm-sans";
-import RecActions from "./RecActions";
-import { TouchableOpacity } from "react-native-gesture-handler";
+import { Colors } from '@constants/colors';
+import { DMSans_400Regular } from '@expo-google-fonts/dm-sans';
+import { Inter_400Regular, useFonts } from '@expo-google-fonts/inter';
+import RecActions from '@rec/RecActions';
+import React, { useState } from 'react';
+import { StyleSheet, Text, View } from 'react-native';
+import { TouchableOpacity } from 'react-native-gesture-handler';
+import GestureRecognizer from 'react-native-swipe-gestures';
 
 const RecListEntry = (props: any) => {
   const [areActionsShown, setAreActionsShown] = useState(false);

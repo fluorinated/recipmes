@@ -1,7 +1,7 @@
-import React from "react";
-import { StyleSheet, View, TouchableOpacity } from "react-native";
-import { Colors } from "@constants/colors";
-import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
+import { Colors } from '@constants/colors';
+import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
+import React from 'react';
+import { StyleSheet, TouchableOpacity, View } from 'react-native';
 
 const getTheme = (props: any) => {
   return props.dark ? styles.darkBg : styles.lightBg;
