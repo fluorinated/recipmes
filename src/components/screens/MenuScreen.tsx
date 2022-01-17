@@ -7,8 +7,8 @@ import RecEmptyState from "@rec/RecEmptyState";
 import RecInputLabel from "@rec/RecInputLabel";
 import { FoodCategory } from "@models/FoodCategory";
 import { Recipe } from "@models/Recipe";
-import RecMiniCard from "@rec/RecMiniCard";
 import { SafeAreaView } from "react-native-safe-area-context";
+import RecipeListEntry from "./recipes/RecipeListEntry";
 
 const MenuScreen = (props: any) => {
   const [menu, setMenu] = useState(props.route.params);
@@ -24,7 +24,7 @@ const MenuScreen = (props: any) => {
             style={includesCategory(recipe, category) ? {} : styles.hidden}
             key={index}
           >
-            <RecMiniCard
+            <RecipeListEntry
               navigation={props.navigation}
               recipe={recipe}
               key={index}

@@ -4,15 +4,13 @@ import { Colors } from "@constants/colors";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 import { faCheck } from "@fortawesome/free-solid-svg-icons";
 import { mockPhoto } from "@constants/mock-photo";
-import GestureRecognizer from "react-native-swipe-gestures";
 
 import { useFonts, Inter_400Regular } from "@expo-google-fonts/inter";
 import { DMSans_400Regular } from "@expo-google-fonts/dm-sans";
 import RecTagList from "@rec/RecTagList";
-import RecActions from "./RecActions";
+import RecListEntry from "@rec/RecListEntry";
 
-const RecMiniCard = (props: any) => {
-  const [areActionsShown, setAreActionsShown] = useState(false);
+const RecipeListEntry = (props: any) => {
   const [recipe, setRecipe] = useState(
     props.recipe || {
       categories: ["breakfast"],
@@ -35,19 +33,11 @@ const RecMiniCard = (props: any) => {
     DMSans_400Regular,
   });
 
-  const toggleActionsVisibility = (direction: string): void => {
-    ["SWIPE_LEFT", "SWIPE_RIGHT"].includes(direction) &&
-      setAreActionsShown(!areActionsShown);
-  };
-
   return (
-    <GestureRecognizer
-      onSwipe={(direction, state) => toggleActionsVisibility(direction)}
+    <RecListEntry
+      handlePress={() => props.navigation.navigate("Recipe", recipe)}
     >
-      <TouchableOpacity
-        style={areActionsShown ? styles.hidden : styles.recipe}
-        onPress={() => props.navigation.navigate("Recipe", recipe)}
-      >
+      <View style={styles.recipe}>
         <Image
           source={{
             uri: "data:image/jpeg;base64," + recipe.photo,
@@ -85,11 +75,8 @@ const RecMiniCard = (props: any) => {
             marginLeft={10}
           />
         </View>
-      </TouchableOpacity>
-      <View style={areActionsShown ? styles.recipe : styles.hidden}>
-        <RecActions />
       </View>
-    </GestureRecognizer>
+    </RecListEntry>
   );
 };
 
@@ -100,12 +87,6 @@ const styles = StyleSheet.create({
   recipe: {
     display: "flex",
     flexDirection: "row",
-    minHeight: 120,
-    width: 420,
-    backgroundColor: Colors.white,
-    borderBottomColor: Colors.neutral7,
-    borderBottomWidth: 1,
-    paddingVertical: 10,
   },
   photo: {
     height: 100,
@@ -119,6 +100,11 @@ const styles = StyleSheet.create({
     width: 180,
     fontSize: 23,
     color: Colors.black,
+  },
+  subHeader: {
+    alignSelf: "center",
+    fontSize: 15,
+    color: Colors.neutral1,
   },
   headerCheckTime: {
     display: "flex",
@@ -141,56 +127,6 @@ const styles = StyleSheet.create({
     marginLeft: 5,
     padding: 5,
   },
-  subHeader: {
-    alignSelf: "center",
-    fontSize: 15,
-    color: Colors.neutral1,
-  },
-  categories: {
-    flexDirection: "row",
-    width: 200,
-    fontSize: 15,
-    paddingRight: 45,
-    paddingTop: 10,
-    overflow: "scroll",
-  },
-  category: {
-    borderRadius: 13,
-    backgroundColor: `${Colors.white}50`,
-    borderColor: Colors.neutral4,
-    color: Colors.neutral1,
-    paddingTop: 5,
-    paddingBottom: 5,
-    paddingRight: 8,
-    paddingLeft: 8,
-    borderWidth: 1,
-    marginRight: 5,
-    marginTop: 5,
-    overflow: "hidden",
-  },
-  actions: {
-    flexDirection: "row",
-    alignSelf: "flex-end",
-    position: "absolute",
-    width: "100%",
-    backgroundColor: Colors.neutral6,
-    borderRadius: 5,
-    marginTop: 100,
-    padding: 10,
-    zIndex: 100,
-  },
-  ellipsisContainer: {
-    flexDirection: "row",
-    alignItems: "flex-start",
-    alignSelf: "flex-end",
-    position: "absolute",
-    height: 90,
-    borderTopRightRadius: 5,
-    borderTopLeftRadius: 5,
-    paddingLeft: 2,
-    marginTop: 10,
-    paddingTop: 10,
-  },
 });
 
-export default RecMiniCard;
+export default RecipeListEntry;

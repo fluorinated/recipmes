@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { StyleSheet, View } from "react-native";
-import RecMiniCard from "@rec/RecMiniCard";
 import { Colors } from "@constants/colors";
 import RecButton from "@rec/RecButton";
 import Parse from "parse/react-native";
@@ -12,6 +11,7 @@ import {
 } from "@constants/mock-data";
 import RecCard from "@rec/RecCard";
 import { Recipe } from "@models/Recipe";
+import RecipeListEntry from "./recipes/RecipeListEntry";
 
 const RecipesScreen = (props: any) => {
   const [recipes, setRecipes]: [any, any] = useState([
@@ -67,10 +67,18 @@ const RecipesScreen = (props: any) => {
       />
       <RecCard search tags paddingLeft={0} paddingBottom={200}>
         {recipes.map((recipe: Recipe, i: number) => (
-          <RecMiniCard navigation={props.navigation} recipe={recipe} key={i} />
+          <RecipeListEntry
+            navigation={props.navigation}
+            recipe={recipe}
+            key={i}
+          />
         ))}
         {recipes.map((recipe: Recipe, i: number) => (
-          <RecMiniCard navigation={props.navigation} recipe={recipe} key={i} />
+          <RecipeListEntry
+            navigation={props.navigation}
+            recipe={recipe}
+            key={i}
+          />
         ))}
       </RecCard>
     </View>

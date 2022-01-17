@@ -39,7 +39,7 @@ const RecipeScreen = (props: any) => {
         paddingBottom={150}
       >
         <Image
-          source={{ uri: `data:image/jpeg;base64,${recipe.photo}` }}
+          source={{ uri: "data:image/jpeg;base64," + recipe.photo }}
           style={styles.photo}
         />
         <View style={styles.mainContent}>

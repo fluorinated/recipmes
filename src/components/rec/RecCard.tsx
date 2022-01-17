@@ -1,10 +1,11 @@
-import React from "react";
-import { StyleSheet, View } from "react-native";
-import { Colors } from "@constants/colors";
-import { ScrollView } from "react-native-gesture-handler";
-import RecSearch from "./RecSearch";
-import RecTagList from "./RecTagList";
-import { FoodCategory } from "@models/FoodCategory";
+import { Colors } from '@constants/colors';
+import { FoodCategory } from '@models/FoodCategory';
+import React from 'react';
+import { StyleSheet, View } from 'react-native';
+import { ScrollView } from 'react-native-gesture-handler';
+
+import RecSearch from './RecSearch';
+import RecTagList from './RecTagList';
 
 const RecCard = (props: any) => {
   return (
@@ -21,7 +22,7 @@ const RecCard = (props: any) => {
     >
       <View
         style={
-          props.search && props.tags
+          props.search || props.tags
             ? styles.searchTagsContainer
             : styles.hidden
         }
@@ -61,7 +62,6 @@ const styles = StyleSheet.create({
   },
   searchTagsContainer: {
     width: "100%",
-    height: 105,
     backgroundColor: Colors.white,
     shadowColor: Colors.neutral4,
     shadowOffset: { width: -2, height: 2 },

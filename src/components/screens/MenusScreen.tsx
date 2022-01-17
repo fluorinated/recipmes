@@ -1,17 +1,14 @@
-import React, { useState, useEffect } from "react";
-import { ScrollView, StyleSheet, Text, View } from "react-native";
-import RecButton from "@rec/RecButton";
-import { faBinoculars } from "@fortawesome/free-solid-svg-icons";
-import { Colors } from "@constants/colors";
-import RecEmptyState from "@rec/RecEmptyState";
-import { Menu } from "@models/Menu";
-import Parse from "parse/react-native";
-import { getDateNumeric } from "@utils/format-date";
-import RecIconButton from "@rec/RecIconButton";
-import { faPen, faTrash } from "@fortawesome/free-solid-svg-icons";
-import { SafeAreaView } from "react-native-safe-area-context";
-import { TouchableOpacity } from "react-native-gesture-handler";
-import { Recipe } from "@models/Recipe";
+import { Colors } from '@constants/colors';
+import { faBinoculars } from '@fortawesome/free-solid-svg-icons';
+import { Recipe } from '@models/Recipe';
+import RecButton from '@rec/RecButton';
+import RecCard from '@rec/RecCard';
+import RecEmptyState from '@rec/RecEmptyState';
+import RecListEntry from '@rec/RecListEntry';
+import { getDateNumeric } from '@utils/format-date';
+import Parse from 'parse/react-native';
+import React, { useEffect, useState } from 'react';
+import { StyleSheet, View } from 'react-native';
 
 const MenusScreen = (props: any) => {
   const [menus, setMenus]: [any, any] = useState([]);
@@ -96,30 +93,16 @@ const MenusScreen = (props: any) => {
           />
         </View>
       ) : (
-        <SafeAreaView>
-          <ScrollView>
-            {menus.map((menu: any, index: number) => (
-              <TouchableOpacity
-                style={styles.listEntry}
-                key={index}
-                onPress={() => onClickMenu(menu)}
-              >
-                <View style={styles.textContainer}>
-                  <Text style={styles.title}>{menu.title}</Text>
-                  <Text style={styles.date}>
-                    {getDateNumeric(menu.createdAt)}
-                  </Text>
-                </View>
-                <View style={styles.actions}>
-                  <View style={{ marginRight: 10 }}>
-                    <RecIconButton icon={faPen} handleClick={() => ``} />
-                  </View>
-                  <RecIconButton icon={faTrash} handleClick={() => ``} />
-                </View>
-              </TouchableOpacity>
-            ))}
-          </ScrollView>
-        </SafeAreaView>
+        <RecCard search paddingLeft={0} paddingRight={0}>
+          {menus.map((menu: any, index: number) => (
+            <RecListEntry
+              onPress={() => onClickMenu(menu)}
+              key={index}
+              header={menu.title}
+              subheaderLeft={getDateNumeric(menu.createdAt)}
+            />
+          ))}
+        </RecCard>
       )}
     </View>
   );
@@ -127,43 +110,13 @@ const MenusScreen = (props: any) => {
 
 const styles = StyleSheet.create({
   background: {
+    flex: 1,
     backgroundColor: Colors.neutral7,
   },
   emptyStateContainer: {
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
-  },
-  description: {
-    textAlign: "center",
-    color: Colors.neutral2,
-    fontSize: 18,
-    marginTop: 65,
-  },
-  title: {
-    color: Colors.black,
-    fontSize: 32,
-    paddingTop: 15,
-    paddingBottom: 15,
-  },
-  date: {
-    color: Colors.neutral2,
-  },
-  actions: {
-    display: "flex",
-    flexDirection: "row",
-    justifyContent: "flex-end",
-    alignItems: "center",
-    width: "70%",
-  },
-  listEntry: {
-    display: "flex",
-    flexDirection: "row",
-    alignItems: "center",
-    paddingHorizontal: 15,
-  },
-  textContainer: {
-    flexDirection: "column",
   },
 });
 

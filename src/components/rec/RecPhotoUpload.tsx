@@ -38,7 +38,7 @@ const RecPhotoUpload = (props: any) => {
           </View>
         </TouchableOpacity>
         <Image
-          source={{ uri: `data:image/jpeg;base64${image}` }}
+          source={{ uri: "data:image/jpeg;base64," + image }}
           style={styles.photo}
         />
       </View>

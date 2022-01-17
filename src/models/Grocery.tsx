@@ -1,9 +1,7 @@
 import { Unit } from "@models/Unit";
 
-export interface Ingredient {
+export interface Grocery {
   title: string;
   amount?: string;
   unit?: Unit;
-  expirationDate?: string;
-  isRunningLow?: boolean;
 }
