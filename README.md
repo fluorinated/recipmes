@@ -11,5 +11,5 @@ Manage your recipes, groceries, and ingredients.
 
 ## How to Configure Parse Server
 Change `Parse.serverURL` in `App.tsx`:
-* local: `http://localhost:1337/parse`
-* prod: `https://recipmes-server.herokuapp.com/parse`
+* Local: `http://localhost:1337/parse`
+* Prod: `https://recipmes-server.herokuapp.com/parse`
