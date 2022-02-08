@@ -1,5 +1,6 @@
 import { Colors } from '@constants/colors';
 import { DMSans_400Regular, useFonts } from '@expo-google-fonts/dm-sans';
+import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import React, { useEffect } from 'react';
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 
@@ -9,28 +10,30 @@ const RecButton = (props: any) => {
   });
   // useEffect(() => {}, [fontsLoaded]);
 
+  const getStyles = () => {
+    switch (props.type) {
+      case "primary":
+        return primaryStyles;
+      case "secondary":
+        return secondaryStyles;
+      case "tertiary":
+        return tertiaryStyles;
+      default:
+        return primaryStyles;
+    }
+  };
+
   return (
-    <View
-      style={
-        props.type === "secondary"
-          ? secondaryStyles.container
-          : primaryStyles.container
-      }
-    >
-      <TouchableOpacity
-        style={
-          props.type === "secondary"
-            ? secondaryStyles.button
-            : primaryStyles.button
-        }
-        onPress={() => props.handleClick()}
-      >
+    <View style={getStyles().container}>
+      <TouchableOpacity style={getStyles().button} onPress={props.handleClick}>
+        {props.icon && (
+          <FontAwesomeIcon icon={props.icon} color={Colors.neutral1} />
+        )}
         <Text
           style={[
             fontsLoaded && { fontFamily: "DMSans_400Regular" },
-            props.type === "secondary"
-              ? secondaryStyles.text
-              : primaryStyles.text,
+            getStyles().text,
+            props.icon && { paddingLeft: 10 },
           ]}
         >
           {props.label}
@@ -48,16 +51,17 @@ const primaryStyles = StyleSheet.create({
     margin: 20,
   },
   button: {
+    display: "flex",
+    alignItems: "center",
     backgroundColor: Colors.pink4,
     padding: 20,
-    alignItems: "center",
     borderRadius: 5,
     borderWidth: 1,
-    borderColor: Colors.pink2,
+    borderColor: Colors.pink3,
     shadowColor: Colors.pink3,
     shadowOffset: {
-      width: -2,
-      height: 2,
+      width: -1,
+      height: 1,
     },
     shadowOpacity: 0.4,
     shadowRadius: 1,
@@ -71,18 +75,47 @@ const primaryStyles = StyleSheet.create({
 
 const secondaryStyles = StyleSheet.create({
   container: {
-    backgroundColor: Colors.neutral7,
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "center",
+    backgroundColor: Colors.white,
+    borderColor: Colors.neutral6,
+    borderWidth: 1,
+    borderRadius: 5,
+    width: 200,
+    padding: 15,
+  },
+  button: {
+    display: "flex",
+    flexDirection: "row",
+    alignItems: "center",
+    shadowColor: Colors.neutral4,
+    shadowOpacity: 0.5,
+    shadowRadius: 0.25,
+    shadowOffset: {
+      width: -0.5,
+      height: 0.5,
+    },
+  },
+  text: {
+    color: Colors.neutral2,
+    fontSize: 16,
+  },
+});
+
+const tertiaryStyles = StyleSheet.create({
+  container: {
     display: "flex",
   },
   button: {
-    backgroundColor: Colors.neutral6,
-    padding: 15,
     alignItems: "center",
-    borderRadius: 10,
+    backgroundColor: Colors.neutral7,
+    borderRadius: 5,
+    padding: 15,
   },
   text: {
-    color: Colors.neutral1,
-    fontSize: 15,
+    color: Colors.neutral2,
+    fontSize: 16,
   },
 });
 

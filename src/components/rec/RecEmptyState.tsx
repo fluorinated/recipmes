@@ -24,7 +24,7 @@ const RecEmptyState = (props: any) => {
         >
           <RecButton
             label={props.buttonLabel}
-            type="secondary"
+            type="tertiary"
             handleClick={props.handleClick}
           />
         </View>

@@ -24,10 +24,16 @@ const RecInputLabel = (props: any) => {
   const handleDeleteClick = () => {
     props.handleDeleteClick && props.handleDeleteClick();
   };
+  const handleEditOkClick = () => {
+    isInputShown ? handleOkClick() : handleEditClick();
+  };
+  const handleDiscardDeleteClick = () => {
+    isInputShown ? handleDiscardClick() : handleDeleteClick();
+  };
 
   return (
-    <View>
-      <View style={isInputShown ? styles.inputActions : styles.hidden}>
+    <View style={styles.container}>
+      {isInputShown ? (
         <RecInput
           placeholder={props.placeholder}
           title={props.inputTitle}
@@ -35,55 +41,45 @@ const RecInputLabel = (props: any) => {
           size="third"
           value={editedLabel}
         />
-        <View style={styles.actions}>
-          <RecIconButton icon={faCheck} size={30} handleClick={handleOkClick} />
-          <RecIconButton
-            icon={faTimes}
-            size={30}
-            handleClick={handleDiscardClick}
-          />
-        </View>
-      </View>
-
-      <View style={isInputShown ? styles.hidden : styles.titleActions}>
+      ) : (
         <Text style={styles.title}>{label}</Text>
-        <View style={styles.actions}>
-          <RecIconButton icon={faPen} handleClick={handleEditClick} />
-          <RecIconButton icon={faTrash} handleClick={handleDeleteClick} />
-        </View>
+      )}
+
+      <View style={styles.actions}>
+        <RecIconButton
+          icon={isInputShown ? faCheck : faPen}
+          handleClick={handleEditOkClick}
+          dark
+          margin={5}
+        />
+        <RecIconButton
+          icon={isInputShown ? faTimes : faTrash}
+          handleClick={handleDiscardDeleteClick}
+          dark
+        />
       </View>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
-  hidden: {
-    display: "none",
-  },
   title: {
     fontSize: 25,
     color: Colors.black,
-    paddingTop: 15,
-    paddingBottom: 15,
+    alignSelf: "center",
   },
-  titleActions: {
-    display: "flex",
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
-    width: "100%",
-    marginTop: 10,
-  },
-  actions: {
-    flexDirection: "row",
-  },
-  inputActions: {
+  container: {
     display: "flex",
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "flex-end",
-    width: "100%",
-    marginTop: 10,
+    width: 390,
+    marginHorizontal: 10,
+    height: 60,
+  },
+  actions: {
+    flexDirection: "row",
+    marginBottom: 5,
   },
 });
 

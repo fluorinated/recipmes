@@ -2442,6 +2442,11 @@
   "resolved" "https://registry.npmjs.org/big-integer/-/big-integer-1.6.50.tgz"
   "version" "1.6.50"
 
+"bignumber.js@^9.0.1":
+  "integrity" "sha512-GAcQvbpsM0pUb0zw1EI0KhQEZ+lRwR5fYaAp3vPOYuP7aDvGy6cVN6XHLauvF8SOga2y0dcLcjt3iQDTSEliyw=="
+  "resolved" "https://registry.npmjs.org/bignumber.js/-/bignumber.js-9.0.2.tgz"
+  "version" "9.0.2"
+
 "blueimp-md5@^2.10.0":
   "integrity" "sha512-DRQrD6gJyy8FbiE4s+bDoXS9hiW3Vbx5uCdwvcCf3zLHL+Iv7LtGHLpr+GZV8rHG8tK766FGYBwRbu8pELTt+w=="
   "resolved" "https://registry.npmjs.org/blueimp-md5/-/blueimp-md5-2.19.0.tgz"
@@ -6537,6 +6542,13 @@
   dependencies:
     "prop-types" "^15.6.2"
     "react-native-iphone-x-helper" "^1.0.3"
+
+"react-native-mask-text@^0.7.0":
+  "integrity" "sha512-gp6GGDsI3s+UP8TIhh+iIjkIgnq0HsZGuMa9qW1+BdcPr9u9rpEzghPhcnWJd5sj/0ONqpudBI5Z8OABB5WH/g=="
+  "resolved" "https://registry.npmjs.org/react-native-mask-text/-/react-native-mask-text-0.7.0.tgz"
+  "version" "0.7.0"
+  dependencies:
+    "bignumber.js" "^9.0.1"
 
 "react-native-safe-area-context@>= 3.0.0", "react-native-safe-area-context@3.3.2":
   "integrity" "sha512-yOwiiPJ1rk+/nfK13eafbpW6sKW0jOnsRem2C1LPJjM3tfTof6hlvV5eWHATye3XOpu2cJ7N+HdkUvUDGwFD2Q=="

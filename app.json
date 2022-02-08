@@ -10,7 +10,7 @@
         "splash": {
             "image": "./src/assets/recipmes-logo.png",
             "resizeMode": "contain",
-            "backgroundColor": "#C0BB87"
+            "backgroundColor": "#FFAFAF"
         },
         "updates": {
             "fallbackToCacheTimeout": 0

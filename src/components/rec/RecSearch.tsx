@@ -47,9 +47,6 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     width: "95%",
-    backgroundColor: Colors.white,
-    marginTop: 10,
-    marginHorizontal: 10,
     borderRadius: 5,
   },
   input: {
@@ -57,10 +54,14 @@ const styles = StyleSheet.create({
     height: 30,
     color: Colors.neutral1,
     fontSize: 22,
-    margin: 10,
+    marginTop: 10,
+    marginBottom: 20,
+    marginHorizontal: 10,
   },
   icon: {
-    marginRight: 10,
+    marginRight: 5,
+    marginTop: 10,
+    marginBottom: 20,
   },
 });
 

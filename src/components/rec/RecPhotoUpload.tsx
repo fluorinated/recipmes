@@ -3,7 +3,9 @@ import { faCamera, faTimes } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import * as ImagePicker from 'expo-image-picker';
 import React, { useEffect, useState } from 'react';
-import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { Image, StyleSheet, TouchableOpacity, View } from 'react-native';
+
+import RecButton from './RecButton';
 
 const RecPhotoUpload = (props: any) => {
   const [image, setImage]: [any, any] = useState({ base64: "" });
@@ -16,9 +18,9 @@ const RecPhotoUpload = (props: any) => {
     let _image = await ImagePicker.launchImageLibraryAsync({
       mediaTypes: ImagePicker.MediaTypeOptions.Images,
       allowsEditing: true,
-      aspect: [4, 3],
+      aspect: [2, 1],
       base64: true,
-      quality: 1,
+      quality: 0.0001,
     });
 
     if (!_image.cancelled) {
@@ -43,15 +45,16 @@ const RecPhotoUpload = (props: any) => {
         />
       </View>
 
-      <View style={styles.container}>
-        <TouchableOpacity
-          onPress={addImage}
-          style={image.base64 !== "" ? styles.hidden : styles.photoUpload}
-        >
-          <FontAwesomeIcon icon={faCamera} style={styles.icon} />
-          <Text style={styles.photoUploadText}>{props.text}</Text>
-        </TouchableOpacity>
-      </View>
+      {image.base64 === "" && (
+        <View style={styles.container}>
+          <RecButton
+            icon={faCamera}
+            label={props.text}
+            type="secondary"
+            handleClick={addImage}
+          />
+        </View>
+      )}
     </View>
   );
 };
@@ -61,22 +64,10 @@ const styles = StyleSheet.create({
     display: "none",
   },
   container: {
-    width: "100%",
-  },
-  photoUpload: {
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
     width: "100%",
-    height: 50,
-    backgroundColor: Colors.neutral6,
-    borderColor: Colors.neutral4,
-    borderWidth: 1,
-    borderRadius: 10,
-    borderStyle: "solid",
-  },
-  photoUploadText: {
-    color: Colors.neutral1,
   },
   photo: {
     height: 130,

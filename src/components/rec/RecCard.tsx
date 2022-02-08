@@ -39,7 +39,10 @@ const RecCard = (props: any) => {
         </View>
       </View>
       <ScrollView
-        style={(props.search || props.tags) && styles.childrenStickyHeader}
+        style={
+          ((props.search || props.tags) && styles.childrenStickyHeader,
+          { height: props.height || 500 })
+        }
       >
         {props.children}
       </ScrollView>
@@ -54,16 +57,16 @@ const styles = StyleSheet.create({
   card: {
     overflow: "scroll",
     padding: 15,
-    width: 430,
     borderWidth: 1,
     backgroundColor: Colors.white,
     borderColor: Colors.neutral4,
+    width: 430,
   },
   searchTagsContainer: {
     width: "100%",
     backgroundColor: Colors.white,
     shadowColor: Colors.neutral4,
-    shadowOffset: { width: -2, height: 2 },
+    shadowOffset: { width: -2, height: 4 },
     shadowOpacity: 0.2,
     shadowRadius: 4,
   },

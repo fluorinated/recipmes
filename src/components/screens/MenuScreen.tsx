@@ -2,49 +2,82 @@ import { Colors } from '@constants/colors';
 import { faBinoculars } from '@fortawesome/free-solid-svg-icons';
 import { FoodCategory } from '@models/FoodCategory';
 import { Recipe } from '@models/Recipe';
-import RecButton from '@rec/RecButton';
+import RecCard from '@rec/RecCard';
 import RecEmptyState from '@rec/RecEmptyState';
 import RecInputLabel from '@rec/RecInputLabel';
 import RecipeListEntry from '@screens/recipes/RecipeListEntry';
-import React, { useState } from 'react';
-import { ScrollView, StyleSheet, Text, View } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
+import RecLoader from 'components/rec/RecLoader';
+import Parse from 'parse/react-native';
+import React, { useEffect, useState } from 'react';
+import { StyleSheet, Text, View } from 'react-native';
 
 const MenuScreen = (props: any) => {
-  const [menu, setMenu] = useState(props.route.params);
+  const [menu, setMenu] = useState(props?.route?.params?.menu ?? undefined);
 
-  const includesCategory = (recipe: Recipe, category: FoodCategory) =>
-    recipe.categories?.includes(category);
+  useEffect(() => {
+    setMenu(props?.route?.params?.menu);
+  }, [props?.route?.params?.menu]);
 
-  const getCategories = (category: FoodCategory) => {
-    return (
-      <View>
-        {menu.recipes.map((recipe: Recipe, index: number) => (
-          <View
-            style={includesCategory(recipe, category) ? {} : styles.hidden}
-            key={index}
-          >
-            <RecipeListEntry
-              navigation={props.navigation}
-              recipe={recipe}
-              key={index}
-              isMenu
-            />
-          </View>
-        ))}
-      </View>
-    );
+  const deleteMenu = async () => {
+    var Menu = Parse.Object.extend("menu");
+    var query = new Parse.Query(Menu);
+    query.equalTo("objectId", menu.objectId);
+    const currentMenu = await query.first();
+
+    if (currentMenu) {
+      currentMenu.destroy().then(
+        (results: any) => {
+          props.navigation.navigate("Menus", {
+            screen: "MenusHome",
+            params: {},
+          });
+        },
+        (error: any) => {
+          console.log("[MenusScreen] deleteMenu error:", error);
+          const { message, code } = JSON.parse(JSON.stringify(error));
+          // setToast({
+          //   isShowing: true,
+          //   errorMessage: `${code} ${message}`,
+          // });
+        }
+      );
+    }
   };
 
-  const getSections = () => {
+  const includesCategoryMenu = (category: FoodCategory) => {
+    const allRecipeCategories = menu.recipes
+      .map((recipe: Recipe) => recipe?.categories || [])
+      .flat();
+    return allRecipeCategories.includes(category);
+  };
+
+  const includesCategory = (recipe: Recipe, category: FoodCategory) =>
+    recipe?.categories?.includes(category);
+
+  const Sections = () => {
     return (
       <View>
         {Object.values(FoodCategory).map((category, i) => (
-          <View key={i}>
+          <View
+            key={i}
+            style={includesCategoryMenu(category) ? {} : styles.hidden}
+          >
             <Text style={styles.title} key={i}>
               {category}
             </Text>
-            {getCategories(category)}
+            {menu?.recipes?.map(
+              (recipe: Recipe, index: number) =>
+                includesCategory(recipe, category) && (
+                  <View key={index}>
+                    <RecipeListEntry
+                      navigation={props.navigation}
+                      recipe={recipe}
+                      key={index}
+                      isMenu
+                    />
+                  </View>
+                )
+            )}
           </View>
         ))}
       </View>
@@ -53,29 +86,27 @@ const MenuScreen = (props: any) => {
 
   return (
     <View style={styles.background}>
-      {false ? (
-        <View style={styles.emptyStateContainer}>
-          <RecEmptyState
-            icon={faBinoculars}
-            header="no recipes found"
-            subheader="view a recipe and use the actions to add a recipe to a menu"
-            handleClick={() => props.navigation.navigate("Recipes")}
-            buttonLabel="view recipes"
-          />
-        </View>
-      ) : (
-        <SafeAreaView>
-          <ScrollView>
-            <RecButton label="add ingredients to groceries" />
-            <RecInputLabel
-              placeholder={menu.title}
-              inputTitle="menu title"
-              handleDeleteClick={() => `dlt`}
+      {/* <RecButton label="add ingredients to groceries" /> */}
+      <RecInputLabel
+        placeholder={menu?.title ?? "menu title"}
+        inputTitle={menu?.title ?? "menu title"}
+        handleDeleteClick={deleteMenu}
+      />
+      <RecCard paddingLeft={5} paddingRight={5} height={560}>
+        {menu && menu?.recipes && menu?.recipes?.length === 0 && (
+          <View style={styles.emptyStateContainer}>
+            <RecEmptyState
+              icon={faBinoculars}
+              header="no recipes found"
+              subheader="browse recipes to add a recipe to a menu"
+              handleClick={() => props.navigation.navigate("Recipes")}
+              buttonLabel="browse recipes"
             />
-            <View>{getSections()}</View>
-          </ScrollView>
-        </SafeAreaView>
-      )}
+          </View>
+        )}
+        {!menu && <RecLoader />}
+        {menu && menu?.recipes && menu?.recipes?.length > 0 && <Sections />}
+      </RecCard>
     </View>
   );
 };
@@ -84,7 +115,6 @@ const styles = StyleSheet.create({
   background: {
     flex: 1,
     backgroundColor: Colors.neutral7,
-    margin: 10,
   },
   hidden: {
     display: "none",
@@ -102,6 +132,7 @@ const styles = StyleSheet.create({
     paddingTop: 15,
     paddingBottom: 15,
     color: Colors.black,
+    marginLeft: 15,
   },
   titleActions: {
     flexDirection: "row",

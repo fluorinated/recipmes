@@ -10,9 +10,11 @@ const RecToast = (props: any) => {
   const [isError, setIsError] = useState(!!props.errorMessage);
 
   useEffect(() => {
-    setIsOpen(props.isShowing);
-    !isError && setTimeout(() => setIsOpen(false), 3000);
-  });
+    if (!isError) {
+      setIsOpen(true);
+    }
+    setTimeout(() => setIsOpen(false), 3000);
+  }, []);
 
   // let [fontsLoaded] = useFonts({
   //   CourierPrime_400Regular,

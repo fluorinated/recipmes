@@ -96,17 +96,15 @@ const styles = StyleSheet.create({
   inputTitle: {
     width: "100%",
     color: Colors.neutral1,
-    marginTop: 10,
-    marginLeft: 5,
   },
   input: {
-    height: 50,
+    height: 45,
     width: "100%",
-    marginTop: 10,
     color: Colors.neutral1,
     backgroundColor: Colors.neutral6,
     borderRadius: 8,
     padding: 10,
+    marginVertical: 5,
   },
   inputContainer: {
     alignItems: "flex-start",
@@ -121,7 +119,7 @@ const styles = StyleSheet.create({
     maxHeight: 100,
     width: "100%",
     overflow: "hidden",
-    marginTop: "-30%",
+    marginTop: "-35%",
     backgroundColor: Colors.neutral6,
     borderBottomRightRadius: 8,
     borderBottomLeftRadius: 8,
@@ -131,7 +129,7 @@ const styles = StyleSheet.create({
   },
   chevDown: {
     position: "absolute",
-    marginTop: 55,
+    marginTop: 35,
     marginLeft: 150,
     zIndex: 1,
   },

@@ -1,9 +1,42 @@
-import { faFlag, faHeart, faPen, faPlus, faTrash } from '@fortawesome/free-solid-svg-icons';
+import { faFlag, faHeart, faPen, faPlus, faTrash, faUndo, faUtensils } from '@fortawesome/free-solid-svg-icons';
 import RecIconButton from '@rec/RecIconButton';
-import React from 'react';
+import React, { useState } from 'react';
 import { StyleSheet, View } from 'react-native';
 
 const RecActions = (props: any) => {
+  const recipeBase = [faHeart, faFlag, faPen, faTrash];
+  const icons = {
+    recipe: [faPlus, ...recipeBase],
+    recipeMenu: [faUtensils, ...recipeBase],
+    recipeEaten: [faUndo, ...recipeBase],
+    ingredient: [faFlag, faPen, faTrash],
+    grocery: [faPen, faTrash],
+    menus: [faTrash],
+    menu: [faPen, faTrash],
+  };
+  const getIconSet = () => {
+    switch (props.iconSet) {
+      case "recipe":
+        return "recipe";
+      case "recipeMenu":
+        return "recipeMenu";
+      case "recipeEaten":
+        return "recipeEaten";
+      case "ingredient":
+        return "ingredient";
+      case "grocery":
+        return "grocery";
+      case "menus":
+        return "menus";
+      case "menu":
+        return "menu";
+      default:
+        return "recipe";
+    }
+  };
+
+  const [currentIcons, setCurrentIcons] = useState(icons[getIconSet()] || []);
+
   return (
     <View
       style={[
@@ -16,16 +49,15 @@ const RecActions = (props: any) => {
         },
       ]}
     >
-      <RecIconButton
-        margin={15}
-        icon={faPlus}
-        handleClick={props.handleClick}
-        dark={props.dark}
-      />
-      <RecIconButton margin={15} icon={faHeart} dark={props.dark} />
-      <RecIconButton margin={15} icon={faFlag} dark={props.dark} />
-      <RecIconButton margin={15} icon={faPen} dark={props.dark} />
-      <RecIconButton margin={15} icon={faTrash} dark={props.dark} />
+      {currentIcons.map((icon, i) => (
+        <RecIconButton
+          margin={15}
+          icon={icon}
+          handleClick={() => props.handleClick(icon.iconName)}
+          dark={props.dark}
+          key={i}
+        />
+      ))}
     </View>
   );
 };

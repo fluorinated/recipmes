@@ -1,5 +1,4 @@
 import { Colors } from '@constants/colors';
-import { mockPhoto } from '@constants/mock-photo';
 import { DMSans_400Regular } from '@expo-google-fonts/dm-sans';
 import { Inter_400Regular, useFonts } from '@expo-google-fonts/inter';
 import { faCheck } from '@fortawesome/free-solid-svg-icons';
@@ -10,22 +9,7 @@ import React, { useState } from 'react';
 import { Image, StyleSheet, Text, View } from 'react-native';
 
 const RecipeListEntry = (props: any) => {
-  const [recipe, setRecipe] = useState(
-    props.recipe || {
-      categories: ["breakfast"],
-      ingredients: [
-        { unit: "tsp", amount: 1, title: "ingredient 1" },
-        { unit: "tbsp", amount: 5, title: "ingredient 2" },
-      ],
-      steps: ["Step 1", "Step 2"],
-      title: "scrambled eggs",
-      cookTimeHours: 1,
-      cookTimeMinutes: 30,
-      isFavorite: true,
-      isFlagged: true,
-      photo: mockPhoto,
-    }
-  );
+  const [recipe, setRecipe] = useState(props.recipe || {});
 
   let [fontsLoaded] = useFonts({
     Inter_400Regular,
@@ -34,7 +18,14 @@ const RecipeListEntry = (props: any) => {
 
   return (
     <RecListEntry
-      handlePress={() => props.navigation.navigate("Recipe", recipe)}
+      handleClick={() =>
+        props.navigation.navigate("Recipes", {
+          screen: "Recipe",
+          params: { recipe },
+        })
+      }
+      iconSet="recipe"
+      recipe={recipe}
     >
       <View style={styles.recipe}>
         <Image
@@ -72,6 +63,7 @@ const RecipeListEntry = (props: any) => {
             style="secondary"
             selectedTags={(tags: any[]) => `${tags}`}
             marginLeft={10}
+            width={280}
           />
         </View>
       </View>

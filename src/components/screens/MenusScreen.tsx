@@ -5,17 +5,22 @@ import RecButton from '@rec/RecButton';
 import RecCard from '@rec/RecCard';
 import RecEmptyState from '@rec/RecEmptyState';
 import RecListEntry from '@rec/RecListEntry';
+import RecLoader from '@rec/RecLoader';
 import { getDateNumeric } from '@utils/format-date';
 import Parse from 'parse/react-native';
 import React, { useEffect, useState } from 'react';
 import { StyleSheet, View } from 'react-native';
 
 const MenusScreen = (props: any) => {
-  const [menus, setMenus]: [any, any] = useState([]);
+  const [menus, setMenus]: [any, any] = useState(undefined);
   const [recipe, setRecipe]: [any, any] = useState(
-    props.route?.params?.recipe ?? {}
+    props.route?.params?.recipe ?? undefined
   );
-  const [isSaved, setIsSaved]: [boolean, any] = useState(false);
+  const [toast, setToast]: [any, any] = useState({
+    isShowing: props.route?.params?.isShowing ?? false,
+    errorMessage: props.route?.params?.errorMessage ?? null,
+    isError: props.route?.params?.isError ?? false,
+  });
 
   useEffect(() => {
     getMenus();
@@ -24,31 +29,46 @@ const MenusScreen = (props: any) => {
   const getMenus = async (): Promise<void> => {
     const query = new Parse.Query("menu");
 
-    query.find().then(
+    await query.find().then(
       (results) => {
         setMenus(JSON.parse(JSON.stringify(results)));
       },
       (error) => {
         console.log("[MenusScreen] getMenus error:", error);
+        const { message, code } = JSON.parse(JSON.stringify(error));
+        setToast({
+          isShowing: true,
+          errorMessage: `${code} ${message}`,
+        });
       }
     );
   };
 
   const saveNewMenu = async (): Promise<void> => {
     let Menu = new Parse.Object("menu");
-    const newMenu: Menu = {
+    const menu = {
       title: "menu title",
-      recipes: [],
+      recipes: recipe ? [recipe] : [],
     };
-    try {
-      let response = await Menu.save(newMenu);
-      props.navigation.navigate("Menu");
-    } catch (e) {
-      console.log("[MenusScreen] saveNewMenu error:", e);
-    }
+    await Menu.save(menu).then(
+      (results) => {
+        props.navigation.navigate("Menus", {
+          screen: "Menu",
+          params: { menu },
+        });
+      },
+      (error) => {
+        console.log("[MenusScreen] saveNewMenu error:", error);
+        const { message, code } = JSON.parse(JSON.stringify(error));
+        setToast({
+          isShowing: true,
+          errorMessage: `${code} ${message}`,
+        });
+      }
+    );
   };
 
-  const addRecipeToMenu = async (menu: any, recipe: Recipe): Promise<void> => {
+  const addRecipeToMenu = async (menu: any, recipe: Recipe) => {
     var Menu = Parse.Object.extend("menu");
     var query = new Parse.Query(Menu);
     query.equalTo("objectId", menu.objectId);
@@ -57,53 +77,103 @@ const MenusScreen = (props: any) => {
       const Menu = Parse.Object.extend("menu");
       const parseMenu = new Menu(currentMenu);
       if (
-        !menu.recipes.some((menuRec: any) => {
-          // would be better to test the whole object in the future
-          return menuRec.title === recipe.title;
+        !menu?.recipes?.some((menuRec: any) => {
+          // filter out more similar fields?
+          return menuRec?.title === recipe?.title;
         })
       ) {
         parseMenu.set("recipes", [...menu.recipes, recipe]);
+        menu.recipes = [...menu.recipes, recipe];
       }
-      parseMenu.save();
-      setIsSaved(true);
+
+      parseMenu.save().then(() => {
+        console.log("saved", menu.recipes);
+        props.navigation.navigate("Menus", {
+          screen: "Menu",
+          params: { menu },
+        });
+      });
     });
   };
 
   const onClickMenu = (menu: any): void => {
-    if (!isSaved && Object.keys(recipe).length !== 0) {
+    if (recipe) {
       addRecipeToMenu(menu, recipe);
-      setIsSaved(false);
-      props.navigation.goBack();
     } else {
-      props.navigation.navigate("Menu", menu);
+      props.navigation.navigate("Menus", {
+        screen: "Menu",
+        params: { menu },
+      });
+    }
+  };
+
+  const deleteMenu = async (menu: any): Promise<void> => {
+    let newMenu = new Parse.Object("menu");
+    newMenu.id = menu.objectId;
+    await newMenu.destroy().then(
+      (results) => {
+        getMenus();
+      },
+      (error) => {
+        console.log("[MenusScreen] deleteMenu error:", error);
+        const { message, code } = JSON.parse(JSON.stringify(error));
+        setToast({
+          isShowing: true,
+          errorMessage: `${code} ${message}`,
+        });
+      }
+    );
+  };
+
+  const handleClickedIcon = (icon: string, menu: any) => {
+    switch (icon) {
+      case "trash":
+        deleteMenu(menu);
+        break;
+      default:
+        break;
     }
   };
 
   return (
     <View style={styles.background}>
+      {/* <RecToast
+        message={toast.isError ?? "error"}
+        isShowing={toast.isShowing}
+        isError={toast.isError}
+        errorMessage={toast.errorMessage}
+      /> */}
       <RecButton handleClick={saveNewMenu} label="create new menu" />
-      {menus.length === 0 ? (
-        <View style={styles.emptyStateContainer}>
-          <RecEmptyState
-            icon={faBinoculars}
-            header="no menus found"
-            subheader="create a new menu or adjust your search"
-            handleClick={saveNewMenu}
-            buttonLabel="create menu"
-          />
-        </View>
-      ) : (
-        <RecCard search paddingLeft={0} paddingRight={0}>
-          {menus.map((menu: any, index: number) => (
+      <RecCard search paddingLeft={0} paddingRight={0}>
+        {menus && menus?.length === 0 && (
+          <View style={styles.emptyStateContainer}>
+            <RecEmptyState
+              icon={faBinoculars}
+              header="no menus found"
+              subheader="create a new menu or adjust your search"
+              handleClick={saveNewMenu}
+              buttonLabel="create menu"
+            />
+          </View>
+        )}
+
+        {!menus && <RecLoader />}
+
+        {menus &&
+          menus?.length > 0 &&
+          menus.map((menu: any, index: number) => (
             <RecListEntry
-              onPress={() => onClickMenu(menu)}
               key={index}
-              header={menu.title}
-              subheaderLeft={getDateNumeric(menu.createdAt)}
+              header={{ left: menu.title }}
+              subheader={{ left: getDateNumeric(menu.createdAt) }}
+              iconSet="menus"
+              handleActionClick={(icon: string) =>
+                handleClickedIcon(icon, menu)
+              }
+              handleClick={() => onClickMenu(menu)}
             />
           ))}
-        </RecCard>
-      )}
+      </RecCard>
     </View>
   );
 };

@@ -2,6 +2,7 @@ import { Colors } from '@constants/colors';
 import { faMinus, faPlus } from '@fortawesome/free-solid-svg-icons';
 import { Ingredient } from '@models/Ingredient';
 import { Unit } from '@models/Unit';
+import RecCheckbox from '@rec/RecCheckbox';
 import RecIconButton from '@rec/RecIconButton';
 import RecInput from '@rec/RecInput';
 import RecSelect from '@rec/RecSelect';
@@ -48,38 +49,72 @@ const RecMultiInput = (props: any) => {
   };
 
   const handleSetIngredients = (
-    text: string | Unit,
+    val: any,
     index: number,
     input: string
   ): void => {
     let newIngredients = [...ingredients];
-    newIngredients[index] = { ...newIngredients[index], [input]: text };
+    newIngredients[index] = { ...newIngredients[index], [input]: val };
     setIngredients(newIngredients);
   };
 
   const showIngredientsInputs = (index: number) => {
     if (props.isIngredients) {
       return (
-        <View style={styles.row}>
-          <RecInput
-            placeholder="amount"
-            title="amount"
-            size="half"
-            marginRight={10}
-            handleChangeText={(text: string) =>
-              handleSetIngredients(text, index, "amount")
+        <View>
+          <View style={styles.row}>
+            <RecInput
+              placeholder="amount"
+              title="amount"
+              marginRight={10}
+              handleChangeText={(text: string) =>
+                handleSetIngredients(text, index, "amount")
+              }
+              width={180}
+            />
+            <RecSelect
+              placeholder="units"
+              title="units"
+              selectedValue={(val: Unit) =>
+                handleSetIngredients(val, index, "unit")
+              }
+              width={180}
+            />
+          </View>
+          <View
+            style={
+              props.isGroceries || props.isNewRecipe
+                ? { display: "none" }
+                : styles.row
             }
-            width={180}
-          />
-          <RecSelect
-            placeholder="units"
-            title="units"
-            size="half"
-            selectedValue={(val: Unit) =>
-              handleSetIngredients(val, index, "unit")
-            }
-            width={180}
-          />
+          >
+            <View
+              style={{
+                width: 180,
+                display: "flex",
+                justifyContent: "flex-end",
+                marginRight: 10,
+              }}
+            >
+              <RecCheckbox
+                label="running low"
+                isChecked={(isChecked: boolean) =>
+                  handleSetIngredients(isChecked, index, "isRunningLow")
+                }
+                dark
+              />
+            </View>
+            <RecInput
+              placeholder="mm/dd/yyyy"
+              title="expiration"
+              handleChangeText={(text: string) =>
+                handleSetIngredients(text, index, "expirationDate")
+              }
+              width={180}
+              keyboardType="numeric"
+              date
+            />
+          </View>
         </View>
       );
     }
@@ -113,7 +148,11 @@ const RecMultiInput = (props: any) => {
               />
 
               {showIngredientsInputs(index)}
-              <TouchableOpacity style={styles.minusContainer}>
+              <TouchableOpacity
+                style={
+                  inputs.length > 1 ? styles.minusContainer : styles.hidden
+                }
+              >
                 <RecIconButton
                   icon={faMinus}
                   size={20}
@@ -123,7 +162,7 @@ const RecMultiInput = (props: any) => {
             </View>
             <TouchableOpacity
               style={
-                index === inputs.length - 1
+                index === inputs.length - 1 && !props.hidePlus
                   ? styles.plusContainer
                   : styles.hidden
               }
@@ -154,7 +193,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     width: "100%",
-    padding: 10,
+    paddingVertical: 10,
   },
   minusContainer: {
     display: "flex",
@@ -162,10 +201,14 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "flex-end",
     width: "100%",
-    padding: 10,
   },
   row: {
     flexDirection: "row",
+    justifyContent: "center",
+  },
+  col: {
+    display: "flex",
+    flexDirection: "column",
   },
   ingredientContainer: {
     display: "flex",
@@ -174,6 +217,9 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderRadius: 5,
     marginTop: 10,
+    paddingBottom: 15,
+    paddingTop: 10,
+    paddingHorizontal: 10,
   },
 });
 

@@ -8,9 +8,6 @@ const RecTagList = (props: any) => {
     props.list ?? Object.values(FoodCategory)
   );
   const [selectedTags, setSelectedTags]: [string[], any] = useState([]);
-  const [isSecondary, setIsSecondary]: [boolean, any] = useState(
-    props.style === "secondary"
-  );
 
   useEffect(() => {
     props.selectedTags(selectedTags);
@@ -30,43 +27,72 @@ const RecTagList = (props: any) => {
   const isTagSelected = (tag: string): boolean =>
     !!selectedTags.find((selectedTag) => selectedTag === tag);
 
-  return (
+  const PrimaryTags = () => (
+    <View
+      style={[
+        styles.tagList,
+        {
+          marginTop: props.marginTop,
+          marginLeft: props.marginLeft,
+          marginRight: props.marginRight,
+          marginBottom: props.marginBottom,
+        },
+      ]}
+    >
+      {list.map((tag, i) => (
+        <TouchableOpacity
+          style={[styles.tag, isTagSelected(tag) && styles.tagSelected]}
+          onPress={() => onClickTag(tag)}
+          key={i}
+        >
+          <Text
+            style={[
+              styles.tagText,
+              isTagSelected(tag) && styles.tagTextSelected,
+            ]}
+          >
+            {tag}
+          </Text>
+        </TouchableOpacity>
+      ))}
+    </View>
+  );
+
+  const SecondaryTags = () => (
+    <View
+      style={[
+        styles.tagList,
+        {
+          marginTop: props.marginTop,
+          marginLeft: props.marginLeft,
+          marginRight: props.marginRight,
+          marginBottom: props.marginBottom,
+          width: props.width,
+        },
+        styles.tagListSecondary,
+      ]}
+    >
+      {list.map((tag, i) => (
+        <View style={[styles.tag, styles.tagSecondary]} key={i}>
+          <Text
+            style={[
+              styles.tagTextSecondary,
+              isTagSelected(tag) && styles.tagTextSelected,
+            ]}
+          >
+            {tag}
+          </Text>
+        </View>
+      ))}
+    </View>
+  );
+
+  return props.style === "secondary" ? (
+    <SecondaryTags />
+  ) : (
     <SafeAreaView>
       <ScrollView horizontal={true}>
-        <View
-          style={[
-            styles.tagList,
-            {
-              marginTop: props.marginTop,
-              marginLeft: props.marginLeft,
-              marginRight: props.marginRight,
-              marginBottom: props.marginBottom,
-            },
-            isSecondary && styles.tagListSecondary,
-          ]}
-        >
-          {list.map((tag, i) => (
-            <TouchableOpacity
-              style={[
-                styles.tag,
-                isTagSelected(tag) && styles.tagSelected,
-                isSecondary && styles.tagSecondary,
-              ]}
-              onPress={() => onClickTag(tag)}
-              key={i}
-              disabled={isSecondary}
-            >
-              <Text
-                style={[
-                  isSecondary ? styles.tagTextSecondary : styles.tagText,
-                  isTagSelected(tag) && styles.tagTextSelected,
-                ]}
-              >
-                {tag}
-              </Text>
-            </TouchableOpacity>
-          ))}
-        </View>
+        <PrimaryTags />
       </ScrollView>
     </SafeAreaView>
   );
@@ -96,7 +122,7 @@ const styles = StyleSheet.create({
     borderColor: Colors.neutral7,
     shadowColor: Colors.neutral4,
     shadowOpacity: 0.3,
-    shadowRadius: 1,
+    shadowRadius: 0.25,
     shadowOffset: {
       width: -0.5,
       height: 0.5,
@@ -120,7 +146,6 @@ const styles = StyleSheet.create({
   },
   tagListSecondary: {
     flexWrap: "wrap",
-    width: 200,
   },
 });
 

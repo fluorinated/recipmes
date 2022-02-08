@@ -10,6 +10,8 @@ import GroceriesScreen from '@screens/GroceriesScreen';
 import IngredientsScreen from '@screens/IngredientsScreen';
 import MenuScreen from '@screens/MenuScreen';
 import MenusScreen from '@screens/MenusScreen';
+import NewGroceryScreen from '@screens/NewGroceryScreen';
+import NewIngredientScreen from '@screens/NewIngredientScreen';
 import NewRecipeScreen from '@screens/NewRecipeScreen';
 import RecipeScreen from '@screens/RecipeScreen';
 import RecipesScreen from '@screens/RecipesScreen';
@@ -185,8 +187,32 @@ export default function App() {
                 />
               ),
             }}
-            component={IngredientsScreen}
-          />
+          >
+            {() => (
+              <IngredientsStack.Navigator>
+                <IngredientsStack.Screen
+                  name="IngredientsHome"
+                  component={IngredientsScreen}
+                  options={{
+                    title: "Ingredients",
+                    header: () => <View />,
+                  }}
+                />
+                <IngredientsStack.Screen
+                  name="NewIngredient"
+                  component={NewIngredientScreen}
+                  options={{
+                    title: "NewIngredient",
+                    headerStyle: {
+                      backgroundColor: Colors.neutral7,
+                    },
+                    headerTintColor: Colors.yellow1,
+                    headerTitle: () => <View />,
+                  }}
+                />
+              </IngredientsStack.Navigator>
+            )}
+          </Tab.Screen>
           <Tab.Screen
             name="Groceries"
             options={{
@@ -204,8 +230,32 @@ export default function App() {
                 />
               ),
             }}
-            component={GroceriesScreen}
-          />
+          >
+            {() => (
+              <GroceriesStack.Navigator>
+                <GroceriesStack.Screen
+                  name="GroceriesHome"
+                  component={GroceriesScreen}
+                  options={{
+                    title: "Groceries",
+                    header: () => <View />,
+                  }}
+                />
+                <GroceriesStack.Screen
+                  name="NewGrocery"
+                  component={NewGroceryScreen}
+                  options={{
+                    title: "NewGrocery",
+                    headerStyle: {
+                      backgroundColor: Colors.neutral7,
+                    },
+                    headerTintColor: Colors.yellow1,
+                    headerTitle: () => <View />,
+                  }}
+                />
+              </GroceriesStack.Navigator>
+            )}
+          </Tab.Screen>
         </Tab.Navigator>
       </NavigationContainer>
     );

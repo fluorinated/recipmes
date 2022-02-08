@@ -51,7 +51,6 @@ const styles = StyleSheet.create({
     width: 30,
     color: Colors.neutral1,
     borderRadius: 8,
-    padding: 10,
     marginVertical: 10,
     marginRight: 10,
   },

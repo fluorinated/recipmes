@@ -9,7 +9,7 @@ const getTheme = (props: any) => {
 
 const RecIconButton = (props: any) => {
   return (
-    <TouchableOpacity onPress={props.handleClick}>
+    <TouchableOpacity onPressIn={props.handleClick}>
       <View
         style={[
           styles.container,

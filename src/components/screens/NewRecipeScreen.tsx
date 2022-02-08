@@ -7,6 +7,7 @@ import RecInput from '@rec/RecInput';
 import RecMultiInput from '@rec/RecMultiInput';
 import RecPhotoUpload from '@rec/RecPhotoUpload';
 import RecTagList from '@rec/RecTagList';
+import RecLoader from 'components/rec/RecLoader';
 import Parse from 'parse/react-native';
 import React, { useState } from 'react';
 import { SafeAreaView, StyleSheet, Text, View } from 'react-native';
@@ -22,10 +23,12 @@ const NewRecipeScreen = (props: any) => {
   const [steps, setSteps]: [string[], any] = useState([]);
   const [ingredients, setIngredients]: [Ingredient[], any] = useState([]);
   const [photo, setPhoto]: [string, any] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
   const saveRecipe = async () => {
+    setIsLoading(true);
     let Recipe = new Parse.Object("recipe");
-    const newRecipe: Recipe = {
+    const newRecipe = {
       title: recipeTitle,
       cookTimeHours,
       cookTimeMinutes,
@@ -36,15 +39,16 @@ const NewRecipeScreen = (props: any) => {
       ingredients,
       steps,
     };
-    let response = await Recipe.save(newRecipe).then(
+    await Recipe.save(newRecipe).then(
       (results) => {
-        // console.log("results", results);
+        setIsLoading(false);
         props.navigation.navigate("Recipes", {
           screen: "RecipesHome",
           params: { isShowing: true, errorMessage: null },
         });
       },
       (error) => {
+        setIsLoading(false);
         const { message, code } = JSON.parse(JSON.stringify(error));
         props.navigation.navigate("Recipes", {
           screen: "RecipesHome",
@@ -120,6 +124,7 @@ const NewRecipeScreen = (props: any) => {
             placeholder="ingredient"
             title="ingredient"
             isIngredients
+            isNewRecipe
             ingredients={(ingredients: Ingredient[]) =>
               setIngredients(ingredients)
             }
@@ -130,7 +135,12 @@ const NewRecipeScreen = (props: any) => {
             handleChangeText={(text: string[]) => setSteps(text)}
           />
         </View>
-        <RecButton handleClick={saveRecipe} label="save recipe" />
+
+        {isLoading ? (
+          <RecLoader />
+        ) : (
+          <RecButton handleClick={saveRecipe} label="save recipe" />
+        )}
       </KeyboardAwareScrollView>
     </SafeAreaView>
   );
@@ -153,6 +163,7 @@ const styles = StyleSheet.create({
   cookTime: {
     color: Colors.neutral1,
     marginTop: 20,
+    marginBottom: 10,
     marginLeft: 5,
   },
   container: {

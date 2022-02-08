@@ -1,58 +1,41 @@
 import { Colors } from '@constants/colors';
 import { faCheck } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
-import RecActions from '@rec/RecActions';
 import RecCard from '@rec/RecCard';
 import RecCheckbox from '@rec/RecCheckbox';
+import RecRecipeActions from '@rec/RecRecipeActions';
 import RecTagList from '@rec/RecTagList';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { Image, StyleSheet, Text, View } from 'react-native';
 
 const RecipeScreen = (props: any) => {
-  const [recipe, setRecipe] = useState({
-    categories: ["breakfast"],
-    ingredients: [
-      { unit: "tsp", amount: 1, title: "ingredient 1" },
-      { unit: "tbsp", amount: 5, title: "ingredient 2" },
-    ],
-    steps: ["Step 1", "Step 2"],
-    title: "scrambled eggs",
-    cookTimeHours: 1,
-    cookTimeMinutes: 30,
-    isFavorite: true,
-    isFlagged: true,
-    photo:
-      "file:///var/mobile/Containers/Data/Application/74B08EF2-95B6-4435-B1ED-8589AB758CB6/Library/Caches/ExponentExperienceData/%2540m2015dominguez%252Frecipmes/ImagePicker/BCB62A00-248F-4293-A781-54E0D2A92852.jpg",
-  });
-
-  useEffect(() => {
-    setRecipe(props.route.params);
-  }, []);
+  const [recipe, setRecipe]: [any, any] = useState(
+    props?.route?.params?.recipe || {}
+  );
 
   return (
     <View style={styles.background}>
-      <RecActions marginBottom={15} dark />
-      <RecCard
-        paddingLeft={0}
-        paddingRight={0}
-        paddingTop={0}
-        paddingBottom={150}
-      >
+      <RecRecipeActions recipe={recipe} marginBottom={15} dark {...props} />
+      <RecCard paddingLeft={0} paddingRight={0} paddingTop={0} height={580}>
         <Image
           source={{ uri: "data:image/jpeg;base64," + recipe.photo }}
           style={styles.photo}
         />
         <View style={styles.mainContent}>
           <Text style={styles.title} ellipsizeMode="tail" numberOfLines={3}>
-            {recipe.title}
+            {recipe?.title}
           </Text>
           <View style={styles.description}>
-            <FontAwesomeIcon icon={faCheck} style={styles.check} />
-            <Text>
-              {recipe.cookTimeHours}h {recipe.cookTimeMinutes}m
+            <FontAwesomeIcon
+              icon={faCheck}
+              style={styles.check}
+              color={Colors.neutral2}
+            />
+            <Text style={styles.text}>
+              {recipe?.cookTimeHours}h {recipe?.cookTimeMinutes}m
             </Text>
             <Text style={styles.separator}>•</Text>
-            <Text>500 calories</Text>
+            <Text style={styles.text}>500 calories</Text>
           </View>
           <RecTagList
             list={recipe.categories}
@@ -61,18 +44,17 @@ const RecipeScreen = (props: any) => {
             marginTop={10}
           />
           <Text style={styles.subtitle}>ingredients</Text>
-          {recipe.ingredients.map((ingredient, i) => (
+          {recipe?.ingredients?.map((ingredient, i) => (
             <RecCheckbox
-              label={`${ingredient.amount} ${ingredient.unit} ${ingredient.title}`.replace(
-                /\s+/g,
-                " "
-              )}
+              label={`${ingredient?.amount ?? ""} ${ingredient?.unit ?? ""} ${
+                ingredient?.title ?? ""
+              }`.replace(/\s+/g, " ")}
               isChecked={(isChecked: boolean) => true}
               key={i}
             />
           ))}
           <Text style={styles.subtitle}>how to make</Text>
-          {recipe.steps.map((step, i) => (
+          {recipe?.steps?.map((step, i) => (
             <View style={styles.step} key={i}>
               <Text style={styles.stepTitle}>{i + 1}.</Text>
               <Text style={styles.stepContent}>{step}</Text>
@@ -105,12 +87,17 @@ const styles = StyleSheet.create({
     fontSize: 30,
     fontFamily: "DMSans_400Regular",
     paddingVertical: 15,
+    color: Colors.black,
   },
   subtitle: {
     fontSize: 25,
     fontFamily: "DMSans_400Regular",
     paddingTop: 25,
     paddingBottom: 5,
+    color: Colors.black,
+  },
+  text: {
+    color: Colors.neutral1,
   },
   description: {
     flexDirection: "row",
