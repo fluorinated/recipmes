@@ -66,6 +66,8 @@ const RecipeScreen = (props: any) => {
   );
 };
 
+// title and subtitle
+// fontFamily: "DMSans_400Regular",
 const styles = StyleSheet.create({
   background: {
     flex: 1,
@@ -85,13 +87,11 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 30,
-    fontFamily: "DMSans_400Regular",
     paddingVertical: 15,
     color: Colors.black,
   },
   subtitle: {
     fontSize: 25,
-    fontFamily: "DMSans_400Regular",
     paddingTop: 25,
     paddingBottom: 5,
     color: Colors.black,

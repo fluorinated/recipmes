@@ -30,7 +30,33 @@ const IngredientsScreen = (props: any) => {
     );
   };
 
-  const handleClickedIcon = (icon: string) => {
+  const deleteIngredient = async (ingredient: any) => {
+    var Ingredient = Parse.Object.extend("ingredient");
+    var query = new Parse.Query(Ingredient);
+    query.equalTo("objectId", ingredient.objectId);
+    const currentIngredient = await query.first();
+
+    if (currentIngredient) {
+      currentIngredient.destroy().then(
+        (results: any) => {
+          props.navigation.navigate("Ingredients", {
+            screen: "IngredientsHome",
+            params: {},
+          });
+        },
+        (error: any) => {
+          console.log("[IngredientsScreen] deleteIngredient error:", error);
+          const { message, code } = JSON.parse(JSON.stringify(error));
+          // setToast({
+          //   isShowing: true,
+          //   errorMessage: `${code} ${message}`,
+          // });
+        }
+      );
+    }
+  };
+
+  const handleClickedIcon = (icon: string, ingredient: any) => {
     switch (icon) {
       case "flag":
         console.log("toggle isRunningLow for ingredient in db (update)");
@@ -39,7 +65,7 @@ const IngredientsScreen = (props: any) => {
         console.log("send to addNew ingredient page to (update/upsert)");
         break;
       case "trash":
-        console.log("delete ingredient in db (delete)");
+        deleteIngredient(ingredient);
         break;
       default:
         break;
@@ -81,7 +107,9 @@ const IngredientsScreen = (props: any) => {
                 right: ingredient.expirationDate,
               }}
               iconSet="ingredient"
-              handleActionClick={(icon: string) => handleClickedIcon(icon)}
+              handleActionClick={(icon: string) =>
+                handleClickedIcon(icon, ingredient)
+              }
             />
           ))}
       </RecCard>

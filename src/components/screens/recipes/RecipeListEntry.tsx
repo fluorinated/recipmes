@@ -1,6 +1,4 @@
 import { Colors } from '@constants/colors';
-import { DMSans_400Regular } from '@expo-google-fonts/dm-sans';
-import { Inter_400Regular, useFonts } from '@expo-google-fonts/inter';
 import { faCheck } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import RecListEntry from '@rec/RecListEntry';
@@ -11,10 +9,10 @@ import { Image, StyleSheet, Text, View } from 'react-native';
 const RecipeListEntry = (props: any) => {
   const [recipe, setRecipe] = useState(props.recipe || {});
 
-  let [fontsLoaded] = useFonts({
-    Inter_400Regular,
-    DMSans_400Regular,
-  });
+  // let [fontsLoaded] = useFonts({
+  //   Inter_400Regular,
+  //   DMSans_400Regular,
+  // });
 
   return (
     <RecListEntry
@@ -39,7 +37,7 @@ const RecipeListEntry = (props: any) => {
             <Text
               style={[
                 styles.header,
-                fontsLoaded ? { fontFamily: "DMSans_400Regular" } : {},
+                // fontsLoaded ? { fontFamily: "DMSans_400Regular" } : {},
               ]}
               ellipsizeMode="tail"
               numberOfLines={2}

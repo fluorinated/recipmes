@@ -1,6 +1,4 @@
 import { Colors } from '@constants/colors';
-import { DMSans_400Regular } from '@expo-google-fonts/dm-sans';
-import { Inter_400Regular, useFonts } from '@expo-google-fonts/inter';
 import { faCalendarAlt, faCalendarTimes } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import RecActions from '@rec/RecActions';
@@ -14,10 +12,10 @@ const RecListEntry = (props: any) => {
   const [areActionsShown, setAreActionsShown]: [any, any] = useState(false);
   const [cardHeight, setCardHeight]: [any, any] = useState(null);
 
-  let [fontsLoaded] = useFonts({
-    Inter_400Regular,
-    DMSans_400Regular,
-  });
+  // let [fontsLoaded] = useFonts({
+  //   Inter_400Regular,
+  //   DMSans_400Regular,
+  // });
 
   const toggleActionsVisibility = (direction: string): void => {
     if (direction === "SWIPE_LEFT") {

@@ -30,13 +30,39 @@ const GroceriesScreen = (props: any) => {
     );
   };
 
-  const handleClickedIcon = (icon: string) => {
+  const deleteGrocery = async (grocery: any) => {
+    var Grocery = Parse.Object.extend("grocery");
+    var query = new Parse.Query(Grocery);
+    query.equalTo("objectId", grocery.objectId);
+    const currentGrocery = await query.first();
+
+    if (currentGrocery) {
+      currentGrocery.destroy().then(
+        (results: any) => {
+          props.navigation.navigate("Groceries", {
+            screen: "GroceriesHome",
+            params: {},
+          });
+        },
+        (error: any) => {
+          console.log("[GroceriesScreen] deleteGrocery error:", error);
+          const { message, code } = JSON.parse(JSON.stringify(error));
+          // setToast({
+          //   isShowing: true,
+          //   errorMessage: `${code} ${message}`,
+          // });
+        }
+      );
+    }
+  };
+
+  const handleClickedIcon = (icon: string, grocery: any) => {
     switch (icon) {
       case "pen":
         console.log("send to addNew grocery page to (update/upsert)");
         break;
       case "trash":
-        console.log("delete grocery in db (delete)");
+        deleteGrocery(grocery);
         break;
       default:
         break;
@@ -75,7 +101,9 @@ const GroceriesScreen = (props: any) => {
                 left: getDateNumeric(grocery.createdAt) || "",
               }}
               iconSet="grocery"
-              handleActionClick={(icon: string) => handleClickedIcon(icon)}
+              handleActionClick={(icon: string) =>
+                handleClickedIcon(icon, grocery)
+              }
             />
           ))}
       </RecCard>

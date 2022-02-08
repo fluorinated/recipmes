@@ -1,13 +1,12 @@
 import { Colors } from '@constants/colors';
-import { DMSans_400Regular, useFonts } from '@expo-google-fonts/dm-sans';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import React, { useEffect } from 'react';
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 
 const RecButton = (props: any) => {
-  let [fontsLoaded] = useFonts({
-    DMSans_400Regular,
-  });
+  // let [fontsLoaded] = useFonts({
+  //   DMSans_400Regular,
+  // });
   // useEffect(() => {}, [fontsLoaded]);
 
   const getStyles = () => {
@@ -31,7 +30,7 @@ const RecButton = (props: any) => {
         )}
         <Text
           style={[
-            fontsLoaded && { fontFamily: "DMSans_400Regular" },
+            // fontsLoaded && { fontFamily: "DMSans_400Regular" },
             getStyles().text,
             props.icon && { paddingLeft: 10 },
           ]}

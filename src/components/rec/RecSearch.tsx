@@ -1,5 +1,4 @@
 import { Colors } from '@constants/colors';
-import { Inter_400Regular, useFonts } from '@expo-google-fonts/inter';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import React from 'react';
@@ -7,9 +6,9 @@ import { StyleSheet, View } from 'react-native';
 import { TextInput } from 'react-native-gesture-handler';
 
 const RecSearch = (props: any) => {
-  let [fontsLoaded] = useFonts({
-    Inter_400Regular,
-  });
+  // let [fontsLoaded] = useFonts({
+  //   Inter_400Regular,
+  // });
 
   return (
     <View
@@ -32,7 +31,7 @@ const RecSearch = (props: any) => {
       <TextInput
         style={[
           styles.input,
-          fontsLoaded && { fontFamily: "Inter_400Regular" },
+          // fontsLoaded && { fontFamily: "Inter_400Regular" },
         ]}
         placeholderTextColor={Colors.neutral2}
         placeholder={props.label}
