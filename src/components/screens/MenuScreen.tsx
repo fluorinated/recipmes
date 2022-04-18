@@ -97,7 +97,7 @@ const MenuScreen = (props: any) => {
           <View style={styles.emptyStateContainer}>
             <RecEmptyState
               icon={faBinoculars}
-              header="no recipes found"
+              header="no recipes added"
               subheader="browse recipes to add a recipe to a menu"
               handleClick={() => props.navigation.navigate("Recipes")}
               buttonLabel="browse recipes"

@@ -7,14 +7,13 @@ const RecTagList = (props: any) => {
   const [list, setList]: [any[] | FoodCategory[], any] = useState(
     props.list ?? Object.values(FoodCategory)
   );
-  const [selectedTags, setSelectedTags]: [string[], any] = useState([]);
+  const [selectedTags, setSelectedTags]: [FoodCategory[], any] = useState([]);
 
   useEffect(() => {
     props.selectedTags(selectedTags);
-  });
+  }, [selectedTags]);
 
-  const selectTag = (tag: string): void => {
-    console.log("hi");
+  const selectTag = (tag: FoodCategory): void => {
     if (isTagSelected(tag)) {
       setSelectedTags(selectedTags.filter((t) => t !== tag));
     } else {
@@ -22,7 +21,7 @@ const RecTagList = (props: any) => {
     }
   };
 
-  const isTagSelected = (tag: string): boolean =>
+  const isTagSelected = (tag: FoodCategory): boolean =>
     !!selectedTags.find((selectedTag) => selectedTag === tag);
 
   const PrimaryTags = () => (
