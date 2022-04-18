@@ -39,10 +39,9 @@ const RecipesScreen = (props: any) => {
   };
 
   const filterRecipes = (tags: FoodCategory[]) => {
-    console.log("filtering, categories.length =>", tags);
     if (recipes && filteredRecipes) {
       // recipe is kept if all tags are in it
-      const newFilteredRecipes = filteredRecipes.filter((r: Recipe) =>
+      const newFilteredRecipes = recipes.filter((r: Recipe) =>
         tags.every((tag) => r.categories.includes(tag))
       );
 
