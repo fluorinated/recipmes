@@ -97,6 +97,7 @@ const NewRecipeScreen = (props: any) => {
             <RecTagList
               listType="food"
               selectedTags={(tags: FoodCategory[]) => setCategories(tags)}
+              dark
             />
           </View>
 

@@ -57,14 +57,6 @@ const primaryStyles = StyleSheet.create({
     borderRadius: 5,
     borderWidth: 1,
     borderColor: Colors.pink3,
-    shadowColor: Colors.pink3,
-    shadowOffset: {
-      width: -1,
-      height: 1,
-    },
-    shadowOpacity: 0.4,
-    shadowRadius: 1,
-    textShadowRadius: 1,
   },
   text: {
     color: Colors.black,

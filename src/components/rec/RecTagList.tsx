@@ -11,14 +11,12 @@ const RecTagList = (props: any) => {
 
   useEffect(() => {
     props.selectedTags(selectedTags);
-  }, [selectedTags]);
+  });
 
-  const onClickTag = (tag: string) => {
+  const selectTag = (tag: string): void => {
+    console.log("hi");
     if (isTagSelected(tag)) {
-      const newSelectedTags = selectedTags.filter(
-        (selectedTag) => selectedTag !== tag
-      );
-      setSelectedTags(newSelectedTags);
+      setSelectedTags(selectedTags.filter((t) => t !== tag));
     } else {
       setSelectedTags([...selectedTags, tag]);
     }
@@ -41,8 +39,14 @@ const RecTagList = (props: any) => {
     >
       {list.map((tag, i) => (
         <TouchableOpacity
-          style={[styles.tag, isTagSelected(tag) && styles.tagSelected]}
-          onPress={() => onClickTag(tag)}
+          style={[
+            styles.tag,
+            props.dark && !isTagSelected(tag)
+              ? { backgroundColor: Colors.neutral6 }
+              : { backgroundColor: Colors.neutral7 },
+            isTagSelected(tag) && styles.tagSelected,
+          ]}
+          onPressIn={() => selectTag(tag)}
           key={i}
         >
           <Text
@@ -100,37 +104,25 @@ const RecTagList = (props: any) => {
 
 const styles = StyleSheet.create({
   tag: {
-    backgroundColor: Colors.white,
     paddingHorizontal: 13,
     paddingVertical: 7,
     marginVertical: 10,
     marginRight: 5,
-    borderRadius: 30,
-    borderWidth: 1,
-    borderColor: Colors.neutral5,
+    borderRadius: 5,
   },
   tagSelected: {
-    backgroundColor: Colors.neutral2,
+    backgroundColor: Colors.pink4,
     borderColor: "transparent",
   },
   tagSecondary: {
-    backgroundColor: Colors.white,
-    paddingHorizontal: 9,
-    paddingVertical: 5,
-    borderRadius: 30,
-    borderWidth: 1,
-    borderColor: Colors.neutral7,
-    shadowColor: Colors.neutral4,
-    shadowOpacity: 0.3,
-    shadowRadius: 0.25,
-    shadowOffset: {
-      width: -0.5,
-      height: 0.5,
-    },
+    backgroundColor: Colors.neutral7,
+    paddingHorizontal: 5,
+    paddingVertical: 2,
+    borderRadius: 5,
     marginVertical: 2,
   },
   tagText: {
-    color: Colors.neutral2,
+    color: Colors.neutral1,
     fontSize: 14,
   },
   tagTextSecondary: {
@@ -138,7 +130,7 @@ const styles = StyleSheet.create({
     fontSize: 13,
   },
   tagTextSelected: {
-    color: Colors.white,
+    color: Colors.neutral1,
   },
   tagList: {
     flex: 1,
