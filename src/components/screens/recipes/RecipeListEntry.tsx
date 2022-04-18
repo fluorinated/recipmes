@@ -1,31 +1,56 @@
 import { Colors } from '@constants/colors';
-import { faCheck } from '@fortawesome/free-solid-svg-icons';
+import { faCheck, faEllipsisH } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
-import RecListEntry from '@rec/RecListEntry';
 import RecTagList from '@rec/RecTagList';
+import RecIconButton from 'components/rec/RecIconButton';
+import RecRecipeActions from 'components/rec/RecRecipeActions';
 import React, { useState } from 'react';
-import { Image, StyleSheet, Text, View } from 'react-native';
+import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 
 const RecipeListEntry = (props: any) => {
   const [recipe, setRecipe] = useState(props.recipe || {});
+  const [areActionsShown, setAreActionsShown]: [any, any] = useState(false);
+  const [cardHeight, setCardHeight]: [any, any] = useState(null);
 
   // let [fontsLoaded] = useFonts({
   //   Inter_400Regular,
   //   DMSans_400Regular,
   // });
 
+  const toggleActionsVisibility = (): void => {
+    setAreActionsShown(!areActionsShown);
+  };
+
+  const setInitialCardHeight = (height: number) => {
+    if (!cardHeight) {
+      setCardHeight(height);
+    }
+  };
+
   return (
-    <RecListEntry
-      handleClick={() =>
+    <TouchableOpacity
+      onPressIn={() =>
         props.navigation.navigate("Recipes", {
           screen: "Recipe",
           params: { recipe },
         })
       }
-      iconSet="recipe"
-      recipe={recipe}
+      style={styles.card}
     >
-      <View style={styles.recipe}>
+      <TouchableOpacity
+        style={
+          areActionsShown
+            ? [styles.actions, { height: cardHeight }]
+            : styles.hidden
+        }
+      >
+        <RecRecipeActions {...props} />
+      </TouchableOpacity>
+
+      <View
+        style={!areActionsShown ? styles.recipe : styles.hidden}
+        onLayout={(e) => setInitialCardHeight(e.nativeEvent.layout.height)}
+      >
         <Image
           source={{
             uri: "data:image/jpeg;base64," + recipe.photo,
@@ -65,13 +90,34 @@ const RecipeListEntry = (props: any) => {
           />
         </View>
       </View>
-    </RecListEntry>
+      <RecIconButton
+        icon={faEllipsisH}
+        color={Colors.neutral4}
+        size={16}
+        handleClick={() => toggleActionsVisibility()}
+        marginLeft={15}
+        marginTop={10}
+      />
+    </TouchableOpacity>
   );
 };
 
 const styles = StyleSheet.create({
   hidden: {
     display: "none",
+  },
+  card: {
+    display: "flex",
+    alignItems: "flex-start",
+    backgroundColor: Colors.white,
+    borderBottomColor: Colors.neutral7,
+    borderBottomWidth: 1,
+    width: 420,
+    paddingVertical: 15,
+  },
+  actions: {
+    width: "100%",
+    justifyContent: "center",
   },
   recipe: {
     display: "flex",

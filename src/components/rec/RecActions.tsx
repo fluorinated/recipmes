@@ -51,7 +51,7 @@ const RecActions = (props: any) => {
     >
       {currentIcons.map((icon, i) => (
         <RecIconButton
-          margin={15}
+          marginRight={15}
           icon={icon}
           handleClick={() => props.handleClick(icon.iconName)}
           dark={props.dark}

@@ -6,8 +6,6 @@ import React, { useState } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import GestureRecognizer from 'react-native-swipe-gestures';
 
-import RecRecipeActions from './RecRecipeActions';
-
 const RecListEntry = (props: any) => {
   const [areActionsShown, setAreActionsShown]: [any, any] = useState(false);
   const [cardHeight, setCardHeight]: [any, any] = useState(null);
@@ -17,21 +15,11 @@ const RecListEntry = (props: any) => {
   //   DMSans_400Regular,
   // });
 
-  const toggleActionsVisibility = (direction: string): void => {
-    if (direction === "SWIPE_LEFT") {
-      setAreActionsShown(false);
-    }
-
-    if (!areActionsShown && !!props.handleClick && direction === "SWIPE_LEFT") {
-      props.handleClick();
-    }
-
-    if (direction === "SWIPE_RIGHT") {
-      setAreActionsShown(true);
-    }
+  const toggleActionsVisibility = (): void => {
+    setAreActionsShown(!areActionsShown);
   };
 
-  const setInitialCardHeight = (height: number) => {
+  const setInitialCardHeight = (height: number): void => {
     if (!cardHeight) {
       setCardHeight(height);
     }
@@ -39,104 +27,91 @@ const RecListEntry = (props: any) => {
 
   return (
     <GestureRecognizer
-      onSwipe={(direction, state) => toggleActionsVisibility(direction)}
-      style={styles.listEntry}
+      style={styles.card}
+      onSwipe={(direction, state) => toggleActionsVisibility()}
     >
       <View
         style={
-          !areActionsShown
-            ? { width: "100%", height: cardHeight }
+          areActionsShown
+            ? [styles.actionsContainer, { height: cardHeight }]
             : styles.hidden
         }
-        onLayout={(e) => setInitialCardHeight(e.nativeEvent.layout.height)}
       >
-        {props.children}
-        <View
-          style={
-            props.header?.left && props.subheader?.left
-              ? styles.textContainer
-              : styles.hidden
-          }
-        >
-          <View style={styles.headerContainer}>
-            <Text
-              style={
-                props.header?.left && props.header?.left?.trim() !== ""
-                  ? styles.header
-                  : styles.hidden
-              }
-            >
-              {props.header?.left?.trim()}
-            </Text>
-            <View
-              style={
-                props.header?.right && props.header?.right?.trim() !== ""
-                  ? styles.headerRight
-                  : styles.hidden
-              }
-            >
-              <Text style={styles.headerRightText}>
-                {props.header?.right?.trim()}
-              </Text>
-            </View>
-          </View>
-          <View style={props.subheader ? styles.subheader : styles.hidden}>
-            <FontAwesomeIcon
-              icon={faCalendarAlt}
-              color={Colors.neutral3}
-              size={15}
-              style={
-                !props.subheader?.left && props.subheader?.left?.trim() !== ""
-                  ? styles.hidden
-                  : styles.icon
-              }
-            />
-            <Text
-              style={
-                props.subheader?.left && props.subheader?.left?.trim() !== ""
-                  ? styles.subheaderText
-                  : styles.hidden
-              }
-            >
-              {props.subheader?.left?.trim()}
-            </Text>
-            <FontAwesomeIcon
-              icon={faCalendarTimes}
-              color={Colors.neutral3}
-              size={15}
-              style={
-                !props.subheader?.right && props.subheader?.right?.trim() !== ""
-                  ? styles.hidden
-                  : styles.icon
-              }
-            />
-            <Text
-              style={
-                props.subheader?.right && props.subheader?.right?.trim() !== ""
-                  ? styles.subheaderText
-                  : styles.hidden
-              }
-            >
-              {props.subheader?.right?.trim()}
+        <RecActions
+          iconSet={props.iconSet}
+          handleClick={(icon: string) => props.handleActionClick(icon)}
+        />
+      </View>
+      <View
+        onLayout={(e) => setInitialCardHeight(e.nativeEvent.layout.height)}
+        style={
+          !areActionsShown && props.header?.left && props.subheader?.left
+            ? [styles.textContainer, { height: cardHeight }]
+            : styles.hidden
+        }
+      >
+        <View style={styles.headerContainer}>
+          <Text
+            style={
+              props.header?.left && props.header?.left?.trim() !== ""
+                ? styles.header
+                : styles.hidden
+            }
+          >
+            {props.header?.left?.trim()}
+          </Text>
+          <View
+            style={
+              props.header?.right && props.header?.right?.trim() !== ""
+                ? styles.headerRight
+                : styles.hidden
+            }
+          >
+            <Text style={styles.headerRightText}>
+              {props.header?.right?.trim()}
             </Text>
           </View>
         </View>
-      </View>
-      <View
-        style={
-          areActionsShown
-            ? { ...styles.actionsContainer, height: cardHeight }
-            : styles.hidden
-        }
-      >
-        {props.iconSet === "recipe" ? (
-          <RecRecipeActions {...props} />
-        ) : (
-          <RecActions
-            iconSet={props.iconSet}
-            handleClick={(icon: string) => props.handleActionClick(icon)}
+        <View style={props.subheader ? styles.subheader : styles.hidden}>
+          <FontAwesomeIcon
+            icon={faCalendarAlt}
+            color={Colors.neutral3}
+            size={15}
+            style={
+              !props.subheader?.left && props.subheader?.left?.trim() !== ""
+                ? styles.hidden
+                : styles.icon
+            }
           />
-        )}
+          <Text
+            style={
+              props.subheader?.left && props.subheader?.left?.trim() !== ""
+                ? styles.subheaderText
+                : styles.hidden
+            }
+          >
+            {props.subheader?.left?.trim()}
+          </Text>
+          <FontAwesomeIcon
+            icon={faCalendarTimes}
+            color={Colors.neutral3}
+            size={15}
+            style={
+              !props.subheader?.right && props.subheader?.right?.trim() !== ""
+                ? styles.hidden
+                : styles.icon
+            }
+          />
+          <Text
+            style={
+              props.subheader?.right && props.subheader?.right?.trim() !== ""
+                ? styles.subheaderText
+                : styles.hidden
+            }
+          >
+            {props.subheader?.right?.trim()}
+          </Text>
+        </View>
       </View>
     </GestureRecognizer>
   );
@@ -146,10 +121,9 @@ const styles = StyleSheet.create({
   hidden: {
     display: "none",
   },
-  listEntry: {
+  card: {
     display: "flex",
-    flexDirection: "row",
-    alignItems: "center",
+    flexDirection: "column",
     justifyContent: "space-between",
     backgroundColor: Colors.white,
     borderBottomColor: Colors.neutral7,
@@ -176,6 +150,7 @@ const styles = StyleSheet.create({
   textContainer: {
     flexDirection: "column",
     paddingLeft: 15,
+    width: "100%",
   },
   headerContainer: {
     display: "flex",
@@ -205,8 +180,7 @@ const styles = StyleSheet.create({
     marginRight: 5,
   },
   actionsContainer: {
-    display: "flex",
-    alignItems: "center",
+    width: "100%",
     justifyContent: "center",
   },
 });

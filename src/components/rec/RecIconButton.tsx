@@ -12,9 +12,14 @@ const RecIconButton = (props: any) => {
     <TouchableOpacity onPressIn={props.handleClick}>
       <View
         style={[
-          styles.container,
           getTheme(props),
-          { marginRight: props.margin },
+          {
+            marginRight: props.marginRight,
+            marginLeft: props.marginLeft,
+            marginTop: props.marginTop,
+            marginBottom: props.marginBottom,
+          },
+          props.size < 23 ? styles.containerSmall : styles.containerLarge,
         ]}
       >
         <FontAwesomeIcon
@@ -29,7 +34,11 @@ const RecIconButton = (props: any) => {
 };
 
 const styles = StyleSheet.create({
-  container: {
+  containerSmall: {
+    padding: 5,
+    borderRadius: 5,
+  },
+  containerLarge: {
     padding: 10,
     borderRadius: 10,
   },

@@ -50,7 +50,7 @@ const RecInputLabel = (props: any) => {
           icon={isInputShown ? faCheck : faPen}
           handleClick={handleEditOkClick}
           dark
-          margin={5}
+          marginRight={5}
         />
         <RecIconButton
           icon={isInputShown ? faTimes : faTrash}
