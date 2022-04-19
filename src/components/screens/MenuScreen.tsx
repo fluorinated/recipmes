@@ -5,8 +5,8 @@ import { Recipe } from '@models/Recipe';
 import RecCard from '@rec/RecCard';
 import RecEmptyState from '@rec/RecEmptyState';
 import RecInputLabel from '@rec/RecInputLabel';
+import RecLoader from '@rec/RecLoader';
 import RecipeListEntry from '@screens/recipes/RecipeListEntry';
-import RecLoader from 'components/rec/RecLoader';
 import Parse from 'parse/react-native';
 import React, { useEffect, useState } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
@@ -133,6 +133,7 @@ const styles = StyleSheet.create({
     paddingBottom: 15,
     color: Colors.black,
     marginLeft: 15,
+    fontFamily: "Medium",
   },
   titleActions: {
     flexDirection: "row",

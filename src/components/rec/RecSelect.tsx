@@ -96,6 +96,7 @@ const styles = StyleSheet.create({
   inputTitle: {
     width: "100%",
     color: Colors.neutral1,
+    fontFamily: "Regular",
   },
   input: {
     height: 45,
@@ -105,6 +106,7 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     padding: 10,
     marginVertical: 5,
+    fontFamily: "Regular",
   },
   inputContainer: {
     alignItems: "flex-start",
@@ -114,6 +116,7 @@ const styles = StyleSheet.create({
     paddingTop: 15,
     paddingBottom: 15,
     paddingLeft: 10,
+    fontFamily: "Regular",
   },
   list: {
     maxHeight: 100,

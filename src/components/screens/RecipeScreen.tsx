@@ -1,6 +1,7 @@
 import { Colors } from '@constants/colors';
 import { faCheck } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
+import { Ingredient } from '@models/Ingredient';
 import RecCard from '@rec/RecCard';
 import RecCheckbox from '@rec/RecCheckbox';
 import RecRecipeActions from '@rec/RecRecipeActions';
@@ -44,7 +45,7 @@ const RecipeScreen = (props: any) => {
             marginTop={10}
           />
           <Text style={styles.subtitle}>ingredients</Text>
-          {recipe?.ingredients?.map((ingredient, i) => (
+          {recipe?.ingredients?.map((ingredient: Ingredient, i: number) => (
             <RecCheckbox
               label={`${ingredient?.amount ?? ""} ${ingredient?.unit ?? ""} ${
                 ingredient?.title ?? ""
@@ -54,7 +55,7 @@ const RecipeScreen = (props: any) => {
             />
           ))}
           <Text style={styles.subtitle}>how to make</Text>
-          {recipe?.steps?.map((step, i) => (
+          {recipe?.steps?.map((step: string, i: number) => (
             <View style={styles.step} key={i}>
               <Text style={styles.stepTitle}>{i + 1}.</Text>
               <Text style={styles.stepContent}>{step}</Text>
@@ -66,8 +67,6 @@ const RecipeScreen = (props: any) => {
   );
 };
 
-// title and subtitle
-// fontFamily: "DMSans_400Regular",
 const styles = StyleSheet.create({
   background: {
     flex: 1,
@@ -89,15 +88,18 @@ const styles = StyleSheet.create({
     fontSize: 30,
     paddingVertical: 15,
     color: Colors.black,
+    fontFamily: "Medium",
   },
   subtitle: {
     fontSize: 25,
     paddingTop: 25,
-    paddingBottom: 5,
+    paddingBottom: 15,
     color: Colors.black,
+    fontFamily: "Regular",
   },
   text: {
     color: Colors.neutral1,
+    fontFamily: "Regular",
   },
   description: {
     flexDirection: "row",
@@ -107,22 +109,33 @@ const styles = StyleSheet.create({
   },
   separator: {
     marginHorizontal: 5,
+    fontFamily: "Regular",
   },
   stepTitle: {
-    width: 20,
-    fontSize: 20,
+    width: 22,
     color: Colors.black,
-    paddingRight: 5,
+    fontFamily: "Medium",
+    fontSize: 22,
+    marginLeft: 5,
   },
   stepContent: {
-    color: Colors.neutral1,
+    color: Colors.yellow1,
     marginTop: 3,
     marginRight: 10,
+    fontFamily: "Regular",
+    fontSize: 18,
   },
   step: {
     flexDirection: "row",
     alignItems: "flex-start",
     paddingBottom: 10,
+    backgroundColor: Colors.pink7,
+    borderWidth: 1,
+    borderColor: "transparent",
+    borderRadius: 5,
+    padding: 4,
+    marginRight: 5,
+    marginBottom: 5,
   },
 });
 

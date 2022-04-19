@@ -71,17 +71,6 @@ const styles = StyleSheet.create({
     marginBottom: 30,
     width: "100%",
   },
-  row: {
-    flexDirection: "row",
-  },
-  cookTime: {
-    color: Colors.neutral1,
-    marginTop: 20,
-    marginLeft: 5,
-  },
-  container: {
-    paddingBottom: 20,
-  },
 });
 
 export default NewIngredientScreen;

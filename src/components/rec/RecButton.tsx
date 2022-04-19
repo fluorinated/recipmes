@@ -1,14 +1,9 @@
 import { Colors } from '@constants/colors';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
-import React, { useEffect } from 'react';
+import React from 'react';
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 
 const RecButton = (props: any) => {
-  // let [fontsLoaded] = useFonts({
-  //   DMSans_400Regular,
-  // });
-  // useEffect(() => {}, [fontsLoaded]);
-
   const getStyles = () => {
     switch (props.type) {
       case "primary":
@@ -28,13 +23,7 @@ const RecButton = (props: any) => {
         {props.icon && (
           <FontAwesomeIcon icon={props.icon} color={Colors.neutral1} />
         )}
-        <Text
-          style={[
-            // fontsLoaded && { fontFamily: "DMSans_400Regular" },
-            getStyles().text,
-            props.icon && { paddingLeft: 10 },
-          ]}
-        >
+        <Text style={[getStyles().text, props.icon && { paddingLeft: 10 }]}>
           {props.label}
         </Text>
       </TouchableOpacity>
@@ -61,6 +50,7 @@ const primaryStyles = StyleSheet.create({
   text: {
     color: Colors.black,
     fontSize: 22,
+    fontFamily: "Regular",
   },
 });
 
@@ -91,6 +81,7 @@ const secondaryStyles = StyleSheet.create({
   text: {
     color: Colors.neutral2,
     fontSize: 16,
+    fontFamily: "Regular",
   },
 });
 
@@ -107,6 +98,7 @@ const tertiaryStyles = StyleSheet.create({
   text: {
     color: Colors.neutral2,
     fontSize: 16,
+    fontFamily: "Regular",
   },
 });
 

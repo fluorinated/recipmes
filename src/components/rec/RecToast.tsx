@@ -16,10 +16,6 @@ const RecToast = (props: any) => {
     setTimeout(() => setIsOpen(false), 3000);
   }, []);
 
-  // let [fontsLoaded] = useFonts({
-  //   CourierPrime_400Regular,
-  // });
-
   const onClickClose = () => {
     setIsOpen(false);
   };
@@ -91,16 +87,18 @@ const styles = StyleSheet.create({
     color: Colors.black,
     fontSize: 18,
     marginLeft: 10,
+    fontFamily: "Regular",
   },
   errorMessage: {
     padding: 5,
     fontSize: 18,
-    // fontFamily: "CourierPrime_400Regular",
+    fontFamily: "Regular",
   },
   iconMessage: {
     display: "flex",
     flexDirection: "row",
     alignItems: "center",
+    fontFamily: "Regular",
   },
   errorMessageScrollContainer: {
     height: 150,
@@ -110,6 +108,7 @@ const styles = StyleSheet.create({
     marginBottom: 10,
     padding: 0,
     marginTop: -35,
+    fontFamily: "Regular",
   },
   errorMessageContainer: {
     borderRadius: 5,

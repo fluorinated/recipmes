@@ -63,16 +63,18 @@ const styles = StyleSheet.create({
   inputTitle: {
     color: Colors.neutral1,
     width: "100%",
-    marginLeft: 5,
+    marginLeft: 3,
+    fontFamily: "Regular",
   },
   input: {
     backgroundColor: Colors.neutral6,
     color: Colors.neutral1,
-    borderRadius: 8,
+    borderRadius: 5,
     width: "100%",
     height: 45,
     paddingHorizontal: 10,
     marginVertical: 5,
+    fontFamily: "Regular",
   },
   inputContainer: {
     alignItems: "flex-start",

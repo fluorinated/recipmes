@@ -42,6 +42,8 @@ const styles = StyleSheet.create({
   label: {
     width: "100%",
     color: Colors.neutral1,
+    fontSize: 18,
+    fontFamily: "Regular",
   },
   checkbox: {
     display: "flex",
@@ -50,8 +52,8 @@ const styles = StyleSheet.create({
     height: 30,
     width: 30,
     color: Colors.neutral1,
-    borderRadius: 8,
-    marginVertical: 10,
+    borderRadius: 5,
+    marginVertical: 5,
     marginRight: 10,
   },
   checkboxContainer: {

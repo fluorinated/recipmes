@@ -59,12 +59,15 @@ const styles = StyleSheet.create({
   emptyStateHeader: {
     fontSize: 20,
     paddingBottom: 10,
+    fontFamily: "Medium",
   },
   emptyStateSubHeader: {
     color: Colors.neutral1,
+    fontFamily: "Regular",
   },
   emptyStateText: {
     width: 150,
+    fontFamily: "Regular",
   },
   emptyStateBtn: {
     width: 150,

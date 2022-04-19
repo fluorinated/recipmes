@@ -33,7 +33,9 @@ const RecCard = (props: any) => {
         <View style={!props.tags && styles.hidden}>
           <RecTagList
             listType="food"
-            selectedTags={(tags: FoodCategory[]) => props.selectedTags(tags)}
+            selectedTags={(tags: FoodCategory[]) =>
+              props.selectedTags ? props.selectedTags(tags) : {}
+            }
             marginLeft={15}
           />
         </View>

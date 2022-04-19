@@ -67,6 +67,7 @@ const styles = StyleSheet.create({
     fontSize: 25,
     color: Colors.black,
     alignSelf: "center",
+    fontFamily: "Medium",
   },
   container: {
     display: "flex",

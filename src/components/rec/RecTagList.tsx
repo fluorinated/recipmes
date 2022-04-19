@@ -110,7 +110,7 @@ const styles = StyleSheet.create({
     borderRadius: 5,
   },
   tagSelected: {
-    backgroundColor: Colors.pink4,
+    backgroundColor: Colors.pink5,
     borderColor: "transparent",
   },
   tagSecondary: {
@@ -123,13 +123,16 @@ const styles = StyleSheet.create({
   tagText: {
     color: Colors.neutral1,
     fontSize: 14,
+    fontFamily: "Regular",
   },
   tagTextSecondary: {
     color: Colors.neutral3,
     fontSize: 13,
+    fontFamily: "Regular",
   },
   tagTextSelected: {
-    color: Colors.neutral1,
+    color: Colors.yellow1,
+    fontFamily: "Medium",
   },
   tagList: {
     flex: 1,

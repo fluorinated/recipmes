@@ -1,11 +1,11 @@
+import { Colors } from '@constants/colors';
 import { faBinoculars } from '@fortawesome/free-solid-svg-icons';
 import RecButton from '@rec/RecButton';
 import RecCard from '@rec/RecCard';
 import RecEmptyState from '@rec/RecEmptyState';
 import RecListEntry from '@rec/RecListEntry';
+import RecLoader from '@rec/RecLoader';
 import { getDateNumeric } from '@utils/format-date';
-import RecLoader from 'components/rec/RecLoader';
-import { Colors } from 'constants/colors';
 import Parse from 'parse/react-native';
 import React, { useEffect, useState } from 'react';
 import { StyleSheet, View } from 'react-native';

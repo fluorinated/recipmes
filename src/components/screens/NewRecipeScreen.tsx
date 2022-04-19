@@ -165,7 +165,8 @@ const styles = StyleSheet.create({
     color: Colors.neutral1,
     marginTop: 20,
     marginBottom: 10,
-    marginLeft: 5,
+    marginLeft: 3,
+    fontFamily: "Regular",
   },
   container: {
     paddingBottom: 20,

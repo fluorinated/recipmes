@@ -1,34 +1,32 @@
+import { Manrope_400Regular, Manrope_500Medium, Manrope_600SemiBold } from '@expo-google-fonts/manrope';
 import { FontAwesome } from '@expo/vector-icons';
 import * as Font from 'expo-font';
 import * as SplashScreen from 'expo-splash-screen';
 import * as React from 'react';
 
-export default function useCachedResources() {
-  const [isLoadingComplete, setLoadingComplete] = React.useState(false);
+export const useCachedResources = () => {
+  const [isLoaded, setIsLoaded] = React.useState(false);
 
   // Load any resources or data that we need prior to rendering the app
   React.useEffect(() => {
     async function loadResourcesAndDataAsync() {
       try {
         SplashScreen.preventAutoHideAsync();
-
-        // Load fonts
         await Font.loadAsync({
           ...FontAwesome.font,
-          // "DM Sans":
-          //   "https://fonts.googleapis.com/css2?family=DM+Sans&display=swap",
+          Light: Manrope_400Regular,
+          Regular: Manrope_500Medium,
+          Medium: Manrope_600SemiBold,
         });
       } catch (e) {
-        // We might want to provide this error information to an error reporting service
-        console.warn(e);
+        console.warn(e); // provide this error info to an error reporting service
       } finally {
-        setLoadingComplete(true);
+        setIsLoaded(true);
         SplashScreen.hideAsync();
       }
     }
-
     loadResourcesAndDataAsync();
   }, []);
 
-  return isLoadingComplete;
-}
+  return isLoaded;
+};

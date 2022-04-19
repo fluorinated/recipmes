@@ -12,11 +12,6 @@ const RecipeListEntry = (props: any) => {
   const [areActionsShown, setAreActionsShown]: [any, any] = useState(false);
   const [cardHeight, setCardHeight]: [any, any] = useState(null);
 
-  // let [fontsLoaded] = useFonts({
-  //   Inter_400Regular,
-  //   DMSans_400Regular,
-  // });
-
   const toggleActionsVisibility = (): void => {
     setAreActionsShown(!areActionsShown);
   };
@@ -135,11 +130,13 @@ const styles = StyleSheet.create({
     width: 180,
     fontSize: 23,
     color: Colors.black,
+    fontFamily: "Medium",
   },
   subHeader: {
     alignSelf: "center",
     fontSize: 15,
     color: Colors.neutral1,
+    fontFamily: "Regular",
   },
   headerCheckTime: {
     display: "flex",
