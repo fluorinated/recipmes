@@ -9,10 +9,11 @@ import RecEmptyState from '@rec/RecEmptyState';
 import RecLoader from '@rec/RecLoader';
 import { setCurrentRecipe, setIsLoaded, setRecipes, setSearchedText, setTags } from '@store/recipes/recipes.reducer';
 import { selectFilteredRecipes, selectIsLoaded } from '@store/recipes/recipes.selectors';
-import RecipeListEntry from 'components/rec/RecListEntryClick';
 import Parse from 'parse/react-native';
 import React, { useEffect, useState } from 'react';
 import { StyleSheet, View } from 'react-native';
+
+import RecipeListEntry from './recipes/RecipeListEntry';
 
 const RecipesScreen = (props: any) => {
   const recipes: Recipe[] = useAppSelector(selectFilteredRecipes);

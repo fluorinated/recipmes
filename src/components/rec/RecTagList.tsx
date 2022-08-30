@@ -10,8 +10,11 @@ const RecTagList = (props: any) => {
   const [selectedTags, setSelectedTags]: [FoodCategory[], any] = useState([]);
 
   useEffect(() => {
-    props.selectedTags(selectedTags);
-  }, [selectedTags]);
+    // hmmm
+    if (props?.selectedTags) {
+      props.selectedTags(selectedTags);
+    }
+  }, []);
 
   const selectTag = (tag: FoodCategory): void => {
     if (isTagSelected(tag)) {
