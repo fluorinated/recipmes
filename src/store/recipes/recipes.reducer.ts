@@ -6,12 +6,16 @@ export interface RecipesState {
   recipes: Recipe[];
   isLoaded: boolean;
   tags: FoodCategory[];
+  searchedText: string;
+  currentRecipe: Recipe | undefined;
 }
 
 const initialState: RecipesState = {
   recipes: [],
   isLoaded: false,
   tags: [],
+  searchedText: "",
+  currentRecipe: undefined,
 };
 
 const recipesSlice = createSlice({
@@ -27,8 +31,20 @@ const recipesSlice = createSlice({
     setIsLoaded: (state, action: PayloadAction<boolean>) => {
       state.isLoaded = action.payload;
     },
+    setSearchedText: (state, action: PayloadAction<string>) => {
+      state.searchedText = action.payload;
+    },
+    setCurrentRecipe: (state, action: PayloadAction<Recipe>) => {
+      state.currentRecipe = action.payload;
+    },
   },
 });
 
-export const { setRecipes, setTags, setIsLoaded } = recipesSlice.actions;
+export const {
+  setRecipes,
+  setTags,
+  setIsLoaded,
+  setSearchedText,
+  setCurrentRecipe,
+} = recipesSlice.actions;
 export default recipesSlice.reducer;

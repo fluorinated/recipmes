@@ -8,6 +8,7 @@ import RecLoader from '@rec/RecLoader';
 import RecMultiInput from '@rec/RecMultiInput';
 import RecPhotoUpload from '@rec/RecPhotoUpload';
 import RecTagList from '@rec/RecTagList';
+import RecToast from '@rec/RecToast';
 import Parse from 'parse/react-native';
 import React, { useState } from 'react';
 import { SafeAreaView, StyleSheet, Text, View } from 'react-native';
@@ -24,6 +25,11 @@ const NewRecipeScreen = (props: any) => {
   const [ingredients, setIngredients]: [Ingredient[], any] = useState([]);
   const [photo, setPhoto]: [string, any] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const [toast, setToast]: [any, any] = useState({
+    isShowing: false,
+    errorMessage: null,
+    isError: false,
+  });
 
   const saveRecipe = async () => {
     setIsLoading(true);
@@ -50,12 +56,9 @@ const NewRecipeScreen = (props: any) => {
       (error) => {
         setIsLoading(false);
         const { message, code } = JSON.parse(JSON.stringify(error));
-        props.navigation.navigate("Recipes", {
-          screen: "RecipesHome",
-          params: {
-            isShowing: true,
-            errorMessage: `${code} ${message}`,
-          },
+        setToast({
+          isShowing: true,
+          errorMessage: `${code} ${message}`,
         });
         console.log("[NewRecipeScreen] saveRecipe error:", error);
       }
@@ -64,6 +67,12 @@ const NewRecipeScreen = (props: any) => {
 
   return (
     <SafeAreaView style={styles.background}>
+      <RecToast
+        message={toast.isError ?? "error"}
+        isShowing={toast.isShowing}
+        isError={toast.isError}
+        errorMessage={toast.errorMessage}
+      />
       <KeyboardAwareScrollView>
         <View style={styles.inputsContainer}>
           <RecInput

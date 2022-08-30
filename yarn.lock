@@ -3523,10 +3523,10 @@
     "qs" "^6.5.0"
     "url-parse" "^1.4.4"
 
-"expo-modules-autolinking@~0.3.3":
-  "integrity" "sha512-hMouDBw/Y5POeYU0ZBsykGC+uiOO1WV0JSz5EE8uO87AlXAzR0K5aPkzgQiufONNwwgxsaD2xUV/J+tjwMw2Ug=="
-  "resolved" "https://registry.npmjs.org/expo-modules-autolinking/-/expo-modules-autolinking-0.3.3.tgz"
-  "version" "0.3.3"
+"expo-modules-autolinking@~0.3.4":
+  "integrity" "sha512-Mu3CIMqEAI8aNM18U/l+7CCi+afU8dERrKjDDEx/Hu7XX3v3FcnnP+NuWDLY/e9/ETzwTJaqoRoBuzhawsuLWw=="
+  "resolved" "https://registry.npmjs.org/expo-modules-autolinking/-/expo-modules-autolinking-0.3.4.tgz"
+  "version" "0.3.4"
   dependencies:
     "chalk" "^4.1.0"
     "commander" "^7.2.0"
@@ -3534,10 +3534,10 @@
     "find-up" "~5.0.0"
     "fs-extra" "^9.1.0"
 
-"expo-modules-core@~0.4.0", "expo-modules-core@~0.4.4", "expo-modules-core@~0.4.5":
-  "integrity" "sha512-boEbB3tAYO7WkgcaXToQLY8IUeEGOZeDF+StTL38FA0l8jzJwwQLU7TaWjWEMGfxvvn7KP7V7kFudJKc7dak3g=="
-  "resolved" "https://registry.npmjs.org/expo-modules-core/-/expo-modules-core-0.4.7.tgz"
-  "version" "0.4.7"
+"expo-modules-core@~0.4.0", "expo-modules-core@~0.4.10", "expo-modules-core@~0.4.4":
+  "integrity" "sha512-uCZA3QzF0syRaHwYY99iaNhnye4vSQGsJ/y6IAiesXdbeVahWibX4G1KoKNPUyNsKXIM4tqA+4yByUSvJe4AAw=="
+  "resolved" "https://registry.npmjs.org/expo-modules-core/-/expo-modules-core-0.4.10.tgz"
+  "version" "0.4.10"
   dependencies:
     "compare-versions" "^3.4.0"
     "invariant" "^2.2.4"
@@ -3565,9 +3565,9 @@
     "expo-modules-core" "~0.4.4"
 
 "expo@~43.0.0", "expo@~43.0.0-beta.0":
-  "integrity" "sha512-1F98CftAvTDNQPkhTSSYpcr5eiw/R0op3RXcV5GkJBTw67FvZ6JI+CsQ5iu2FICKnE51WKjH2y26V7+cjXboIg=="
-  "resolved" "https://registry.npmjs.org/expo/-/expo-43.0.1.tgz"
-  "version" "43.0.1"
+  "integrity" "sha512-GShSipvKxxIuG7EL196d5gscPV7t/bOFGTLVefRFk2wyfiNcnRflsVK5B3c0hh9j1n0VGy0n+pHkXWoLzyk9vg=="
+  "resolved" "https://registry.npmjs.org/expo/-/expo-43.0.5.tgz"
+  "version" "43.0.5"
   dependencies:
     "@babel/runtime" "^7.14.0"
     "@expo/metro-config" "~0.1.84"
@@ -3580,8 +3580,8 @@
     "expo-file-system" "~13.0.3"
     "expo-font" "~10.0.3"
     "expo-keep-awake" "~10.0.0"
-    "expo-modules-autolinking" "~0.3.3"
-    "expo-modules-core" "~0.4.5"
+    "expo-modules-autolinking" "~0.3.4"
+    "expo-modules-core" "~0.4.10"
     "fbemitter" "^2.1.1"
     "invariant" "^2.2.2"
     "md5-file" "^3.2.3"
@@ -3628,9 +3628,9 @@
     "to-regex" "^3.0.1"
 
 "fast-glob@^3.2.5":
-  "integrity" "sha512-rYGMRwip6lUMvYD3BTScMwT1HtAs2d71SMv66Vrxs0IekGZEjhM0pcMfjQPnknBt2zeCwQMEupiN02ZP4DiT1Q=="
-  "resolved" "https://registry.npmjs.org/fast-glob/-/fast-glob-3.2.7.tgz"
-  "version" "3.2.7"
+  "integrity" "sha512-xrO3+1bxSo3ZVHAnqzyuewYT6aMFHRAd4Kcs92MAonjwQZLsK9d0SF1IyQ3k5PoirxTW0Oe/RqFgMQ6TcNE5Ew=="
+  "resolved" "https://registry.npmjs.org/fast-glob/-/fast-glob-3.2.11.tgz"
+  "version" "3.2.11"
   dependencies:
     "@nodelib/fs.stat" "^2.0.2"
     "@nodelib/fs.walk" "^1.2.3"
@@ -4298,7 +4298,7 @@
     "is-plain-object" "^2.0.4"
 
 "is-extglob@^2.1.1":
-  "integrity" "sha1-qIwCU1eR8C7TfHahueqXc8gz+MI="
+  "integrity" "sha512-SbKbANkN603Vi4jEZv49LeVJMn4yGwsbzZworEoyEiutsN3nJYdbO36zfhGJ6QEDpOZIFkDtnq5JRxmvl3jsoQ=="
   "resolved" "https://registry.npmjs.org/is-extglob/-/is-extglob-2.1.1.tgz"
   "version" "2.1.1"
 

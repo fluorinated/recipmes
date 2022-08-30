@@ -35,14 +35,15 @@ const primaryStyles = StyleSheet.create({
   container: {
     backgroundColor: Colors.neutral7,
     display: "flex",
-    width: "90%",
-    margin: 20,
+    alignSelf: "center",
+    width: "95%",
+    margin: 10,
   },
   button: {
     display: "flex",
     alignItems: "center",
     backgroundColor: Colors.pink4,
-    padding: 20,
+    padding: 15,
     borderRadius: 5,
     borderWidth: 1,
     borderColor: Colors.pink3,

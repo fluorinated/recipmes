@@ -1,6 +1,7 @@
 import { Colors } from '@constants/colors';
 import { faCheck } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
+import { useAppDispatch, useAppSelector } from '@hooks/redux-hooks';
 import { Ingredient } from '@models/Ingredient';
 import RecCard from '@rec/RecCard';
 import RecCheckbox from '@rec/RecCheckbox';
@@ -8,12 +9,14 @@ import RecRecipeActions from '@rec/RecRecipeActions';
 import RecTagList from '@rec/RecTagList';
 import React, { useState } from 'react';
 import { Image, StyleSheet, Text, View } from 'react-native';
+import { selectCurrentRecipe } from 'store/recipes/recipes.selectors';
 
 const RecipeScreen = (props: any) => {
   const [recipe, setRecipe]: [any, any] = useState(
     props?.route?.params?.recipe || {}
   );
-
+  const searchedText: string = useAppSelector(selectCurrentRecipe);
+  const dispatch = useAppDispatch();
   return (
     <View style={styles.background}>
       <RecRecipeActions recipe={recipe} marginBottom={15} dark {...props} />
@@ -56,7 +59,13 @@ const RecipeScreen = (props: any) => {
           ))}
           <Text style={styles.subtitle}>how to make</Text>
           {recipe?.steps?.map((step: string, i: number) => (
-            <View style={styles.step} key={i}>
+            <View
+              style={[
+                styles.step,
+                { backgroundColor: i % 2 == 0 ? Colors.pink6 : Colors.pink7 },
+              ]}
+              key={i}
+            >
               <Text style={styles.stepTitle}>{i + 1}.</Text>
               <Text style={styles.stepContent}>{step}</Text>
             </View>
@@ -121,7 +130,7 @@ const styles = StyleSheet.create({
   stepContent: {
     color: Colors.yellow1,
     marginTop: 3,
-    marginRight: 10,
+    marginRight: 30,
     fontFamily: "Regular",
     fontSize: 18,
   },
@@ -129,12 +138,10 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "flex-start",
     paddingBottom: 10,
-    backgroundColor: Colors.pink7,
     borderWidth: 1,
     borderColor: "transparent",
     borderRadius: 5,
     padding: 4,
-    marginRight: 5,
     marginBottom: 5,
   },
 });

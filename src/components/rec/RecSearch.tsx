@@ -5,13 +5,17 @@ import { useAppDispatch, useAppSelector } from '@hooks/redux-hooks';
 import RecIconButton from '@rec/RecIconButton';
 import { setSearchedText } from '@store/search/search.reducer';
 import { selectSearchedText } from '@store/search/search.selectors';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { StyleSheet, View } from 'react-native';
 import { TextInput } from 'react-native-gesture-handler';
 
 const RecSearch = (props: any) => {
   const searchedText: string = useAppSelector(selectSearchedText);
   const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    props.searchedText(searchedText);
+  }, [searchedText]);
 
   return (
     <View

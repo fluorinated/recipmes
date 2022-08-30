@@ -1,20 +1,13 @@
 import { Colors } from '@constants/colors';
-import { faCheck } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
-import { useAppDispatch } from '@hooks/redux-hooks';
-import RecTagList from '@rec/RecTagList';
-import RecListEntryClick from 'components/rec/RecListEntryClick';
+import { faEllipsisH } from '@fortawesome/free-solid-svg-icons';
+import RecIconButton from 'components/rec/RecIconButton';
+import RecRecipeActions from 'components/rec/RecRecipeActions';
 import React, { useState } from 'react';
-import { Image, StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, TouchableOpacity, View } from 'react-native';
 
-const RecipeListEntry = (props: any) => {
-  // const recipe: Recipe = useAppSelector(selectCurrentRecipe);
-  // const recipes: Recipe = useAppSelector(selectCurrentRecipe);
-  const [recipe, setRecipe] = useState(props.recipe || {});
+const RecListEntryClick = (props: any) => {
   const [areActionsShown, setAreActionsShown]: [any, any] = useState(false);
   const [cardHeight, setCardHeight]: [any, any] = useState(null);
-
-  const dispatch = useAppDispatch();
 
   const toggleActionsVisibility = (): void => {
     setAreActionsShown(!areActionsShown);
@@ -27,39 +20,35 @@ const RecipeListEntry = (props: any) => {
   };
 
   return (
-    <RecListEntryClick
-      handlePressIn={() => (props.handlePressIn ? props.handlePressIn() : {})}
+    <TouchableOpacity
+      onPressIn={() => props.handlePressIn()}
+      style={styles.card}
     >
-      <Image
-        source={{
-          uri: "data:image/jpeg;base64," + recipe?.photo,
-        }}
-        style={styles.photo}
-      ></Image>
-      <View>
-        <View style={styles.headerCheckTime}>
-          <Text style={styles.header} ellipsizeMode="tail" numberOfLines={2}>
-            {recipe?.title}
-          </Text>
-          <View style={styles.checkTime}>
-            <FontAwesomeIcon
-              icon={faCheck}
-              style={styles.check}
-              color={Colors.neutral1}
-            />
-            <Text style={styles.subHeader}>
-              {recipe?.cookTimeHours}h {recipe?.cookTimeMinutes}m
-            </Text>
-          </View>
-        </View>
-        <RecTagList
-          list={recipe?.categories}
-          style="secondary"
-          marginLeft={10}
-          width={280}
-        />
+      <TouchableOpacity
+        style={
+          areActionsShown
+            ? [styles.actions, { height: cardHeight }]
+            : styles.hidden
+        }
+      >
+        <RecRecipeActions {...props} />
+      </TouchableOpacity>
+
+      <View
+        style={!areActionsShown ? styles.recipe : styles.hidden}
+        onLayout={(e) => setInitialCardHeight(e.nativeEvent.layout.height)}
+      >
+        {props.children}
       </View>
-    </RecListEntryClick>
+      <RecIconButton
+        icon={faEllipsisH}
+        color={Colors.neutral4}
+        size={16}
+        handleClick={() => toggleActionsVisibility()}
+        marginLeft={15}
+        marginTop={10}
+      />
+    </TouchableOpacity>
   );
 };
 
@@ -127,4 +116,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default RecipeListEntry;
+export default RecListEntryClick;

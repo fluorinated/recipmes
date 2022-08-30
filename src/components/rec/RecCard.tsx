@@ -27,7 +27,13 @@ const RecCard = (props: any) => {
         }
       >
         <View style={!props.search && styles.hidden}>
-          <RecSearch label="search" marginLeft={20} />
+          <RecSearch
+            label="search"
+            marginLeft={20}
+            searchedText={(text: string) =>
+              props.searchedText ? props.searchedText(text) : {}
+            }
+          />
         </View>
 
         <View style={!props.tags && styles.hidden}>

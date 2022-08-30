@@ -7,9 +7,9 @@ import RecButton from '@rec/RecButton';
 import RecCard from '@rec/RecCard';
 import RecEmptyState from '@rec/RecEmptyState';
 import RecLoader from '@rec/RecLoader';
-import RecipeListEntry from '@screens/recipes/RecipeListEntry';
-import { setIsLoaded, setRecipes, setTags } from '@store/recipes/recipes.reducer';
+import { setCurrentRecipe, setIsLoaded, setRecipes, setSearchedText, setTags } from '@store/recipes/recipes.reducer';
 import { selectFilteredRecipes, selectIsLoaded } from '@store/recipes/recipes.selectors';
+import RecipeListEntry from 'components/rec/RecListEntryClick';
 import Parse from 'parse/react-native';
 import React, { useEffect, useState } from 'react';
 import { StyleSheet, View } from 'react-native';
@@ -46,6 +46,14 @@ const RecipesScreen = (props: any) => {
     );
   };
 
+  const handlePressIn = (recipe: Recipe): void => {
+    dispatch(setCurrentRecipe(recipe));
+    props.navigation.navigate("Recipes", {
+      screen: "Recipe",
+      params: { recipe },
+    });
+  };
+
   return (
     <View style={styles.background}>
       <RecButton
@@ -58,6 +66,7 @@ const RecipesScreen = (props: any) => {
         paddingLeft={0}
         height={450}
         selectedTags={(tags: FoodCategory[]) => dispatch(setTags(tags))}
+        searchedText={(text: string) => dispatch(setSearchedText(text))}
       >
         {recipes && recipes?.length === 0 && (
           <View style={styles.emptyStateContainer}>
@@ -79,6 +88,7 @@ const RecipesScreen = (props: any) => {
               navigation={props.navigation}
               recipe={recipe}
               key={i}
+              handlePressIn={() => handlePressIn(recipe)}
             />
           ))}
       </RecCard>

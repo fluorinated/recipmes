@@ -6,7 +6,7 @@ import RecCard from '@rec/RecCard';
 import RecEmptyState from '@rec/RecEmptyState';
 import RecInputLabel from '@rec/RecInputLabel';
 import RecLoader from '@rec/RecLoader';
-import RecipeListEntry from '@screens/recipes/RecipeListEntry';
+import RecipeListEntry from 'components/rec/RecListEntryClick';
 import Parse from 'parse/react-native';
 import React, { useEffect, useState } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
