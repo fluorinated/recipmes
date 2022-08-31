@@ -4,12 +4,12 @@ import { Recipe } from '@models/Recipe';
 import RecButton from '@rec/RecButton';
 import RecCard from '@rec/RecCard';
 import RecEmptyState from '@rec/RecEmptyState';
-import RecListEntry from '@rec/RecListEntry';
 import RecLoader from '@rec/RecLoader';
-import { getDateNumeric } from '@utils/format-date';
 import Parse from 'parse/react-native';
 import React, { useEffect, useState } from 'react';
 import { StyleSheet, View } from 'react-native';
+
+import MenuListEntry from './menus/MenuListEntry';
 
 const MenusScreen = (props: any) => {
   const [menus, setMenus]: [any, any] = useState(undefined);
@@ -97,9 +97,12 @@ const MenusScreen = (props: any) => {
   };
 
   const onClickMenu = (menu: any): void => {
+    console.log("outside");
+
     if (recipe) {
       addRecipeToMenu(menu, recipe);
     } else {
+      console.log("inside");
       props.navigation.navigate("Menus", {
         screen: "Menu",
         params: { menu },
@@ -161,16 +164,14 @@ const MenusScreen = (props: any) => {
 
         {menus &&
           menus?.length > 0 &&
-          menus.map((menu: any, index: number) => (
-            <RecListEntry
-              key={index}
-              header={{ left: menu.title }}
-              subheader={{ left: getDateNumeric(menu.createdAt) }}
+          menus.map((menu: any, i: number) => (
+            <MenuListEntry
+              key={i}
+              menu={menu}
               iconSet="menus"
-              handleActionClick={(icon: string) =>
-                handleClickedIcon(icon, menu)
-              }
-              handleClick={() => onClickMenu(menu)}
+              navigation={props.navigation}
+              handlePressIn={() => onClickMenu(menu)}
+              inlineBtn={true}
             />
           ))}
       </RecCard>
@@ -178,6 +179,10 @@ const MenusScreen = (props: any) => {
   );
 };
 
+// subheader={{ left: getDateNumeric(menu.createdAt) }}
+// handleActionClick={(icon: string) =>
+//   handleClickedIcon(icon, menu)
+// }
 const styles = StyleSheet.create({
   background: {
     flex: 1,

@@ -34,20 +34,22 @@ const RecListEntryClick = (props: any) => {
         <RecRecipeActions {...props} />
       </TouchableOpacity>
 
-      <View
-        style={!areActionsShown ? styles.recipe : styles.hidden}
-        onLayout={(e) => setInitialCardHeight(e.nativeEvent.layout.height)}
-      >
-        {props.children}
+      <View style={props.inlineBtn ? styles.row : styles.column}>
+        <View
+          style={!areActionsShown ? styles.row : {}}
+          onLayout={(e) => setInitialCardHeight(e.nativeEvent.layout.height)}
+        >
+          {props.children}
+        </View>
+        <RecIconButton
+          icon={faEllipsisH}
+          color={Colors.neutral4}
+          size={16}
+          handleClick={() => toggleActionsVisibility()}
+          marginLeft={15}
+          marginTop={10}
+        />
       </View>
-      <RecIconButton
-        icon={faEllipsisH}
-        color={Colors.neutral4}
-        size={16}
-        handleClick={() => toggleActionsVisibility()}
-        marginLeft={15}
-        marginTop={10}
-      />
     </TouchableOpacity>
   );
 };
@@ -62,57 +64,25 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.white,
     borderBottomColor: Colors.neutral7,
     borderBottomWidth: 1,
-    width: 420,
+    width: "100%",
     paddingVertical: 15,
   },
   actions: {
     width: "100%",
     justifyContent: "center",
+    alignItems: "center",
+    alignSelf: "center",
+    marginVertical: 5,
   },
-  recipe: {
+  row: {
     display: "flex",
     flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    width: "80%",
   },
-  photo: {
-    height: 100,
-    width: 100,
-    borderColor: Colors.neutral6,
-    borderWidth: 1,
-    borderRadius: 5,
-    marginLeft: 15,
-  },
-  header: {
-    width: 180,
-    fontSize: 23,
-    color: Colors.black,
-    fontFamily: "Medium",
-  },
-  subHeader: {
-    alignSelf: "center",
-    fontSize: 15,
-    color: Colors.neutral1,
-    fontFamily: "Regular",
-  },
-  headerCheckTime: {
-    display: "flex",
-    flexDirection: "row",
-    justifyContent: "flex-start",
-    width: 270,
-    maxWidth: 270,
-    paddingBottom: 5,
-    marginLeft: 15,
-  },
-  check: {
-    alignSelf: "center",
-    marginRight: 5,
-  },
-  checkTime: {
-    height: 25,
-    flexDirection: "row",
-    backgroundColor: Colors.neutral7,
-    borderRadius: 5,
-    marginLeft: 5,
-    padding: 5,
+  column: {
+    alignItems: "flex-start",
   },
 });
 
