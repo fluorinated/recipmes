@@ -1,0 +1,63 @@
+{
+    "fruit": ['fruit juice',
+        'kombucha',
+        'strawberries',
+        'blueberries',
+        'raspberries',
+        'blackberries',
+        'mango',
+        'apple', 'banana', 'plum', 'white peach', 'yellow peach', 'pineapple', 'avocado', 'lemon'
+    ],
+    "vegetables": [
+        'celery',
+        'carrots',
+        'dill',
+        'cucumber',
+        'radishes',
+        'parsley',
+        'green beans',
+        'potato',
+        'garlic', 'white onion', 'red onion', 'salad heads', 'arugula', 'mixed spring salad',
+        'hummus'
+    ],
+    "cheese": [
+        'parmesan',
+        'mozarrella',
+        'white cheddar',
+        'sharp cheddar',
+        'brie'
+    ],
+    "frozen": ['mixed berries'],
+    "meat": ['steak',
+        'porkchop',
+        'salmons',
+        'ham slices',
+        'turkey',
+        'turkey slices'
+    ],
+    "nonPerishables": ['wheat germ',
+        'raw sunflower seeds',
+        'dark brown sugar',
+        'old fashioned oats',
+        'vanilla extract',
+        'kosher salt',
+        'trail mix',
+        'dried cranberries',
+        'dried apricots',
+        'unsalted butter'
+        'chocolate chips'
+    ],
+    "nonFood": ['sifter',
+        'baking sheet',
+        'can opener'
+    ],
+    "bread": ['sourdough',
+        'white',
+        'potato',
+        'whole grain'
+    ],
+    "exitFridge": ['oat milk',
+        'plain greek yogurt',
+        'eggs'
+    ]
+}
