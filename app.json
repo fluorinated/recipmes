@@ -1,34 +1,35 @@
 {
-    "expo": {
-        "name": "recipmes",
-        "slug": "recipmes",
-        "version": "1.0.0",
-        "orientation": "portrait",
-        "icon": "./src/assets/recipmes-logo.png",
-        "scheme": "myapp",
-        "userInterfaceStyle": "automatic",
-        "splash": {
-            "image": "./src/assets/recipmes-logo.png",
-            "resizeMode": "contain",
-            "backgroundColor": "#FFAFAF"
-        },
-        "updates": {
-            "fallbackToCacheTimeout": 0
-        },
-        "assetBundlePatterns": [
-            "**/*"
-        ],
-        "ios": {
-            "supportsTablet": true
-        },
-        "android": {
-            "adaptiveIcon": {
-                "foregroundImage": "./src/assets/recipmes-logo.png",
-                "backgroundColor": "#C0BB87"
-            }
-        },
-        "web": {
-            "favicon": "./src/assets/recipmes-logo.png"
-        }
+  "expo": {
+    "name": "recipmes",
+    "slug": "recipmes",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./src/assets/recipmes-logo.png",
+    "scheme": "myapp",
+    "userInterfaceStyle": "automatic",
+    "splash": {
+      "image": "./src/assets/recipmes-logo.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#FFAFAF"
+    },
+    "updates": {
+      "fallbackToCacheTimeout": 0
+    },
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.m2015dominguez.recipmes"
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./src/assets/recipmes-logo.png",
+        "backgroundColor": "#C0BB87"
+      }
+    },
+    "web": {
+      "favicon": "./src/assets/recipmes-logo.png"
     }
+  }
 }

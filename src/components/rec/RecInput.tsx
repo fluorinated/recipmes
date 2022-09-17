@@ -1,9 +1,11 @@
 import { Colors } from '@constants/colors';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { StyleSheet, Text, TextInput, View } from 'react-native';
 import { MaskedTextInput } from 'react-native-mask-text';
 
 const RecInput = (props: any) => {
+  useEffect(() => {}, [props.value]);
+
   const getSize = (): number => {
     switch (props.size) {
       case "half":
@@ -50,6 +52,7 @@ const RecInput = (props: any) => {
           onChangeText={(text) => props.handleChangeText(text)}
           keyboardType={props.keyboardType}
           value={props.value}
+          onPressIn={props.handlePressIn}
         ></TextInput>
       )}
     </View>

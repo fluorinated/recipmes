@@ -1,63 +1,121 @@
-{
-    "fruit": ['fruit juice',
-        'kombucha',
-        'strawberries',
-        'blueberries',
-        'raspberries',
-        'blackberries',
-        'mango',
-        'apple', 'banana', 'plum', 'white peach', 'yellow peach', 'pineapple', 'avocado', 'lemon'
-    ],
-    "vegetables": [
-        'celery',
-        'carrots',
-        'dill',
-        'cucumber',
-        'radishes',
-        'parsley',
-        'green beans',
-        'potato',
-        'garlic', 'white onion', 'red onion', 'salad heads', 'arugula', 'mixed spring salad',
-        'hummus'
-    ],
-    "cheese": [
-        'parmesan',
-        'mozarrella',
-        'white cheddar',
-        'sharp cheddar',
-        'brie'
-    ],
-    "frozen": ['mixed berries'],
-    "meat": ['steak',
-        'porkchop',
-        'salmons',
-        'ham slices',
-        'turkey',
-        'turkey slices'
-    ],
-    "nonPerishables": ['wheat germ',
-        'raw sunflower seeds',
-        'dark brown sugar',
-        'old fashioned oats',
-        'vanilla extract',
-        'kosher salt',
-        'trail mix',
-        'dried cranberries',
-        'dried apricots',
-        'unsalted butter'
-        'chocolate chips'
-    ],
-    "nonFood": ['sifter',
-        'baking sheet',
-        'can opener'
-    ],
-    "bread": ['sourdough',
-        'white',
-        'potato',
-        'whole grain'
-    ],
-    "exitFridge": ['oat milk',
-        'plain greek yogurt',
-        'eggs'
-    ]
-}
+[{
+        "title": "toiletries",
+        "aisle": 2,
+        "items": []
+    },
+    {
+        "title": "produce",
+        "aisle": 1,
+        "items": []
+    },
+    {
+        "title": "frozen food",
+        "aisle": 1,
+        "items": []
+    },
+    {
+        "title": "deli",
+        "aisle": 0,
+        "items": []
+    },
+    {
+        "title": "fresh meat",
+        "aisle": 0,
+        "items": []
+    },
+    {
+        "title": "pasta",
+        "aisle": 2,
+        "items": []
+    },
+    {
+        "title": "grains",
+        "aisle": 2,
+        "items": []
+    },
+    {
+        "title": "canned goods",
+        "aisle": 2,
+        "items": []
+    },
+    {
+        "title": "condiments",
+        "aisle": 2,
+        "items": []
+    },
+    {
+        "title": "salty snacks",
+        "aisle": 3,
+        "items": []
+    },
+    {
+        "title": "cookies",
+        "aisle": 3,
+        "items": []
+    },
+    {
+        "title": "baking supplies",
+        "aisle": 3,
+        "items": []
+    },
+    {
+        "title": "cleaning supplies",
+        "aisle": 4,
+        "items": []
+    },
+    {
+        "title": "pets",
+        "aisle": 4,
+        "items": []
+    },
+    {
+        "title": "paper goods",
+        "aisle": 4,
+        "items": []
+    },
+    {
+        "title": "cereal bars",
+        "aisle": 5,
+        "items": []
+    },
+    {
+        "title": "cereal",
+        "aisle": 5,
+        "items": []
+    },
+    {
+        "title": "juice",
+        "aisle": 5,
+        "items": []
+    },
+    {
+        "title": "misc",
+        "aisle": 5,
+        "items": []
+    },
+    {
+        "title": "canned meat",
+        "aisle": 5,
+        "items": []
+    },
+    {
+        "title": "candy",
+        "aisle": 6,
+        "items": []
+    },
+    {
+        "title": "bread",
+        "aisle": 6,
+        "items": []
+    },
+    {
+        "title": "dairy",
+        "aisle": 6,
+        "items": []
+    },
+    {
+        "title": "soda & seltzer",
+        "aisle": 0,
+        "items": []
+    }
+]

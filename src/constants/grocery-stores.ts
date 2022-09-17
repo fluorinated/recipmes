@@ -1,5 +1,5 @@
 export const groceryStores: string[] = [
-  "rittenhouse market",
+  "rittenhouse",
   "whole foods",
   "acme",
   "target",

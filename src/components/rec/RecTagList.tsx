@@ -14,7 +14,7 @@ const RecTagList = (props: any) => {
     if (props?.selectedTags) {
       props.selectedTags(selectedTags);
     }
-  }, []);
+  }, [selectedTags]);
 
   const selectTag = (tag: FoodCategory): void => {
     if (isTagSelected(tag)) {

@@ -7,11 +7,11 @@ import RecButton from '@rec/RecButton';
 import RecCard from '@rec/RecCard';
 import RecEmptyState from '@rec/RecEmptyState';
 import RecLoader from '@rec/RecLoader';
-import { setCurrentRecipe, setIsLoaded, setRecipes, setSearchedText, setTags } from '@store/recipes/recipes.reducer';
-import { selectFilteredRecipes, selectIsLoaded } from '@store/recipes/recipes.selectors';
 import Parse from 'parse/react-native';
 import React, { useEffect, useState } from 'react';
 import { StyleSheet, View } from 'react-native';
+import { setCurrentRecipe, setIsLoaded, setRecipes, setSearchedText, setTags } from 'store/recipes/recipes.reducer';
+import { selectFilteredRecipes, selectIsLoaded } from 'store/recipes/recipes.selectors';
 
 import RecipeListEntry from './recipes/RecipeListEntry';
 
@@ -36,15 +36,15 @@ const RecipesScreen = (props: any) => {
 
   const getRecipes = async (): Promise<void> => {
     const query = new Parse.Query("recipe");
-    await query.find().then(
-      (results) => {
-        dispatch(setRecipes(JSON.parse(JSON.stringify(results))));
-      },
-      (error) => {
+    await query
+      .find()
+      .then((results) =>
+        dispatch(setRecipes(JSON.parse(JSON.stringify(results))))
+      )
+      .catch((error) => {
         console.log("[RecipesScreen] getRecipe error:", error);
         const { message, code } = JSON.parse(JSON.stringify(error));
-      }
-    );
+      });
   };
 
   const handlePressIn = (recipe: Recipe): void => {

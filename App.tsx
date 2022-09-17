@@ -16,6 +16,7 @@ import NewRecipeScreen from '@screens/NewRecipeScreen';
 import RecipeScreen from '@screens/RecipeScreen';
 import RecipesScreen from '@screens/RecipesScreen';
 import { store } from '@store/store';
+import { Logs } from 'expo';
 import { LinearGradient } from 'expo-linear-gradient';
 import Parse from 'parse/react-native';
 import * as React from 'react';
@@ -33,6 +34,8 @@ const RecipesStack = createNativeStackNavigator();
 const MenuStack = createNativeStackNavigator();
 const GroceriesStack = createNativeStackNavigator();
 const IngredientsStack = createNativeStackNavigator();
+
+Logs.enableExpoCliLogging();
 
 const BackHeader = (props: any) => {
   const isHome = (): boolean =>

@@ -16,6 +16,11 @@ const RecCard = (props: any) => {
           paddingLeft: props.paddingLeft,
           paddingRight: props.paddingRight,
           paddingBottom: props.paddingBottom,
+          width: props.width,
+          marginLeft: props.marginLeft,
+          marginRight: props.marginRight,
+          marginTop: props.marginTop,
+          marginBottom: props.marginBottom,
         },
       ]}
     >

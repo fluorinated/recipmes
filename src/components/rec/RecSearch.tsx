@@ -3,11 +3,11 @@ import { faSearch, faTimes } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { useAppDispatch, useAppSelector } from '@hooks/redux-hooks';
 import RecIconButton from '@rec/RecIconButton';
-import { setSearchedText } from '@store/search/search.reducer';
-import { selectSearchedText } from '@store/search/search.selectors';
 import React, { useEffect } from 'react';
 import { StyleSheet, View } from 'react-native';
 import { TextInput } from 'react-native-gesture-handler';
+import { setSearchedText } from 'store/search/search.reducer';
+import { selectSearchedText } from 'store/search/search.selectors';
 
 const RecSearch = (props: any) => {
   const searchedText: string = useAppSelector(selectSearchedText);
