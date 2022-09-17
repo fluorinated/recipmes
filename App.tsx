@@ -26,7 +26,7 @@ import { Provider } from 'react-redux';
 
 Parse.setAsyncStorage(AsyncStorage);
 Parse.initialize("recipmes", "recipmesJSKey", "recipmesMasterKey619");
-Parse.serverURL = "https://recipmes-server.herokuapp.com/parse";
+Parse.serverURL = "https://recipmes-md1997619-real.herokuapp.com/parse";
 // Parse.serverURL = "http://localhost:1337/parse";
 
 const Tab = createBottomTabNavigator();
