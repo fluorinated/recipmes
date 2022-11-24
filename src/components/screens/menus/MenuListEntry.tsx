@@ -50,7 +50,6 @@ const styles = StyleSheet.create({
   },
   actions: {
     width: "100%",
-    justifyContent: "center",
   },
   header: {
     width: 180,

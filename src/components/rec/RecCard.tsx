@@ -24,6 +24,14 @@ const RecCard = (props: any) => {
         },
       ]}
     >
+      <ScrollView
+        style={
+          ((props.search || props.tags) && styles.childrenStickyHeader,
+          { maxHeight: props.height || 500 })
+        }
+      >
+        {props.children}
+      </ScrollView>
       <View
         style={
           props.search || props.tags
@@ -43,7 +51,7 @@ const RecCard = (props: any) => {
 
         <View style={!props.tags && styles.hidden}>
           <RecTagList
-            listType="food"
+            list={props.tagList}
             selectedTags={(tags: FoodCategory[]) =>
               props.selectedTags ? props.selectedTags(tags) : {}
             }
@@ -51,14 +59,6 @@ const RecCard = (props: any) => {
           />
         </View>
       </View>
-      <ScrollView
-        style={
-          ((props.search || props.tags) && styles.childrenStickyHeader,
-          { maxHeight: props.height || 500 })
-        }
-      >
-        {props.children}
-      </ScrollView>
     </View>
   );
 };
@@ -74,14 +74,11 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.white,
     borderColor: Colors.neutral6,
     width: 430,
+    height: 580,
   },
   searchTagsContainer: {
     width: "100%",
     backgroundColor: Colors.white,
-    shadowColor: Colors.neutral4,
-    shadowOffset: { width: -2, height: 4 },
-    shadowOpacity: 0.2,
-    shadowRadius: 4,
   },
   childrenStickyHeader: {
     marginTop: 1,

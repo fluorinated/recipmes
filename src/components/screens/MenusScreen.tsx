@@ -146,7 +146,6 @@ const MenusScreen = (props: any) => {
         isError={toast.isError}
         errorMessage={toast.errorMessage}
       /> */}
-      <RecButton handleClick={saveNewMenu} label="create new menu" />
       <RecCard search paddingLeft={0} paddingRight={0}>
         {menus && menus?.length === 0 && (
           <View style={styles.emptyStateContainer}>
@@ -175,6 +174,7 @@ const MenusScreen = (props: any) => {
             />
           ))}
       </RecCard>
+      <RecButton handleClick={saveNewMenu} label="create new menu" />
     </View>
   );
 };

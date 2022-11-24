@@ -69,7 +69,9 @@ const RecMultiInput = (props: any) => {
 
   const handleChangeText = (text: string, index: number): void => {
     if (index === 0) {
-      fetchIngredients(text);
+      if (props.isIngredients) {
+        fetchIngredients(text);
+      }
       setPageNumber(0);
     }
     let newInputTexts = [...inputTexts];
@@ -151,7 +153,7 @@ const RecMultiInput = (props: any) => {
 
   const handlePressInInput = (index: number) => {
     if (index === 0) {
-      setIsSearchFoodShowing(true);
+      setIsSearchFoodShowing(props.isIngredients && true);
     } else {
       setIsSearchFoodShowing(false);
     }

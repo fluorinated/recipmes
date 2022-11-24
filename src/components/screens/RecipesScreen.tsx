@@ -57,10 +57,6 @@ const RecipesScreen = (props: any) => {
 
   return (
     <View style={styles.background}>
-      <RecButton
-        handleClick={() => props.navigation.navigate("NewRecipe")}
-        label="add recipe"
-      />
       <RecCard
         search
         tags
@@ -93,6 +89,10 @@ const RecipesScreen = (props: any) => {
             />
           ))}
       </RecCard>
+      <RecButton
+        handleClick={() => props.navigation.navigate("NewRecipe")}
+        label="add recipe"
+      />
     </View>
   );
 };

@@ -1,8 +1,6 @@
-import RecTagList from '@components/rec/RecTagList';
 import { groceryStores } from '@constants/grocery-stores';
 import { faBinoculars } from '@fortawesome/free-solid-svg-icons';
 import { useAppDispatch } from '@hooks/redux-hooks';
-import { FoodCategory } from '@models/FoodCategory';
 import RecButton from '@rec/RecButton';
 import RecCard from 'components/rec/RecCard';
 import RecEmptyState from 'components/rec/RecEmptyState';
@@ -121,7 +119,14 @@ const GroceriesScreen = (props: any) => {
 
   return (
     <View style={styles.background}>
-      <RecCard search paddingLeft={0} paddingRight={0} marginTop={10}>
+      <RecCard
+        search
+        paddingLeft={0}
+        paddingRight={0}
+        selectedTags={(tags: FoodCategory[]) => setGroceryStore(tags)}
+        tagList={groceryStores}
+        tags
+      >
         {groceries && groceries?.length === 0 && (
           <View style={styles.emptyStateContainer}>
             <RecEmptyState
@@ -135,11 +140,6 @@ const GroceriesScreen = (props: any) => {
         )}
 
         {!groceries && <RecLoader />}
-
-        <RecTagList
-          list={groceryStores}
-          selectedTags={(tags: FoodCategory[]) => setGroceryStore(tags)}
-        />
 
         {getStoreSections()}
         {/* map everything in supermarket AND show if in groceries list */}
@@ -156,7 +156,6 @@ const styles = StyleSheet.create({
   background: {
     flex: 1,
     backgroundColor: Colors.neutral7,
-    justifyContent: "space-between",
   },
   emptyStateContainer: {
     display: "flex",

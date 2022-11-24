@@ -74,10 +74,6 @@ const IngredientsScreen = (props: any) => {
 
   return (
     <View style={styles.background}>
-      <RecButton
-        handleClick={() => props.navigation.navigate("NewIngredient")}
-        label="add ingredient"
-      />
       <RecCard search paddingLeft={0} paddingRight={0}>
         {ingredients && ingredients?.length === 0 && (
           <View style={styles.emptyStateContainer}>
@@ -113,6 +109,10 @@ const IngredientsScreen = (props: any) => {
             />
           ))}
       </RecCard>
+      <RecButton
+        handleClick={() => props.navigation.navigate("NewIngredient")}
+        label="add ingredient"
+      />
     </View>
   );
 };

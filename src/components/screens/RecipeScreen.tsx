@@ -51,7 +51,7 @@ const RecipeScreen = (props: any) => {
           {recipe?.ingredients?.map((ingredient: Ingredient, i: number) => (
             <RecCheckbox
               label={`${ingredient?.amount ?? ""} ${ingredient?.unit ?? ""} ${
-                ingredient?.title ?? ""
+                ingredient?.description ?? ""
               }`.replace(/\s+/g, " ")}
               isChecked={(isChecked: boolean) => true}
               key={i}
