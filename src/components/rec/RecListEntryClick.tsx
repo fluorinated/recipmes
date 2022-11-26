@@ -41,14 +41,16 @@ const RecListEntryClick = (props: any) => {
         >
           {props.children}
         </View>
-        <RecIconButton
-          icon={faEllipsisH}
-          color={Colors.neutral4}
-          size={16}
-          handleClick={() => toggleActionsVisibility()}
-          marginLeft={15}
-          marginTop={10}
-        />
+        {props.showMoreButton && (
+          <RecIconButton
+            icon={faEllipsisH}
+            color={Colors.neutral4}
+            size={16}
+            handleClick={() => toggleActionsVisibility()}
+            marginLeft={15}
+            marginTop={10}
+          />
+        )}
       </View>
     </TouchableOpacity>
   );

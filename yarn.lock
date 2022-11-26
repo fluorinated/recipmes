@@ -11097,6 +11097,13 @@
   dependencies:
     "asap" "~2.0.6"
 
+"promise@^8.2.0":
+  "integrity" "sha512-rZPNPKTOYVNEEKFaq1HqTgOwZD+4/YHS5ukLzQCypkj+OkYx7iv0mA91lJlpPPZ8vMau3IIGj5Qlwrx+8iiSmg=="
+  "resolved" "https://registry.npmjs.org/promise/-/promise-8.3.0.tgz"
+  "version" "8.3.0"
+  dependencies:
+    "asap" "~2.0.6"
+
 "prompts@^2.0.1", "prompts@^2.2.1", "prompts@^2.3.2", "prompts@^2.4.0":
   "integrity" "sha512-NxNv/kLguCA7p3jE8oL2aEBsrJWgAakBpgmgK6lpPWV+WuOmY6r2/zbAVnP+T8bQlA0nzHXSJSJW0Hq7ylaD2Q=="
   "resolved" "https://registry.npmjs.org/prompts/-/prompts-2.4.2.tgz"
@@ -11512,10 +11519,10 @@
     "postcss-value-parser" "^4.2.0"
     "styleq" "^0.1.2"
 
-"react-native@*", "react-native@^0.0.0-0 || 0.60 - 0.70 || 1000.0.0", "react-native@^0.69.5", "react-native@> 0.57", "react-native@>=0.42.0", "react-native@>=0.48.4", "react-native@>=0.50.0", "react-native@>=0.57", "react-native@>=0.59", "react-native@>=0.65.1":
-  "integrity" "sha512-4Psrj1nDMLQjBXVH8n3UikzOHQc8+sa6NbxZQR0XKtpx8uC3HiJBgX+/FIum/RWxfi5J/Dt/+A2gLGmq2Hps8g=="
-  "resolved" "https://registry.npmjs.org/react-native/-/react-native-0.69.5.tgz"
-  "version" "0.69.5"
+"react-native@*", "react-native@^0.0.0-0 || 0.60 - 0.70 || 1000.0.0", "react-native@^0.69.7", "react-native@> 0.57", "react-native@>=0.42.0", "react-native@>=0.48.4", "react-native@>=0.50.0", "react-native@>=0.57", "react-native@>=0.59", "react-native@>=0.65.1":
+  "integrity" "sha512-T3z2utgRcE/+mMML3Wg4vvpnFoGWJcqWskq+8vdFS4ASM1zYg5Hab5vPlKZp9uncD8weYiGsYwkWXzrvZrsayQ=="
+  "resolved" "https://registry.npmjs.org/react-native/-/react-native-0.69.7.tgz"
+  "version" "0.69.7"
   dependencies:
     "@jest/create-cache-key-function" "^27.0.1"
     "@react-native-community/cli" "^8.0.4"
@@ -11538,7 +11545,7 @@
     "mkdirp" "^0.5.1"
     "nullthrows" "^1.1.1"
     "pretty-format" "^26.5.2"
-    "promise" "^8.0.3"
+    "promise" "^8.2.0"
     "react-devtools-core" "4.24.0"
     "react-native-codegen" "^0.69.2"
     "react-native-gradle-plugin" "^0.0.7"

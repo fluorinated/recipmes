@@ -4,17 +4,20 @@ import React, { useEffect, useState } from 'react';
 import { SafeAreaView, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 
 const RecTagList = (props: any) => {
-  const [list, setList]: [any[] | FoodCategory[], any] = useState(
-    props.list ?? Object.values(FoodCategory)
+  const [list, setList]: [string[] | FoodCategory[], any] = useState(
+    props.tagList ?? Object.values(FoodCategory)
   );
   const [selectedTags, setSelectedTags]: [FoodCategory[], any] = useState([]);
 
   useEffect(() => {
-    // hmmm
     if (props?.selectedTags) {
       props.selectedTags(selectedTags);
     }
-  }, [selectedTags]);
+
+    if (props?.tagList) {
+      setList(props.tagList);
+    }
+  }, [selectedTags, props.tagList]);
 
   const selectTag = (tag: FoodCategory): void => {
     if (isTagSelected(tag)) {

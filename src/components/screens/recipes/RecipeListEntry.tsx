@@ -93,7 +93,7 @@ const styles = StyleSheet.create({
     marginLeft: 15,
   },
   header: {
-    width: 180,
+    width: 165,
     fontSize: 23,
     color: Colors.black,
     fontFamily: "Medium",

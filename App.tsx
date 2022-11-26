@@ -1,5 +1,5 @@
 import { Colors } from '@constants/colors';
-import { faBookOpen, faCarrot, faChevronLeft, faClipboard, faList } from '@fortawesome/free-solid-svg-icons';
+import { faBookOpen, faCarrot, faChevronLeft, faClipboard, faList, faShoppingCart } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { useCachedResources } from '@hooks/useCachedResources';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -16,6 +16,8 @@ import NewRecipeScreen from '@screens/NewRecipeScreen';
 import RecipeScreen from '@screens/RecipeScreen';
 import RecipesScreen from '@screens/RecipesScreen';
 import { store } from '@store/store';
+import FoodScreen from 'components/screens/browse-food/FoodScreen';
+import BrowseFoodScreen from 'components/screens/BrowseFoodScreen';
 import { Logs } from 'expo';
 import { LinearGradient } from 'expo-linear-gradient';
 import Parse from 'parse/react-native';
@@ -34,6 +36,7 @@ const RecipesStack = createNativeStackNavigator();
 const MenuStack = createNativeStackNavigator();
 const GroceriesStack = createNativeStackNavigator();
 const IngredientsStack = createNativeStackNavigator();
+const BrowseFoodStack = createNativeStackNavigator();
 
 Logs.enableExpoCliLogging();
 
@@ -298,6 +301,41 @@ export default function App() {
                     }}
                   />
                 </GroceriesStack.Navigator>
+              )}
+            </Tab.Screen>
+            <Tab.Screen
+              name="BrowseFood"
+              options={{
+                tabBarIcon: ({ color, size }) => (
+                  <FontAwesomeIcon
+                    icon={faShoppingCart}
+                    color={Colors.yellow1}
+                    size={size}
+                  />
+                ),
+              }}
+            >
+              {() => (
+                <BrowseFoodStack.Navigator>
+                  <BrowseFoodStack.Screen
+                    name="BrowseFoodHome"
+                    component={BrowseFoodScreen}
+                    options={{
+                      title: "Browse Food",
+                      header: (props) => (
+                        <BackHeader {...props} title="Browse Food" />
+                      ),
+                    }}
+                  />
+                  <GroceriesStack.Screen
+                    name="Food"
+                    component={FoodScreen}
+                    options={{
+                      title: "Food",
+                      header: (props) => <BackHeader {...props} title="Food" />,
+                    }}
+                  />
+                </BrowseFoodStack.Navigator>
               )}
             </Tab.Screen>
           </Tab.Navigator>
